@@ -1,7 +1,7 @@
 {
   "name": "dateplus",
   "version": "1.0.0",
-  "description": "I hate date manipulation",
+  "description": "A simple program to assist with date manipulation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,9 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/Luke-zhang-04/date-plus.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["date", "date-manipulation"],
+  "author": "Luke Zhang",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Luke-zhang-04/date-plus/issues"
   },
