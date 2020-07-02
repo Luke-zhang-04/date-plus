@@ -7,3 +7,6 @@ lint:
 
 lint-fix:
 	npx eslint "*/**/*.{js,jsx,ts,tsx}" --fix
+
+compile:
+	npx tsc -p .
