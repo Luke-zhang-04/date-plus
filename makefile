@@ -10,4 +10,6 @@ lint-fix:
 
 build:
 	npx tsc -p .
-	npx babel index.js -d .
+	npx babel index.js -o dist/dateplus.min.js --minified --compact true --no-comments -s inline
+	npx babel index.js -o dist/dateplus.js
+	npx babel index.js -o index.js
