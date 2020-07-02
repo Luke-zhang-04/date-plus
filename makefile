@@ -8,5 +8,6 @@ lint:
 lint-fix:
 	npx eslint "*/**/*.{js,jsx,ts,tsx}" --fix
 
-compile:
+build:
 	npx tsc -p .
+	npx babel index.js -d .
