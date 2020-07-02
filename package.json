@@ -1,0 +1,30 @@
+{
+  "name": "dateplus",
+  "version": "1.0.0",
+  "description": "I hate date manipulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luke-zhang-04/date-plus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luke-zhang-04/date-plus/issues"
+  },
+  "homepage": "https://github.com/Luke-zhang-04/date-plus#readme",
+  "dependencies": {
+    "typescript": "^3.9.6"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "eslint": "^7.3.1",
+    "eslint-config-recommended": "^4.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.1"
+  }
+}
