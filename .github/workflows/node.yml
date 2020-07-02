@@ -16,9 +16,7 @@ jobs:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: lint
-      run: make lint  
+    - uses: actions/checkout@v2 
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -27,6 +25,9 @@ jobs:
 
     - name: install deps
       run: yarn install --frozen-lockfile
+
+    - name: lint
+      run: make lint 
 
     - name: run test
       run: yarn test
