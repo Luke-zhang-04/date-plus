@@ -1,5 +1,5 @@
 {
-  "name": "dateplus",
+  "name": "@luke-zhang-04/dateplus",
   "version": "1.0.0",
   "description": "A simple program to assist with date manipulation",
   "main": "index.js",
