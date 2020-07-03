@@ -46,12 +46,41 @@ export default class Convert extends Date {
     public static msToMinutes = (ms: number): interfaces.MinutesObj => {
         const milliseconds = ms % msPerSec % msPerSec,
             seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
-            minutes = (ms - seconds * msPerSec - milliseconds) / (msPerSec * secsPerMin)
+            minutes = (
+                ms - seconds * msPerSec - milliseconds
+            ) / (msPerSec * secsPerMin)
 
         return {
             ms: milliseconds,
             seconds,
             minutes,
+        }
+    }
+
+    /**
+     * Converts milliseconds to minutes with remainder
+     * @public
+     * @static
+     * @param {number} ms - milliseconds to convert
+     * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
+     */
+    public static msToHours = (ms: number): interfaces.MinutesObj => {
+        const milliseconds = ms % msPerSec % msPerSec,
+            seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
+            minutes = (
+                ms - seconds * msPerSec - milliseconds
+            ) / (msPerSec * secsPerMin) % minsPerHr,
+            hours = (
+                ms -
+                minutes * msPerSec * secsPerMin -
+                seconds * msPerSec - milliseconds
+            ) / (msPerSec * secsPerMin * minsPerHr)
+
+        return {
+            ms: milliseconds,
+            seconds,
+            minutes,
+            hours,
         }
     }
 

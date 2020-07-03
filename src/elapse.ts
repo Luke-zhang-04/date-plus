@@ -8,7 +8,6 @@
  * @exports Elapse
  * @file defines Elapse class for elapsed 
  */
-import * as interfaces from "./interfaces"
 import Convert from "./conversions"
 import DatePlus from "."
 
