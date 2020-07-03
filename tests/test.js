@@ -44,10 +44,20 @@ if (date.getWordDay() !== "Wednesday") {
 }
 console.log("getWordDay passed\n")
 
+
 console.log("testing getElapsedDays")
-const date2 = new DatePlus(2020, 6, 31)
+const date2 = new Date(2020, 6, 31)
 
 if (date.getElapsedDays(date2) !== 30) {
     throw Error(`Word day ${date.getElapsedDays(date2)} from getElapsedDays does not match 30`)
 }
 console.log("getElapsedDays passed\n")
+
+
+console.log("testing getDateValues")
+const dateVals = DatePlus.getDateValues("2020/06/1")
+
+if (dateVals.year !== 2020 && dateVals.month !== 6 && dateVals.day !== 1) {
+    throw Error(`Word day {year: ${dateVals.year}, month: ${dateVals.month}, day: ${dateVals.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
+}
+console.log("getDateValues passed\n")

@@ -54,7 +54,7 @@ export default class Elapse extends Date {
      * @param {Date | DatePlus} date - ending date object to calculate
      * @returns {number} - number of elapsed days
      */
-    public getElapsedDays = (date: Date | DatePlus,): number => Math.round(
+    public getElapsedDays = (date: Date | DatePlus): number => Math.round(
         Math.abs((this.getTime() - date.getTime()) / Elapse._oneDay)
     )
 

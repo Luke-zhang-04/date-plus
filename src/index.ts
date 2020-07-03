@@ -8,8 +8,10 @@
  * @exports DatePlus
  * @file exports main dateplus object
  */
-
+import * as interfaces from "./interfaces"
 import Elapse from "./elapse"
+
+type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
 
 /**
  * Base interface for Date and Month references
@@ -30,6 +32,16 @@ interface Days extends Reference {
     4: "Thursday",
     5: "Friday",
     6: "Saturday",
+}
+
+/**
+ * Object for date keys
+ */
+interface Keys {
+    [index: string]: string,
+    y: "year" | "years",
+    m: "month" | "months",
+    d: "day" | "days",
 }
 
 /**
@@ -74,6 +86,20 @@ export default class DatePlus extends Elapse {
         5: "Friday",
         6: "Saturday",
     }
+
+    /* eslint-disable id-length */
+    /**
+     * Reference to months of a year, zero indexed
+     * @private
+     * @static
+     * @type {Object.<number, string>}
+     */
+    private static _keysReference: Keys = {
+        y: "year",
+        m: "month",
+        d: "day",
+    }
+    /* eslint-enable id-length */
 
     /**
      * Reference to months of a year, zero indexed
@@ -141,6 +167,49 @@ export default class DatePlus extends Elapse {
             year = date.getFullYear().toString()
     
         return [year, month, day].join(seperator)
+    }
+
+    /**
+     * Gets date values and outputs an object
+     * @public
+     * @static
+     * @param {string} date - date to extract values from, months zero indexed
+     * @param {DateFormat}format - format of string date
+     * @param {string} seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
+     * @returns {interfaces.YearObj} object with all values
+     */
+    public static getDateValues = (
+        date: string,
+        format: DateFormat = "y:m:d",
+        seperator = "auto",
+    ): interfaces.YearObj => {
+        let _seperator = "/"
+
+        type KeysArr = ("y" | "m" | "d")[]
+
+        if (seperator === "auto") {
+            for (const letter of date) {
+                if (isNaN(Number(letter))) {
+                    _seperator = letter
+                    break
+                }
+            }
+        } else {
+            _seperator = seperator
+        }
+
+        const dateData = date.split(_seperator),
+            dateFormat: KeysArr = format.split(":") as KeysArr,
+            output: {[key: string]: number} = {}
+
+        for (let index = 0; index < 3; index++) {
+            const key = DatePlus._keysReference[dateFormat[index]]
+
+            output[key] = Number(dateData[index])
+            console.log(key, dateData[index])
+        }
+
+        return output as interfaces.YearObj
     }
 
     /* eslint-disable max-len */
