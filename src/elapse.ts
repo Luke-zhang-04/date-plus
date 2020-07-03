@@ -9,20 +9,21 @@
  * @file defines Elapse class for elapsed 
  */
 import * as interfaces from "./interfaces"
+import Convert from "./conversions"
 import DatePlus from "."
 
-const hPerD = 24,
-    mPerH = 60,
-    sPerM = 60,
-    msPerS = 1000
+const hrsPerDay = 24,
+    minsPerHr = 60,
+    secsPerMin = 60,
+    msPerSec = 1000
 
 /**
- * Dateplus class and namespace
- * @classdesc A class and namespace program to assist with date manipulation
+ * Elapse class and namespace
+ * @classdesc A class and namespace program to find elapsed times
  * @class
  * @namespace
  */
-export default class Elapse extends Date {
+export default class Elapse extends Convert {
 
     /**
      * Gets milliseconds per day
@@ -30,7 +31,8 @@ export default class Elapse extends Date {
      * @static
      * @type {number}
      */
-    private static _oneDay: number = hPerD * mPerH * sPerM * msPerS
+    private static _oneDay: number =
+        hrsPerDay * minsPerHr * secsPerMin * msPerSec
     
     /**
      * Calculates number of elapsed days between date1 and date2

@@ -5,7 +5,6 @@
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
  * @version 1.1.0
- * @exports YearsObj 
  * @file defines interfaces shared across one or more files'
  * @namespace
  */

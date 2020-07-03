@@ -176,7 +176,7 @@ export default class DatePlus extends Elapse {
      * @param {string} date - date to extract values from, months zero indexed
      * @param {DateFormat}format - format of string date
      * @param {string} seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
-     * @returns {interfaces.YearObj} object with all values
+     * @returns {Object<string, number>} object with all values
      */
     public static getDateValues = (
         date: string,

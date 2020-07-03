@@ -26,6 +26,9 @@ cp ./dist/dateplus.bundle.js ./dist/dateplus.bundle.min.js
 # Minify copy of bundle
 npx babel ./dist/dateplus.bundle.min.js -o ./dist/dateplus.bundle.min.js --minified --compact true --no-comments -s inline
 
+# Run babel on bundle
+npx babel ./dist/dateplus.bundle.js -o ./dist/dateplus.bundle.js -s inline
+
 # Remove previous lib
 if [ -d "lib" ]; then
     rm -r lib

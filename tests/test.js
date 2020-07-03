@@ -21,6 +21,14 @@ const test = (DatePlus) => {
     }
     console.log("formatDate passed\n")
 
+    console.log("testing getDateValues")
+    const dateVals = DatePlus.getDateValues("2020/06/1")
+
+    if (dateVals.year !== 2020 || dateVals.month !== 6 || dateVals.day !== 1) {
+        throw Error(`Word day {year: ${dateVals.year}, month: ${dateVals.month}, day: ${dateVals.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
+    }
+    console.log("getDateValues passed\n")
+
 
     console.log("testing addZeros")
     formattedDate = DatePlus.addZeros(formattedDate)
@@ -49,18 +57,27 @@ const test = (DatePlus) => {
     const date2 = new Date(2020, 6, 31)
 
     if (date.getElapsedDays(date2) !== 30) {
-        throw Error(`Word day ${date.getElapsedDays(date2)} from getElapsedDays does not match 30`)
+        throw Error(`Elapsed days ${date.getElapsedDays(date2)} from getElapsedDays does not match 30`)
     }
     console.log("getElapsedDays passed\n")
 
+    
+    console.log("testing msToSeconds")
+    let conv = DatePlus.msToSeconds(2001)
 
-    console.log("testing getDateValues")
-    const dateVals = DatePlus.getDateValues("2020/06/1")
-
-    if (dateVals.year !== 2020 && dateVals.month !== 6 && dateVals.day !== 1) {
-        throw Error(`Word day {year: ${dateVals.year}, month: ${dateVals.month}, day: ${dateVals.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
+    if (conv.seconds !== 2 || conv.ms !== 1) {
+        throw Error(`Converted day {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSeconds does not match {seconds: 2, ms: 1}`)
     }
-    console.log("getDateValues passed\n")
+    console.log("msToSeconds passed\n")
+
+
+    console.log("testing msToMinutes")
+    conv = DatePlus.msToMinutes(182001)
+
+    if (conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
+        throw Error(`Converted day {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMinutes does not match {minutes: 3, seconds: 2, ms: 1}`)
+    }
+    console.log("msToMinutes passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")
