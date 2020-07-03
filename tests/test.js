@@ -159,21 +159,21 @@ const test = (DatePlus) => {
 
     console.log("testing hrsToMs")
     if (DatePlus.hrsToMs(2.5) !== 9000000) {
-        throw Error(`Converted seconds ${DatePlus.hrsToMs(2.5)} from hrsToMs does not match 9000000`)
+        throw Error(`Converted hours ${DatePlus.hrsToMs(2.5)} from hrsToMs does not match 9000000`)
     }
     console.log("hrsToMs passed\n")
 
 
     console.log("testing hrsToSecs")
     if (DatePlus.hrsToSecs(2.5) !== 9000) {
-        throw Error(`Converted seconds ${DatePlus.hrsToSecs(2.5)} from hrsToSecs does not match 9000`)
+        throw Error(`Converted hours ${DatePlus.hrsToSecs(2.5)} from hrsToSecs does not match 9000`)
     }
     console.log("hrsToSecs passed\n")
 
 
     console.log("testing hrsToMins")
     if (DatePlus.hrsToMins(2.5) !== 150) {
-        throw Error(`Converted seconds ${DatePlus.hrsToMins(2.5)} from hrsToMins does not match 130`)
+        throw Error(`Converted hours ${DatePlus.hrsToMins(2.5)} from hrsToMins does not match 130`)
     }
     console.log("hrsToMins passed\n")
 
@@ -182,9 +182,37 @@ const test = (DatePlus) => {
     conv = DatePlus.hrsToDays(49)
 
     if (conv.days !== 2 || conv.hours !== 1) {
-        throw Error(`Converted seconds {days: ${conv.days}, hours: ${conv.hours}} from hrsToDays does not match {days: 2, hours: 1}`)
+        throw Error(`Converted hours {days: ${conv.days}, hours: ${conv.hours}} from hrsToDays does not match {days: 2, hours: 1}`)
     }
     console.log("hrsToDays passed\n")
+
+
+    console.log("testing daysToMs")
+    if (DatePlus.daysToMs(2.5) !== 216000000) {
+        throw Error(`Converted days ${DatePlus.daysToMs(2.5)} from daysToMs does not match 216000000`)
+    }
+    console.log("daysToMs passed\n")
+
+
+    console.log("testing daysToSecs")
+    if (DatePlus.daysToSecs(2.5) !== 216000) {
+        throw Error(`Converted days ${DatePlus.daysToSecs(2.5)} from daysToSecs does not match 216000`)
+    }
+    console.log("daysToSecs passed\n")
+
+
+    console.log("testing daysToMins")
+    if (DatePlus.daysToMins(2.5) !== 3600) {
+        throw Error(`Converted days ${DatePlus.daysToMins(2.5)} from daysToMins does not match 3600`)
+    }
+    console.log("daysToMins passed\n")
+
+
+    console.log("testing daysToHrs")
+    if (DatePlus.daysToHrs(2.5) !== 60) {
+        throw Error(`Converted days ${DatePlus.daysToSecs(2.5)} from daysToHrs does not match 60`)
+    }
+    console.log("daysToHrs passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")

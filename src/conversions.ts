@@ -232,6 +232,42 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} converted days
      */
     public static hrsToDays = (hrs: number): interfaces.DaysObj => Convert.msToDays(Convert.hrsToMs(hrs))
+
+    /**
+     * Converts days to milliseconds 
+     * @public
+     * @static
+     * @param {number} days - days to convert
+     * @returns {number} converted milliseconds
+     */
+    public static daysToMs = (days: number): number => days * hrsPerDay * minsPerHr * secsPerMin * msPerSec
+
+    /**
+     * Converts days to seconds 
+     * @public
+     * @static
+     * @param {number} days - days to convert
+     * @returns {number} converted seconds
+     */
+    public static daysToSecs = (days: number): number => days * hrsPerDay * minsPerHr * secsPerMin
+
+    /**
+     * Converts days to minutes 
+     * @public
+     * @static
+     * @param {number} days - days to convert
+     * @returns {number} converted minutes
+     */
+    public static daysToMins = (days: number): number => days * hrsPerDay * minsPerHr
+
+    /**
+     * Converts days to hours 
+     * @public
+     * @static
+     * @param {number} days - days to convert
+     * @returns {number} converted hours
+     */
+    public static daysToHrs = (days: number): number => days * hrsPerDay
     /* eslint-enable max-len */
 
 }
