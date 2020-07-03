@@ -207,4 +207,33 @@ export default class Convert extends Date {
         Convert.msToDays(Convert.minsToMs(mins))
     )
 
+    /* eslint-disable max-len */
+    /**
+     * Converts hours to milliseconds 
+     * @public
+     * @static
+     * @param {number} hours - hours to convert
+     * @returns {number} converted milliseconds
+     */
+    public static hrsToMs = (hours: number): number => hours * minsPerHr * secsPerMin * msPerSec
+
+    /**
+     * Converts hours to seconds 
+     * @public
+     * @static
+     * @param {number} hours - hours to convert
+     * @returns {number} converted seconds
+     */
+    public static hrsToSecs = (hours: number): number => hours * minsPerHr * secsPerMin
+
+    /**
+     * Converts hours to minutes
+     * @public
+     * @static
+     * @param {number} hours - hours to convert
+     * @returns {number} converted minutes
+     */
+    public static hrsToMins = (hours: number): number => hours * minsPerHr
+    /* eslint-enable max-len */
+
 }

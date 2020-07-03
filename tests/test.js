@@ -66,7 +66,7 @@ const test = (DatePlus) => {
     let conv = DatePlus.msToSecs(2001)
 
     if (conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSecs does not match {seconds: 2, ms: 1}`)
+        throw Error(`Converted milliseconds {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSecs does not match {seconds: 2, ms: 1}`)
     }
     console.log("msToSecs passed\n")
 
@@ -75,7 +75,7 @@ const test = (DatePlus) => {
     conv = DatePlus.msToMins(182001)
 
     if (conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMins does not match {minutes: 3, seconds: 2, ms: 1}`)
+        throw Error(`Converted milliseconds {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMins does not match {minutes: 3, seconds: 2, ms: 1}`)
     }
     console.log("msToMins passed\n")
 
@@ -84,7 +84,7 @@ const test = (DatePlus) => {
     conv = DatePlus.msToHrs(14582001)
 
     if (conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHrs does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
+        throw Error(`Converted milliseconds {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHrs does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
     }
     console.log("msToHrs passed\n")
 
@@ -93,7 +93,7 @@ const test = (DatePlus) => {
     conv = DatePlus.msToDays(446582001)
 
     if (conv.days !== 5 || conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToDays does not match {days: 5, hours: 4, minutes: 3, seconds: 2, ms: 1}`)
+        throw Error(`Converted milliseconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToDays does not match {days: 5, hours: 4, minutes: 3, seconds: 2, ms: 1}`)
     }
     console.log("msToDays passed\n")
 
@@ -134,7 +134,7 @@ const test = (DatePlus) => {
 
     console.log("testing minsToMs")
     if (DatePlus.minsToMs(2.5) !== 150000) {
-        throw Error(`Converted seconds ${DatePlus.minsToMs(2.5)} from minsToSecs does not match 150000`)
+        throw Error(`Converted minutes ${DatePlus.minsToMs(2.5)} from minsToSecs does not match 150000`)
     }
     console.log("minsToMs passed\n")
 
@@ -143,7 +143,7 @@ const test = (DatePlus) => {
     conv = DatePlus.minsToHrs(121)
 
     if (conv.hours !== 2 || conv.minutes !== 1) {
-        throw Error(`Converted seconds {hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToHrs does not match {hours: 2, minutes: 1}`)
+        throw Error(`Converted minutes {hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToHrs does not match {hours: 2, minutes: 1}`)
     }
     console.log("minsToHrs passed\n")
 
@@ -152,9 +152,30 @@ const test = (DatePlus) => {
     conv = DatePlus.minsToDays(4441)
 
     if (conv.days !== 3 || conv.hours !== 2 || conv.minutes !== 1) {
-        throw Error(`Converted seconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToDays does not match {days: 3, hours: 2, minutes: 1}`)
+        throw Error(`Converted minutes {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToDays does not match {days: 3, hours: 2, minutes: 1}`)
     }
     console.log("minsToDays passed\n")
+
+
+    console.log("testing hrsToMs")
+    if (DatePlus.hrsToMs(2.5) !== 9000000) {
+        throw Error(`Converted seconds ${DatePlus.hrsToMs(2.5)} from hrsToMs does not match 9000000`)
+    }
+    console.log("hrsToMs passed\n")
+
+
+    console.log("testing hrsToSecs")
+    if (DatePlus.hrsToSecs(2.5) !== 9000) {
+        throw Error(`Converted seconds ${DatePlus.hrsToSecs(2.5)} from hrsToSecs does not match 9000`)
+    }
+    console.log("hrsToSecs passed\n")
+
+
+    console.log("testing hrsToMins")
+    if (DatePlus.hrsToMins(2.5) !== 150) {
+        throw Error(`Converted seconds ${DatePlus.hrsToMins(2.5)} from hrsToMins does not match 130`)
+    }
+    console.log("hrsToMins passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")
