@@ -79,6 +79,7 @@ const test = (DatePlus) => {
     }
     console.log("msToMinutes passed\n")
 
+
     console.log("testing msToHours")
     conv = DatePlus.msToHours(14582001)
 
@@ -86,6 +87,15 @@ const test = (DatePlus) => {
         throw Error(`Converted day {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHours does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
     }
     console.log("msToHours passed\n")
+
+
+    console.log("testing msToDays")
+    conv = DatePlus.msToDays(446582001)
+
+    if (conv.days !== 5 || conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
+        throw Error(`Converted day {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToDays does not match {days: 5, hours: 4, minutes: 3, seconds: 2, ms: 1}`)
+    }
+    console.log("msToDays passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")

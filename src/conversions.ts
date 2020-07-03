@@ -58,13 +58,13 @@ export default class Convert extends Date {
     }
 
     /**
-     * Converts milliseconds to minutes with remainder
+     * Converts milliseconds to hours with remainder
      * @public
      * @static
      * @param {number} ms - milliseconds to convert
-     * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
+     * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
      */
-    public static msToHours = (ms: number): interfaces.MinutesObj => {
+    public static msToHours = (ms: number): interfaces.HoursObj => {
         const milliseconds = ms % msPerSec % msPerSec,
             seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
             minutes = (
@@ -73,7 +73,8 @@ export default class Convert extends Date {
             hours = (
                 ms -
                 minutes * msPerSec * secsPerMin -
-                seconds * msPerSec - milliseconds
+                seconds * msPerSec -
+                milliseconds
             ) / (msPerSec * secsPerMin * minsPerHr)
 
         return {
@@ -81,6 +82,44 @@ export default class Convert extends Date {
             seconds,
             minutes,
             hours,
+        }
+    }
+
+    /**
+     * Converts milliseconds to days with remainder
+     * @public
+     * @static
+     * @param {number} ms - milliseconds to convert
+     * @returns {Object.<string, number>} object with days, hours, minutes, seconds, and milliseconds
+     */
+    public static msToDays = (ms: number): interfaces.DaysObj => {
+        const milliseconds = ms % msPerSec % msPerSec,
+            seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
+            minutes = (
+                ms -
+                seconds * msPerSec -
+                milliseconds
+            ) / (msPerSec * secsPerMin) % minsPerHr,
+            hours = (
+                ms -
+                minutes * msPerSec * secsPerMin -
+                seconds * msPerSec -
+                milliseconds
+            ) / (msPerSec * secsPerMin * minsPerHr) % hrsPerDay,
+            days = (
+                ms -
+                hours * msPerSec * secsPerMin * minsPerHr -
+                minutes * msPerSec * secsPerMin -
+                seconds * msPerSec -
+                milliseconds
+            ) / (msPerSec * secsPerMin * minsPerHr * hrsPerDay)
+
+        return {
+            ms: milliseconds,
+            seconds,
+            minutes,
+            hours,
+            days,
         }
     }
 
