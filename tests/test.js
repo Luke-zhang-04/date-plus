@@ -11,7 +11,7 @@
 const DatePlus = require("..").default
 
 const date = new DatePlus(2020, 6, 1)
-
+/* eslint-enable one-var */
 
 console.log("testing formatDate")
 let formattedDate = date.formatDate()
@@ -44,4 +44,10 @@ if (date.getWordDay() !== "Wednesday") {
 }
 console.log("getWordDay passed\n")
 
-/* eslint-enable one-var */
+console.log("testing getElapsedDays")
+const date2 = new DatePlus(2020, 6, 31)
+
+if (date.getElapsedDays(date2) !== 30) {
+    throw Error(`Word day ${date.getElapsedDays(date2)} from getElapsedDays does not match 30`)
+}
+console.log("getElapsedDays passed\n")
