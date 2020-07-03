@@ -1,2 +1,2 @@
-./lib/*.js linguist-generated=true
-./dist/*.js linguist-generated=true
+./lib/* linguist-generated
+./dist/* linguist-vendored
