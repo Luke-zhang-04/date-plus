@@ -113,6 +113,7 @@ const test = (DatePlus) => {
     }
     console.log("secsToMins passed\n")
 
+
     console.log("testing secsToHrs")
     conv = DatePlus.secsToHrs(10921)
 
@@ -120,12 +121,21 @@ const test = (DatePlus) => {
         throw Error(`Converted seconds {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToHrs does not match {hours: 3, minutes: 2 seconds: 1}`)
     }
     console.log("secsToHrs passed\n")
+
+
+    console.log("testing secsToDays")
+    conv = DatePlus.secsToDays(356521)
+
+    if (conv.days !== 4 || conv.hours !== 3 || conv.minutes !== 2 || conv.seconds !== 1) {
+        throw Error(`Converted seconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToDays does not match {days: 4, hours: 3, minutes: 2 seconds: 1}`)
+    }
+    console.log("secsToDays passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")
 test(require("..").default)
 console.log("NODE ENV PASSED\n\n\n")
 
-console.log("TESTING AS BROWSER APP SCRIPT\n")
+console.log("TESTING AS BROWSER SCRIPT\n")
 test(require("../dist/dateplus.bundle.min").default)
 console.log("BROWSER ENV PASSED")

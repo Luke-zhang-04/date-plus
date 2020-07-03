@@ -154,4 +154,15 @@ export default class Convert extends Date {
         Convert.msToHrs(Convert.secsToMs(secs))
     )
 
+    /**
+     * Converts seconds to days remainders
+     * @public
+     * @static
+     * @param {number} secs - seconds to convert
+     * @returns {Object.<string, number>} converted days
+     */
+    public static secsToDays = (secs: number): interfaces.DaysObj => (
+        Convert.msToDays(Convert.secsToMs(secs))
+    )
+
 }
