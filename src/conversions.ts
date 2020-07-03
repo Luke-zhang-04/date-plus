@@ -123,4 +123,13 @@ export default class Convert extends Date {
         }
     }
 
+    /**
+     * Converts seconds to milliseconds with 
+     * @public
+     * @static
+     * @param {number} secs - seconds to convert
+     * @returns {number} converted milliseconds
+     */
+    public static secsToMs = (secs: number): number => secs * msPerSec
+
 }
