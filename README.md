@@ -1,6 +1,6 @@
 # Date Plus
 
-<p align="center">
+<p>
     <a href="https://github.com/Luke-zhang-04/date-plus/actions?query=workflow%3A%22Node.js+CI%22"><img src="https://img.shields.io/github/workflow/status/luke-zhang-04/date-plus/Node.js CI" alt="build status"/></a>
     <a href="https://github.com/Luke-zhang-04/date-plus/blob/master/dist/dateplus.min.js"><img src="https://img.shields.io/github/size/luke-zhang-04/date-plus/dist/dateplus.min.js?label=dateplus.min.js" alt="minified file size"/></a>
     <a href="https://github.com/Luke-zhang-04/date-plus/blob/master/LICENSE"><img src="https://img.shields.io/github/license/luke-zhang-04/date-plus" alt="license"/></a>
