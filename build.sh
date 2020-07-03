@@ -6,6 +6,11 @@ verison="1.1.0"
 # Compile typescript
 npx tsc -p .
 
+mkdir build
+cd src
+find . -name "*.js" -exec mv "{}" ../build \;
+cd ..
+
 # Add require to ./index.js
 # printf "/**\n * DatePlus\n * A simple program to assist with date manipulation\n * @copyright Copyright (C) 2020 Luke Zhang\n * @author Luke Zhang luke-zhang-04.github.io\n * @license MIT\n * @version $version\n * @exports DatePlus\n */\nimport DatePlus from \"./lib/\"\nexport default DatePlus\n" > index.js
 
@@ -30,12 +35,5 @@ npx babel build --out-dir lib
 
 rm -r build
 
-# Remove previous index.js
-if [ -d "index.js" ]; then
-    rm -r index.js
-fi
-
-mv lib/index.js index.js
-cd lib/src
-mv *.* ..
-cd ..
+sed -i -e 's/src/lib/g' index.js
+rm -rf index.js-e

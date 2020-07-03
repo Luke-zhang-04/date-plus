@@ -19,6 +19,6 @@ Object.defineProperty(exports, "__esModule", {
  * @exports DatePlus
  */
 
-var src_1 = __importDefault(require("./src"));
+var lib_1 = __importDefault(require("./lib"));
 
-exports["default"] = src_1["default"];
+exports["default"] = lib_1["default"];
