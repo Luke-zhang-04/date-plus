@@ -1,2 +1,2 @@
-./lib linguist-generated=true
-./dist linguist-generated=true
+./lib/*.js linguist-generated=true
+./dist/*.js linguist-generated=true
