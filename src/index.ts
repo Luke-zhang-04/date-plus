@@ -104,7 +104,7 @@ export default class DatePlus extends Elapse {
      * @param {string} seperator - char the date is seperatred by
      * @returns {string} - date with zeros
      */
-    public static addZeros = (date: string, seperator: string = "/"): string => {
+    public static addZeros = (date: string, seperator = "/"): string => {
         let newDate = ""
 
         for (let index = 0; index < 2; index++) {
@@ -134,7 +134,7 @@ export default class DatePlus extends Elapse {
      */
     public static formatDate = (
         date: Date | DatePlus,
-        seperator: string = "/"
+        seperator = "/"
     ): string => {
         const month = (date.getMonth()).toString(),
             day = date.getDate().toString(),
@@ -169,7 +169,7 @@ export default class DatePlus extends Elapse {
      * @param {string} seperator - char the date is seperatred by
      * @returns {string} - date with zeros
      */
-    public addZeros = (seperator: string = "/"): string => DatePlus.addZeros(this.formatDate(), seperator)
+    public addZeros = (seperator = "/"): string => DatePlus.addZeros(this.formatDate(), seperator)
 
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
@@ -178,7 +178,7 @@ export default class DatePlus extends Elapse {
      * @param {string} seperator - char to seperate date with
      * @returns {string} formatted date
      */
-    public formatDate = (seperator: string = "/"): string => DatePlus.formatDate(this, seperator)
+    public formatDate = (seperator = "/"): string => DatePlus.formatDate(this, seperator)
 
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
