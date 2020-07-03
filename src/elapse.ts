@@ -30,7 +30,7 @@ export default class Elapse extends Date {
     public static getElapsedDays = (date1: Date | DatePlus, date2: Date | DatePlus): number => {
         const oneDay = 24 * 60 * 60 * 1000
         
-        return Math.round(Math.abs((date1 - date2) / oneDay));
+        return Math.round(Math.abs((date1.getTime() - date2.getTime()) / oneDay))
     }
 
 }

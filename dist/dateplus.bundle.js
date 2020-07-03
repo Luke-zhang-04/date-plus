@@ -18,4 +18,4 @@ module.exports=function(e){var t={};function r(n){if(t[n])return t[n].exports;va
  * @version 1.1.0
  * @exports Elapse
  * @file defines Elapse class for elapsed
- */Object.defineProperty(t,"__esModule",{value:!0});class n extends Date{}t.default=n}]);
+ */Object.defineProperty(t,"__esModule",{value:!0});class n extends Date{}t.default=n,n.getElapsedDays=(e,t)=>Math.round(Math.abs((e.getTime()-t.getTime())/864e5))}]);
