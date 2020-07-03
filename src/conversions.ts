@@ -133,14 +133,25 @@ export default class Convert extends Date {
     public static secsToMs = (secs: number): number => secs * msPerSec
 
     /**
-     * Converts seconds to minutes with 
+     * Converts seconds to minutes remainders
      * @public
      * @static
      * @param {number} secs - seconds to convert
-     * @returns {Object.<string, number>} converted milliseconds
+     * @returns {Object.<string, number>} converted minutes
      */
     public static secsToMins = (secs: number): interfaces.MinutesObj => (
         Convert.msToMins(Convert.secsToMs(secs))
+    )
+
+    /**
+     * Converts seconds to hours remainders
+     * @public
+     * @static
+     * @param {number} secs - seconds to convert
+     * @returns {Object.<string, number>} converted hours
+     */
+    public static secsToHrs = (secs: number): interfaces.HoursObj => (
+        Convert.msToHrs(Convert.secsToMs(secs))
     )
 
 }

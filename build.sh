@@ -11,9 +11,6 @@ cd src
 find . -name "*.js" -exec mv "{}" ../build \;
 cd ..
 
-# Add require to ./index.js
-# printf "/**\n * DatePlus\n * A simple program to assist with date manipulation\n * @copyright Copyright (C) 2020 Luke Zhang\n * @author Luke Zhang luke-zhang-04.github.io\n * @license MIT\n * @version $version\n * @exports DatePlus\n */\nimport DatePlus from \"./lib/\"\nexport default DatePlus\n" > index.js
-
 # Convert to commonJs with Babel
 npx babel index.js -o index.js
 

@@ -1,5 +1,7 @@
 const path = require("path")
 
+const minifiedConfig = {}
+
 module.exports = {
     entry: "./build/index.js",
     output: {

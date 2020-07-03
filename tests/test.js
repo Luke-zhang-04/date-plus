@@ -109,9 +109,17 @@ const test = (DatePlus) => {
     conv = DatePlus.secsToMins(121)
 
     if (conv.minutes !== 2 || conv.seconds !== 1) {
-        throw Error(`Converted seconds {minutes: ${conv.minues}, seconds: ${conv.seconds}} from secsToMins does not match {minutes: 2 seconds: 1}`)
+        throw Error(`Converted seconds {minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToMins does not match {minutes: 2 seconds: 1}`)
     }
     console.log("secsToMins passed\n")
+
+    console.log("testing secsToHrs")
+    conv = DatePlus.secsToHrs(10921)
+
+    if (conv.hours !== 3 || conv.minutes !== 2 || conv.seconds !== 1) {
+        throw Error(`Converted seconds {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToHrs does not match {hours: 3, minutes: 2 seconds: 1}`)
+    }
+    console.log("secsToHrs passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")
