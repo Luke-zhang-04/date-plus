@@ -23,3 +23,6 @@ Run in a browser environment by either using webpack or an alternative on the pr
 ```
 
 No CDN is currently available
+
+## Documentation
+For documentation, visit the [dateplus wiki](https://github.com/Luke-zhang-04/date-plus/wiki)
