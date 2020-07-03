@@ -1,27 +1,24 @@
 "use strict";
 
+var __importDefault = void 0 && (void 0).__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = void 0;
-
-var _lib = _interopRequireDefault(require("./lib/"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
 /**
  * DatePlus
  * A simple program to assist with date manipulation
  * @copyright Copyright (C) 2020 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 
+ * @version 1.1.0
  * @exports DatePlus
  */
 
+var src_1 = __importDefault(require("./src"));
 
-var _default = _lib["default"];
-exports["default"] = _default;
+exports["default"] = src_1["default"];

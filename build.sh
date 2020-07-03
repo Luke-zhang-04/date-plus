@@ -29,3 +29,13 @@ fi
 npx babel build --out-dir lib
 
 rm -r build
+
+# Remove previous index.js
+if [ -d "index.js" ]; then
+    rm -r index.js
+fi
+
+mv lib/index.js index.js
+cd lib/src
+mv *.* ..
+cd ..
