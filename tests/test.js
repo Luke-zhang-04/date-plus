@@ -130,6 +130,13 @@ const test = (DatePlus) => {
         throw Error(`Converted seconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToDays does not match {days: 4, hours: 3, minutes: 2 seconds: 1}`)
     }
     console.log("secsToDays passed\n")
+    
+
+    console.log("testing minsToMs")
+    if (DatePlus.minsToMs(2.5) !== 150000) {
+        throw Error(`Converted seconds ${DatePlus.minsToMs(2.5)} from hoursToMs does not match 150000`)
+    }
+    console.log("minsToMs passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")

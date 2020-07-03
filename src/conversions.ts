@@ -165,4 +165,15 @@ export default class Convert extends Date {
         Convert.msToDays(Convert.secsToMs(secs))
     )
 
+    /* eslint-disable max-len */
+    /**
+     * Converts hours to milliseconds 
+     * @public
+     * @static
+     * @param {number} mins - minutes to convert
+     * @returns {number} converted milliseconds
+     */
+    public static minsToMs = (mins: number): number => mins * secsPerMin * msPerSec
+    /* eslint-enable max-len */
+
 }
