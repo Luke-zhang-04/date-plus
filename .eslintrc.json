@@ -5,12 +5,12 @@
 
 {
     "env": {
-        "es6": true,
+        "es2020": true,
         "node": true
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        "plugin:@typescript-eslint/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -19,8 +19,7 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": 2020,
-        "sourceType": "module",
-        "project": ["./tsconfig.json"]
+        "sourceType": "module"
     },
     "plugins": [
         "@typescript-eslint",
@@ -55,7 +54,6 @@
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/type-annotation-spacing": "off",
         "@typescript-eslint/unified-signatures": "off",
-        
         "accessor-pairs": "error",
         "array-bracket-newline": ["error", {
             "multiline": true
@@ -306,6 +304,11 @@
     "overrides": [
         {
             "files": ["*.ts", "*.tsx"],
+            "parserOptions": {
+                "ecmaVersion": 2020,
+                "sourceType": "module",
+                "project": ["./tsconfig.json"]
+            },
             "rules": {
                 "@typescript-eslint/array-type": "error",
 
