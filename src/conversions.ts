@@ -185,4 +185,26 @@ export default class Convert extends Date {
      */
     public static minsToSecs = (mins: number): number => mins * secsPerMin
 
+    /**
+     * Converts minutes to hours remainders
+     * @public
+     * @static
+     * @param {number} mins - minutes to convert
+     * @returns {Object.<string, number>} converted hours
+     */
+    public static minsToHrs = (mins: number): interfaces.HoursObj => (
+        Convert.msToHrs(Convert.minsToMs(mins))
+    )
+
+    /**
+     * Converts minutes to days remainders
+     * @public
+     * @static
+     * @param {number} mins - minutes to convert
+     * @returns {Object.<string, number>} converted days
+     */
+    public static minsToDays = (mins: number): interfaces.DaysObj => (
+        Convert.msToDays(Convert.minsToMs(mins))
+    )
+
 }
