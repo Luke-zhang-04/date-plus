@@ -19,7 +19,7 @@ import DatePlus from "@luke-zhang-04/dateplus"
 
 Run in a browser environment by either using webpack or an alternative on the previous solution, or by adding the `dateplus.min.js` to your javascript within the HTML
 ```html
-<script src="js/dateplus.js"></script>
+<script src="js/dateplus.min.js"></script>
 ```
 
 No CDN is currently available

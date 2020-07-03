@@ -7,3 +7,5 @@
 **/*.d.ts
 /src/serviceWorker.ts
 dist/
+build/
+lib/

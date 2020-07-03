@@ -5,8 +5,10 @@
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
  * @version 1.1.0
- * @exports DatePlus
+ * @exports Elapse
+ * @file defines Elapse class for elapsed 
  */
-import DatePlus from "./src"
 
-export default DatePlus
+export default class Elapse extends Date {
+    
+}
