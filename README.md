@@ -4,8 +4,7 @@
     <a href="https://github.com/Luke-zhang-04/date-plus/actions?query=workflow%3A%22Node.js+CI%22"><img src="https://img.shields.io/github/workflow/status/luke-zhang-04/date-plus/Node.js CI" alt="build status"/></a>
     <a href="https://github.com/Luke-zhang-04/date-plus/blob/master/dist/dateplus.min.js"><img src="https://img.shields.io/github/size/luke-zhang-04/date-plus/dist/dateplus.min.js?label=dateplus.min.js" alt="minified file size"/></a>
     <a href="https://github.com/Luke-zhang-04/date-plus/blob/master/LICENSE"><img src="https://img.shields.io/github/license/luke-zhang-04/date-plus" alt="license"/></a>
-    <a href="https://github.com/Luke-zhang-04/date-plus/packages/297148"><img src="https://img.shields.io/npm/v/@luke-zhang-04/dateplus" alt="npm version"></a>
-    <a href="https://github.com/Luke-zhang-04/date-plus/packages/297148"><img src="https://img.shields.io/npm/dt/@luke-zhang-04/dateplus" alt="npm downloads"></a>
+    <a href="https://github.com/Luke-zhang-04/date-plus/packages/297148"><img src="https://img.shields.io/github/v/release/luke-zhang-04/date-plus?include_prereleases" alt="github version"></a>
 </p>
 
 A simple library to assist with date manipulation (the most horrendous thing a human can be put through), comprising of a series of simple functions for convenience.
