@@ -8,7 +8,7 @@
  * @exports Elapse
  * @file defines Elapse class for elapsed 
  */
-
+import * as interfaces from "./interfaces"
 import DatePlus from "."
 
 const hPerD = 24,
