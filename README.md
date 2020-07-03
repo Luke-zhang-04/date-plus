@@ -6,7 +6,6 @@
     <a href="https://github.com/Luke-zhang-04/date-plus/blob/master/LICENSE"><img src="https://img.shields.io/github/license/luke-zhang-04/date-plus" alt="license"/></a>
     <a href="https://www.npmjs.com/package/@luke-zhang-04/dateplus"><img src="https://img.shields.io/github/v/release/luke-zhang-04/date-plus?include_prereleases" alt="github version"></a>
     <a href="https://www.npmjs.com/package/@luke-zhang-04/dateplus"><img src="https://img.shields.io/npm/v/@luke-zhang-04/dateplus?logo=npm" alt="npm version"/></a>
-    <a href="https://www.npmjs.com/package/@luke-zhang-04/dateplus"><img src="https://img.shields.io/npm/dt/@luke-zhang-04/dateplus?logo=npm" alt="npm downloads"/></a>
 </p>
 
 A simple library to assist with date manipulation (the most horrendous thing a human can be put through), comprising of a series of simple functions for convenience.
