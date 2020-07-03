@@ -9,7 +9,7 @@
  * @file exports main dateplus object
  */
 import * as interfaces from "./interfaces"
-import Elapse from "./elapse"
+import Alias from "./alias"
 
 type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
 
@@ -69,7 +69,7 @@ interface Months extends Reference {
  * @class
  * @namespace
  */
-export default class DatePlus extends Elapse {
+export default class DatePlus extends Alias {
 
     /**
      * Reference to days of the week, zero indexed
