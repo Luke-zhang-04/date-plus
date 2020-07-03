@@ -134,9 +134,16 @@ const test = (DatePlus) => {
 
     console.log("testing minsToMs")
     if (DatePlus.minsToMs(2.5) !== 150000) {
-        throw Error(`Converted seconds ${DatePlus.minsToMs(2.5)} from hoursToMs does not match 150000`)
+        throw Error(`Converted seconds ${DatePlus.minsToMs(2.5)} from minsToSecs does not match 150000`)
     }
     console.log("minsToMs passed\n")
+
+
+    console.log("testing minsToSecs")
+    if (DatePlus.minsToSecs(2.5) !== 150) {
+        throw Error(`Converted seconds ${DatePlus.minsToSecs(2.5)} from minsToSecs does not match 150`)
+    }
+    console.log("minsToSecs passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")

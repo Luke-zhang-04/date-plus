@@ -176,4 +176,13 @@ export default class Convert extends Date {
     public static minsToMs = (mins: number): number => mins * secsPerMin * msPerSec
     /* eslint-enable max-len */
 
+    /**
+     * Converts hours to seconds 
+     * @public
+     * @static
+     * @param {number} mins - minutes to convert
+     * @returns {number} converted seconds
+     */
+    public static minsToSecs = (mins: number): number => mins * secsPerMin
+
 }
