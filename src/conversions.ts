@@ -23,7 +23,7 @@ const hrsPerDay = 24,
 export default class Convert extends Date {
 
     /**
-     * Converts milliseconds to seconds with remainder
+     * Converts milliseconds to seconds with remainders
      * @public
      * @static
      * @param {number} ms - milliseconds to convert
@@ -37,7 +37,7 @@ export default class Convert extends Date {
     )
     
     /**
-     * Converts milliseconds to minutes with remainder
+     * Converts milliseconds to minutes with remainders
      * @public
      * @static
      * @param {number} ms - milliseconds to convert
@@ -58,7 +58,7 @@ export default class Convert extends Date {
     }
 
     /**
-     * Converts milliseconds to hours with remainder
+     * Converts milliseconds to hours with remainders
      * @public
      * @static
      * @param {number} ms - milliseconds to convert
@@ -86,7 +86,7 @@ export default class Convert extends Date {
     }
 
     /**
-     * Converts milliseconds to days with remainder
+     * Converts milliseconds to days with remainders
      * @public
      * @static
      * @param {number} ms - milliseconds to convert
@@ -123,6 +123,7 @@ export default class Convert extends Date {
         }
     }
 
+    /* eslint-disable max-len */
     /**
      * Converts seconds to milliseconds 
      * @public
@@ -133,39 +134,32 @@ export default class Convert extends Date {
     public static secsToMs = (secs: number): number => secs * msPerSec
 
     /**
-     * Converts seconds to minutes remainders
+     * Converts seconds to minutes with remainders
      * @public
      * @static
      * @param {number} secs - seconds to convert
      * @returns {Object.<string, number>} converted minutes
      */
-    public static secsToMins = (secs: number): interfaces.MinutesObj => (
-        Convert.msToMins(Convert.secsToMs(secs))
-    )
+    public static secsToMins = (secs: number): interfaces.MinutesObj => Convert.msToMins(Convert.secsToMs(secs))
 
     /**
-     * Converts seconds to hours remainders
+     * Converts seconds to hours with remainders
      * @public
      * @static
      * @param {number} secs - seconds to convert
      * @returns {Object.<string, number>} converted hours
      */
-    public static secsToHrs = (secs: number): interfaces.HoursObj => (
-        Convert.msToHrs(Convert.secsToMs(secs))
-    )
+    public static secsToHrs = (secs: number): interfaces.HoursObj => Convert.msToHrs(Convert.secsToMs(secs))
 
     /**
-     * Converts seconds to days remainders
+     * Converts seconds to days with remainders
      * @public
      * @static
      * @param {number} secs - seconds to convert
      * @returns {Object.<string, number>} converted days
      */
-    public static secsToDays = (secs: number): interfaces.DaysObj => (
-        Convert.msToDays(Convert.secsToMs(secs))
-    )
+    public static secsToDays = (secs: number): interfaces.DaysObj => Convert.msToDays(Convert.secsToMs(secs))
 
-    /* eslint-disable max-len */
     /**
      * Converts hours to milliseconds 
      * @public
@@ -174,7 +168,6 @@ export default class Convert extends Date {
      * @returns {number} converted milliseconds
      */
     public static minsToMs = (mins: number): number => mins * secsPerMin * msPerSec
-    /* eslint-enable max-len */
 
     /**
      * Converts hours to seconds 
@@ -186,28 +179,24 @@ export default class Convert extends Date {
     public static minsToSecs = (mins: number): number => mins * secsPerMin
 
     /**
-     * Converts minutes to hours remainders
+     * Converts minutes to hours with remainders
      * @public
      * @static
      * @param {number} mins - minutes to convert
      * @returns {Object.<string, number>} converted hours
      */
-    public static minsToHrs = (mins: number): interfaces.HoursObj => (
-        Convert.msToHrs(Convert.minsToMs(mins))
-    )
+    public static minsToHrs = (mins: number): interfaces.HoursObj => Convert.msToHrs(Convert.minsToMs(mins))
 
     /**
-     * Converts minutes to days remainders
+     * Converts minutes to days with remainders
      * @public
      * @static
      * @param {number} mins - minutes to convert
      * @returns {Object.<string, number>} converted days
      */
-    public static minsToDays = (mins: number): interfaces.DaysObj => (
-        Convert.msToDays(Convert.minsToMs(mins))
-    )
+    public static minsToDays = (mins: number): interfaces.DaysObj => Convert.msToDays(Convert.minsToMs(mins))
 
-    /* eslint-disable max-len */
+    
     /**
      * Converts hours to milliseconds 
      * @public
@@ -234,6 +223,15 @@ export default class Convert extends Date {
      * @returns {number} converted minutes
      */
     public static hrsToMins = (hours: number): number => hours * minsPerHr
+
+    /**
+     * Converts hours to days with remainders
+     * @public
+     * @static
+     * @param {number} hrs - hours to convert
+     * @returns {Object.<string, number>} converted days
+     */
+    public static hrsToDays = (hrs: number): interfaces.DaysObj => Convert.msToDays(Convert.hrsToMs(hrs))
     /* eslint-enable max-len */
 
 }
