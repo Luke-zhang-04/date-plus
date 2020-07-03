@@ -13,6 +13,6 @@ build:
 	npx babel index.js -o dist/dateplus.min.js --minified --compact true --no-comments -s inline
 	npx babel index.js -o dist/dateplus.js
 	
-	printf "/**\n * DatePlus\n * A simple program to assist with date manipulation\n * @copyright Copyright (C) 2020 Luke Zhang\n * @author Luke Zhang luke-zhang-04.github.io\n * @license MIT\n * @version 1.0.1\n * @exports DatePlus\n */\nimport DatePlus from \"./dist/dateplus\"\nexport default DatePlus\n" > index.js
+	printf "/**\n * DatePlus\n * A simple program to assist with date manipulation\n * @copyright Copyright (C) 2020 Luke Zhang\n * @author Luke Zhang luke-zhang-04.github.io\n * @license MIT\n * @version 1.0.2\n * @exports DatePlus\n */\nimport DatePlus from \"./dist/dateplus\"\nexport default DatePlus\n" > index.js
 
 	npx babel index.js -o index.js

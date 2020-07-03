@@ -8,12 +8,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: install deps
+      run: yarn --frozen-lockfile
+
+    - name: publish to NPM
+      run: yarn publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - uses: actions/setup-node@v1
+      with:
         registry-url: 'https://npm.pkg.github.com'
         scope: '@luke-zhang-04'
-    - run: yarn install --frozen-lockfile
-    - run: yarn publish
+
+    - name: publish to GPR
+      run: yarn publish
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
