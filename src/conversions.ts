@@ -29,13 +29,13 @@ export default class Convert extends Date {
      * @param {number} ms - milliseconds to convert
      * @returns {Object.<string, number>} object with seconds and milliseconds
      */
-    public static msToSeconds = (ms: number): interfaces.SecondsObj => (
+    public static msToSecs = (ms: number): interfaces.SecondsObj => (
         {
             ms: ms % msPerSec,
             seconds: (ms - ms % msPerSec) / msPerSec,
         }
     )
-
+    
     /**
      * Converts milliseconds to minutes with remainder
      * @public
@@ -43,7 +43,7 @@ export default class Convert extends Date {
      * @param {number} ms - milliseconds to convert
      * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
      */
-    public static msToMinutes = (ms: number): interfaces.MinutesObj => {
+    public static msToMins = (ms: number): interfaces.MinutesObj => {
         const milliseconds = ms % msPerSec % msPerSec,
             seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
             minutes = (
@@ -64,7 +64,7 @@ export default class Convert extends Date {
      * @param {number} ms - milliseconds to convert
      * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
      */
-    public static msToHours = (ms: number): interfaces.HoursObj => {
+    public static msToHrs = (ms: number): interfaces.HoursObj => {
         const milliseconds = ms % msPerSec % msPerSec,
             seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
             minutes = (
@@ -124,12 +124,23 @@ export default class Convert extends Date {
     }
 
     /**
-     * Converts seconds to milliseconds with 
+     * Converts seconds to milliseconds 
      * @public
      * @static
      * @param {number} secs - seconds to convert
      * @returns {number} converted milliseconds
      */
     public static secsToMs = (secs: number): number => secs * msPerSec
+
+    /**
+     * Converts seconds to minutes with 
+     * @public
+     * @static
+     * @param {number} secs - seconds to convert
+     * @returns {Object.<string, number>} converted milliseconds
+     */
+    public static secsToMins = (secs: number): interfaces.MinutesObj => (
+        Convert.msToMins(Convert.secsToMs(secs))
+    )
 
 }

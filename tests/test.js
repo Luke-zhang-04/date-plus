@@ -62,31 +62,31 @@ const test = (DatePlus) => {
     console.log("getElapsedDays passed\n")
 
     
-    console.log("testing msToSeconds")
-    let conv = DatePlus.msToSeconds(2001)
+    console.log("testing msToSecs")
+    let conv = DatePlus.msToSecs(2001)
 
     if (conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSeconds does not match {seconds: 2, ms: 1}`)
+        throw Error(`Converted day {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSecs does not match {seconds: 2, ms: 1}`)
     }
-    console.log("msToSeconds passed\n")
+    console.log("msToSecs passed\n")
 
 
-    console.log("testing msToMinutes")
-    conv = DatePlus.msToMinutes(182001)
+    console.log("testing msToMins")
+    conv = DatePlus.msToMins(182001)
 
     if (conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMinutes does not match {minutes: 3, seconds: 2, ms: 1}`)
+        throw Error(`Converted day {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMins does not match {minutes: 3, seconds: 2, ms: 1}`)
     }
-    console.log("msToMinutes passed\n")
+    console.log("msToMins passed\n")
 
 
-    console.log("testing msToHours")
-    conv = DatePlus.msToHours(14582001)
+    console.log("testing msToHrs")
+    conv = DatePlus.msToHrs(14582001)
 
     if (conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted day {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHours does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
+        throw Error(`Converted day {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHrs does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
     }
-    console.log("msToHours passed\n")
+    console.log("msToHrs passed\n")
 
 
     console.log("testing msToDays")
@@ -103,6 +103,15 @@ const test = (DatePlus) => {
         throw Error(`Converted seconds ${DatePlus.secsToMs(12.1)} from secsToMs does not match 12100`)
     }
     console.log("secsToMs passed\n")
+
+
+    console.log("testing secsToMins")
+    conv = DatePlus.secsToMins(121)
+
+    if (conv.minutes !== 2 || conv.seconds !== 1) {
+        throw Error(`Converted seconds {minutes: ${conv.minues}, seconds: ${conv.seconds}} from secsToMins does not match {minutes: 2 seconds: 1}`)
+    }
+    console.log("secsToMins passed\n")
 }
 
 console.log("TESTING AS NODE MODULE\n")
