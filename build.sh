@@ -1,7 +1,7 @@
 # Build shell script for dateplus
 # Copyright (C) 2020 Luke Zhang | MIT License | luke-zhang-04.github.io
 
-verison="1.1.0"
+verison="1.1.2"
 
 # Compile typescript
 npx tsc -p .

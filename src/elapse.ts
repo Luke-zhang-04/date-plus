@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 1.1.1
+ * @version 1.1.2
  * @exports Elapse
  * @file defines Elapse class for elapsed 
  */
@@ -45,8 +45,8 @@ export default class Elapse extends Convert {
         date1: Date | DatePlus,
         date2: Date | DatePlus
     ): number => Math.round(
-        Math.abs((date1.getTime() - date2.getTime()) / Elapse._oneDay)
-    )
+        (date1.getTime() - date2.getTime()) / Elapse._oneDay
+    ) * -1
 
     /**
      * Calculates number of elapsed days between instantiated date and dae
@@ -56,7 +56,7 @@ export default class Elapse extends Convert {
      * @returns {number} - number of elapsed days
      */
     public getElapsedDays = (date: Date | DatePlus): number => Math.round(
-        Math.abs((this.getTime() - date.getTime()) / Elapse._oneDay)
-    )
+        (this.getTime() - date.getTime()) / Elapse._oneDay
+    ) * -1
 
 }
