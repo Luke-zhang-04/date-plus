@@ -12,6 +12,16 @@
 A simple library to assist with date manipulation (the most horrendous thing a human can be put through), comprising of a series of simple functions for convenience.
 
 ## Installation
+Download from NPM
+```bash
+# Using NPM
+npm i @luke-zhang-05/dateplus --save
+
+#using Yarn
+yarn add @luke-zhang-05/dateplus
+```
+
+## Usage
 Run in a node environment with a `require` or `import` statement
 ```js
 const DatePlus = require("@luke-zhang-04/dateplus").default
