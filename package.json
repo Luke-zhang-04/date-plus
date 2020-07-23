@@ -1,6 +1,6 @@
 {
   "name": "@luke-zhang-04/dateplus",
-  "version": "",
+  "version": "2.0.0",
   "description": "A simple program to assist with date manipulation",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

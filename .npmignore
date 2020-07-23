@@ -125,14 +125,10 @@ typings/
 .vscode
 
 .github
-assets
-cli/*.ts
-docs
 src/
 wiki
 .babelrc.js
 .babelrc.min.js
-.codeclimate.yml
 .eslintignore
 .eslintrc.json
 .gitattributes
@@ -142,5 +138,4 @@ build.js
 *.config.js
 makefile
 tsconfig.json
-tsconfig.cli.json
 yarn.lock
