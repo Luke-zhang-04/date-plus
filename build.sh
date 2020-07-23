@@ -29,7 +29,7 @@ build() {
 
     # Format development dist
     printf "${BIPurple}Formatting ${Red}dist ${Green}bundle\n"
-    npx eslint ./dist/dateplus.bundle.js --fix --env browser --rule "{\"no-var\": \"off\", \"prefer-arrow/prefer-arrow-functions\": \"off\", \"camelcase\": \"off\", \"id-length\": \"off\"}" > out.log &
+    npx eslint ./dist/dateplus.bundle.js --no-ignore --fix --env browser --rule "{\"no-var\": \"off\", \"prefer-arrow/prefer-arrow-functions\": \"off\", \"camelcase\": \"off\", \"id-length\": \"off\"}" > out.log &
 
     wait
 
