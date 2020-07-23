@@ -1,14 +1,24 @@
 const path = require("path")
 
-const minifiedConfig = {}
-
-module.exports = {
-    entry: "./build/index.js",
-    output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "dateplus.bundle.js",
-        library: "dateplus",
-        libraryTarget: "commonjs2",
+const prod = {
+        entry: "./lib/index.js",
+        output: {
+            path: path.resolve(__dirname, "dist"),
+            filename: "dateplus.bundle.min.js",
+            library: "DatePlus",
+            libraryTarget: "var",
+        },
+        mode: "production",
     },
-    mode: "production",
-}
+    dev = {
+        entry: "./lib/index.js",
+        output: {
+            path: path.resolve(__dirname, "dist"),
+            filename: "dateplus.bundle.js",
+            library: "DatePlus",
+            libraryTarget: "var",
+        },
+        mode: "none",
+    }
+
+module.exports = [prod, dev]
