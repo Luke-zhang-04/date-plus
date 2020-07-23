@@ -215,7 +215,7 @@ module.exports = function (e) {
    * @copyright Copyright (C) 2020 Luke Zhang
    * @author Luke Zhang luke-zhang-04.github.io
    * @license MIT
-   * @version 1.1.2
+   * @version 2.0.0
    * @exports Alias
    * @file defines alias static methods from conversion.ts with longer names
    */
@@ -255,7 +255,7 @@ module.exports = function (e) {
    * @copyright Copyright (C) 2020 Luke Zhang
    * @author Luke Zhang luke-zhang-04.github.io
    * @license MIT
-   * @version 1.1.2
+   * @version 2.0.0
    * @exports Elapse
    * @file defines Elapse class for elapsed
    */

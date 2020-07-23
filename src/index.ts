@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 1.1.2
+ * @version 2.0.0
  * @exports DatePlus
  * @file exports main dateplus object
  */
