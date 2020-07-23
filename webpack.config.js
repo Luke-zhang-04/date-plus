@@ -18,7 +18,7 @@ const prod = {
             library: "DatePlus",
             libraryTarget: "var",
         },
-        mode: "none",
+        mode: "production",
     }
 
 module.exports = [prod, dev]
