@@ -1,6 +1,9 @@
 # Distribution is generated
 ./dist/*.js linguist-generated=true
 
+# So is this file
+tests/browser.js linguist-generated=true
+
 # Enforce Unix newlines
 * text=auto eol=lf
 

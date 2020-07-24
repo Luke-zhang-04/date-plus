@@ -20,6 +20,7 @@ build() {
     # Minify copy of bundle
     printf "${BICyan}Running ${BIYellow}Babel${Purple} on ${Yellow}./dist/dateplus.bundle.min.js/${Purple} and ${Blue}minifying${Purple}\n"
     npx babel ./dist/dateplus.bundle.min.js -o ./dist/dateplus.bundle.min.js --no-comments --no-babelrc --config-file ./.babelrc.min.js &
+    npx babel ./tests/browser.js -o ./tests/browser.js --no-comments --no-babelrc --config-file ./.babelrc.min.js &
 
     # Run babel on bundle
     printf "${BICyan}Running ${BIYellow}Babel${Purple} on ${Yellow}./dist/dateplus.bundle.min.js/${Purple}\n"
@@ -40,6 +41,9 @@ $(cat ./dist/dateplus.bundle.js)" > ./dist/dateplus.bundle.js &
 
     echo "/* dateplus v2.0.0 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
 $(cat ./dist/dateplus.bundle.min.js)" > ./dist/dateplus.bundle.min.js &
+
+    echo "/* dateplus v2.0.0 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
+$(cat ./tests/browser.js)" > ./tests/browser.js &
 
     wait
 
