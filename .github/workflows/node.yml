@@ -8,7 +8,23 @@ on:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
+    steps:
+    - uses: actions/checkout@v2 
+
+    - name: install deps
+      run: yarn install --frozen-lockfile
+
+    - name: build
+      run: yarn build
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: lib/
+    
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,7 +32,12 @@ jobs:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-    - uses: actions/checkout@v2 
+    - uses: [actions/checkout@v2, build]
+    
+    - uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: lib/
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -24,10 +45,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: install deps
-      run: yarn install --frozen-lockfile
+      run: yarn install --frozen-lockfile --production
 
-    - name: lint
-      run: make lint 
-
-    - name: run test
+    - name: test
       run: yarn test
+    
