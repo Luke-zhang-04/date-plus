@@ -32,7 +32,7 @@ jobs:
         node-version: [10.x, 12.x, 14.x]
 
     steps:
-    - uses: [actions/checkout@v2, build]
+    - uses: build
     
     - uses: actions/download-artifact@v2
       with:
