@@ -3,7 +3,9 @@
 # To find out more about Eslint, visit https://eslint.org/
 
 */node_modules/
-dist/
-build/
-lib/
-tests/
+**/functions/lib/*
+**/*.d.ts
+/src/serviceWorker.ts
+src/*.js
+./*.bundle.*.js
+./lib/*

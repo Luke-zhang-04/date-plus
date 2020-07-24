@@ -15,10 +15,17 @@ A simple library to assist with date manipulation (the most horrendous thing a h
 Download from NPM
 ```bash
 # Using NPM
-npm i @luke-zhang-05/dateplus --save
+npm i @luke-zhang-04/dateplus --save
 
 #using Yarn
-yarn add @luke-zhang-05/dateplus
+yarn add @luke-zhang-04/dateplus
+```
+
+Get bundles with curl
+```bash
+curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.min.js -O js/dateplus.bundle.min.js # Download minified file (recommended)
+
+curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.js -O js/dateplus.bundle.js # Download not minfiied file (not recommended for production)
 ```
 
 ## Usage
@@ -26,14 +33,23 @@ Run in a node environment with a `require` or `import` statement
 ```js
 const DatePlus = require("@luke-zhang-04/dateplus").default
 import DatePlus from "@luke-zhang-04/dateplus"
+
+const myDate = new DatePlus()
 ```
 
 Run in a browser environment by either using webpack or an alternative on the previous solution, or by adding the `dateplus.min.js` to your javascript within the HTML
 ```html
 <script src="js/dateplus.min.js"></script>
+
+<script>
+    // Warning: Object destructuring is an ES6 feature
+    const {DatePlus} = DatePlus, // DatePlus is exposed to one global Namespace
+        myDate = new DatePlus()
+</script>
 ```
 
 No CDN is currently available
+
 
 ## Documentation
 For documentation, visit the [dateplus wiki](https://github.com/Luke-zhang-04/date-plus/wiki)

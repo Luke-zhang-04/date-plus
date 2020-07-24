@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 1.1.2
+ * @version 2.0.0
  */
 
 /* eslint-disable one-var */
@@ -219,6 +219,8 @@ console.log("TESTING AS NODE MODULE\n")
 test(require("..").default)
 console.log("NODE ENV PASSED\n\n\n")
 
+console.log(require("../dist/dateplus.bundle"))
+
 console.log("TESTING AS BROWSER SCRIPT\n")
-test(require("../dist/dateplus.bundle.min").default)
+test(require("./browser").default)
 console.log("BROWSER ENV PASSED")

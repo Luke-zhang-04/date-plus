@@ -8,6 +8,7 @@
         "es2020": true,
         "node": true
     },
+    "ignorePatterns": ["/lib/*, "],
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended"
@@ -54,6 +55,7 @@
         "@typescript-eslint/space-before-function-paren": "off",
         "@typescript-eslint/type-annotation-spacing": "off",
         "@typescript-eslint/unified-signatures": "off",
+        "@typescript-eslint/no-var-requires": "off",
         "accessor-pairs": "error",
         "array-bracket-newline": ["error", {
             "multiline": true
@@ -82,7 +84,7 @@
         "comma-style": "error",
         "complexity": "error",
         "computed-property-spacing": "error",
-        "consistent-return": "error",
+        "consistent-return": "off",
         "consistent-this": "error",
         "curly": "error",
         "default-case": "warn",
@@ -405,7 +407,9 @@
 
                 "@typescript-eslint/type-annotation-spacing": ["error", { "before": false, "after": true }],
 
-                "@typescript-eslint/unified-signatures": "error"
+                "@typescript-eslint/unified-signatures": "error",
+
+                "@typescript-eslint/no-var-requires": "error"
             }
         },
         {

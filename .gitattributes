@@ -1,2 +1,14 @@
-lib/* linguist-generated
-dist/* linguist-vendored
+# Distribution is generated
+./dist/*.js linguist-generated=true
+
+# So is this file
+tests/browser.js linguist-generated=true
+
+# Enforce Unix newlines
+* text=auto eol=lf
+
+# Remove config files
+*.config.js linguist-detectable=false
+
+# Remove babel files
+.babelrc.* linguist-detectable=false

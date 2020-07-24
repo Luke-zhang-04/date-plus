@@ -5,7 +5,7 @@ build:
 	bash build.sh
 
 lint:
-	npx eslint "*/**/*.{js,jsx,ts,tsx}"
+	npx eslint "*/**/*.ts"
 
 lint-fix:
-	npx eslint "*/**/*.{js,jsx,ts,tsx}" --fix
+	npx eslint "*/**/*.ts" --fix
