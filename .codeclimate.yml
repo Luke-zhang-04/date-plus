@@ -35,5 +35,5 @@ checks:
 exclude_patterns:
   - "./dist"
   - "*.config.js"
-  - "./test"
+  - "./tests"
   
