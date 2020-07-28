@@ -30,11 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
 
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x]
-
     steps:
+<<<<<<< HEAD
       - name: Checkout Repo
         uses: actions/checkout@v2
 
@@ -81,4 +78,47 @@ jobs:
           CC_TEST_REPORTER_ID: afd8b552c0ad955dc741acc35939d50880510387379461759db80337d35efaf9
         with:
           coverageCommand: yarn coverage
+=======
+      - uses: actions/checkout@v2 
+
+      - name: install deps
+        run: yarn install --frozen-lockfile
+
+      - name: build
+        run: yarn build
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: lib
+    
+  test:
+    name: test
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: lib
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: test
+        run: yarn test
+>>>>>>> c09f056b7e75fdbaa5189ee29bd5d6c890bda8cd
     

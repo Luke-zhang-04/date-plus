@@ -15,8 +15,12 @@
     "start": "bash build.sh --watch",
     "prepublishOnly": "yarn build",
     "lint": "make lint",
+<<<<<<< HEAD
     "test": "node tests/test.js",
     "coverage": "npx nyc yarn test"
+=======
+    "test": "node tests/test.js"
+>>>>>>> c09f056b7e75fdbaa5189ee29bd5d6c890bda8cd
   },
   "repository": {
     "type": "git",
