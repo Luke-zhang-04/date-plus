@@ -1,6 +1,6 @@
 {
   "name": "@luke-zhang-04/dateplus",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple program to assist with date manipulation",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -16,7 +16,8 @@
     "prepublishOnly": "yarn build",
     "lint": "make lint",
     "test": "node tests/test.js",
-    "coverage": "npx nyc yarn test"
+    "test:quiet": "node tests/test.js -q",
+    "coverage": "npx nyc yarn test:quiet"
   },
   "repository": {
     "type": "git",
