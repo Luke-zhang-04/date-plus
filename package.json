@@ -16,7 +16,8 @@
     "prepublishOnly": "yarn build",
     "lint": "make lint",
     "test": "node tests/test.js",
-    "coverage": "npx nyc yarn test"
+    "test:quiet": "node tests/test.js -q",
+    "coverage": "npx nyc yarn test:quiet"
   },
   "repository": {
     "type": "git",
