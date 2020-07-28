@@ -76,5 +76,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: afd8b552c0ad955dc741acc35939d50880510387379461759db80337d35efaf9
         with:
-          coverageCommand: yarn coverage
+          coverageCommand: ./cc-test-reporter before-build && yarn coverage && cd coverage && ../cc-test-reporter after-build -t clover
     
