@@ -597,7 +597,11 @@ var DatePlus = (function (modules) {
          * @copyright Copyright (C) 2020 Luke Zhang
          * @author Luke Zhang luke-zhang-04.github.io
          * @license MIT
+<<<<<<< HEAD
          * @version 2.0.3
+=======
+         * @version 2.0.2
+>>>>>>> 42c62df47374612a30dbae6351bbb965563095db
          * @exports Alias
          * @file defines alias static methods from conversion.ts with longer names
          */
@@ -799,7 +803,11 @@ var DatePlus = (function (modules) {
          * @copyright Copyright (C) 2020 Luke Zhang
          * @author Luke Zhang luke-zhang-04.github.io
          * @license MIT
+<<<<<<< HEAD
          * @version 2.0.3
+=======
+         * @version 2.0.2
+>>>>>>> 42c62df47374612a30dbae6351bbb965563095db
          * @exports Elapse
          * @file defines Elapse class for elapsed
          */
