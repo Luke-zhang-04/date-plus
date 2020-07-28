@@ -72,7 +72,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: test coverage
-        uses: paambaati/codeclimate-action@v2.2.4
+        uses: paambaati/codeclimate-action@v2.6.0
         env:
           CC_TEST_REPORTER_ID: afd8b552c0ad955dc741acc35939d50880510387379461759db80337d35efaf9
         with:
