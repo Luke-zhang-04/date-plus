@@ -36,13 +36,13 @@ build() {
 
     node build.js ./dist/dateplus.bundle.js
 
-    echo "/* dateplus v2.0.1 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
+    echo "/* dateplus v2.0.2 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
 $(cat ./dist/dateplus.bundle.js)" > ./dist/dateplus.bundle.js &
 
-    echo "/* dateplus v2.0.1 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
+    echo "/* dateplus v2.0.2 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
 $(cat ./dist/dateplus.bundle.min.js)" > ./dist/dateplus.bundle.min.js &
 
-    echo "/* dateplus v2.0.1 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
+    echo "/* dateplus v2.0.2 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
 $(cat ./tests/browser.js)" > ./tests/browser.js &
 
     wait
