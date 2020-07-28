@@ -1,4 +1,4 @@
-/* dateplus v2.0.1 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
+/* dateplus v2.0.2 | Copyright (C) 2020 Luke Zhang https://luke-zhang-04.github.io | MIT License */
 
 
 function _wrapNativeSuper (Class) {
@@ -597,7 +597,7 @@ var DatePlus = (function (modules) {
          * @copyright Copyright (C) 2020 Luke Zhang
          * @author Luke Zhang luke-zhang-04.github.io
          * @license MIT
-         * @version 2.0.1
+         * @version 2.0.2
          * @exports Alias
          * @file defines alias static methods from conversion.ts with longer names
          */
@@ -799,7 +799,7 @@ var DatePlus = (function (modules) {
          * @copyright Copyright (C) 2020 Luke Zhang
          * @author Luke Zhang luke-zhang-04.github.io
          * @license MIT
-         * @version 2.0.1
+         * @version 2.0.2
          * @exports Elapse
          * @file defines Elapse class for elapsed
          */
