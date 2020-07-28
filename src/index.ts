@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 2.0.0
+ * @version 2.0.1
  * @exports DatePlus
  * @file exports main dateplus object
  */
@@ -206,7 +206,6 @@ export default class DatePlus extends Alias {
             const key = DatePlus._keysReference[dateFormat[index]]
 
             output[key] = Number(dateData[index])
-            console.log(key, dateData[index])
         }
 
         return output as interfaces.YearObj
