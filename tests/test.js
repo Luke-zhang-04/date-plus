@@ -221,8 +221,6 @@ quiet ? {} : console.log("TESTING AS NODE MODULE\n")
 test(require("..").default, quiet)
 quiet ? {} : console.log("NODE ENV PASSED\n\n\n")
 
-quiet ? {} : console.log(require("../dist/dateplus.bundle"))
-
 quiet ? {} : console.log("TESTING AS BROWSER SCRIPT\n")
 test(require("./browser").default, quiet)
 quiet ? {} : console.log("BROWSER ENV PASSED")
