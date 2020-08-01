@@ -20,15 +20,32 @@ Download from NPM
 # Using NPM
 npm i @luke-zhang-04/dateplus --save
 
-#using Yarn
+# Using Yarn
 yarn add @luke-zhang-04/dateplus
 ```
 
 Get bundles with curl
 ```bash
-curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.min.js -O js/dateplus.bundle.min.js # Download minified file (recommended)
+# Development
+curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.js -O js/dateplus.bundle.js
 
-curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.js -O js/dateplus.bundle.js # Download not minfiied file (not recommended for production)
+# Production
+curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.min.js -O js/dateplus.bundle.min.js
+
+# Latest
+curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v2.0.3/dateplus.bundle.min.js -O js/dateplus.bundle.min.js
+```
+
+CDN
+```html
+<!-- Development -->
+<script src="https://unpkg.com/@luke-zhang-04/dateplus/dist/dateplus.bundle.js"></script>
+
+<!-- Production -->
+<script src="https://unpkg.com/@luke-zhang-04/dateplus/dist/dateplus.bundle.min.js"></script>
+
+<!-- Latest -->
+<script src="https://unpkg.com/@luke-zhang-04/dateplus@2.0.3/dist/dateplus.bundle.min.js"></script>
 ```
 
 ## Usage
@@ -50,8 +67,6 @@ Run in a browser environment by either using webpack or an alternative on the pr
         myDate = new DatePlus()
 </script>
 ```
-
-No CDN is currently available
 
 
 ## Documentation
