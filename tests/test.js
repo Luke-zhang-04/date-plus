@@ -9,232 +9,236 @@
 
 /* eslint-disable */
 
-const test = (DatePlus) => {
-    const date = new DatePlus(2020, 6, 1)
+const assert = require("assert")
 
-    console.log("testing formatDate")
-    let formattedDate = date.formatDate()
-
-    if (formattedDate !== "2020/6/1") {
-        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/6/1`)
+/**
+ * Tests values converted upwards (seconds to ms)
+ * @param {Object.<string, number>} conv - object of converted value
+ * @param {Object.string, number>} tests - values to test for
+ * @returns {void} void
+ */
+const upwardConversion = (conv, tests) => {
+    for (const [key, val] of Object.entries(tests)) {
+        it(`Should equal ${val}`, () => {
+            assert.strictEqual(conv[key], val)
+        })
     }
-    console.log("formatDate passed\n")
-
-    console.log("testing getDateValues")
-    const dateVals = DatePlus.getDateValues("2020/06/1")
-
-    if (dateVals.year !== 2020 || dateVals.month !== 6 || dateVals.day !== 1) {
-        throw Error(`Word day {year: ${dateVals.year}, month: ${dateVals.month}, day: ${dateVals.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
-    }
-    console.log("getDateValues passed\n")
-
-    console.log("testing getDateValueswith custom seperator ")
-    const dateVals2 = DatePlus.getDateValues("2020-06-1", "y:m:d", "-")
-
-    if (dateVals2.year !== 2020 || dateVals2.month !== 6 || dateVals2.day !== 1) {
-        throw Error(`Word day {year: ${dateVals2.year}, month: ${dateVals2.month}, day: ${dateVals2.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
-    }
-    console.log("getDateValues with custom seperator passed\n")
-
-
-    console.log("testing addZeros")
-    formattedDate = DatePlus.addZeros(formattedDate)
-
-    if (formattedDate !== "2020/06/01") {
-        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/06/01`)
-    }
-    console.log("addZeros passed\n")
-
-
-    console.log("testing addZeros with custom seperator")
-    formattedDate = DatePlus.addZeros(formattedDate.replace(/\//gu, "-"), "-")
-
-    if (formattedDate !== "2020-06-01") {
-        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020-06-01`)
-    }
-    console.log("addZeros with custom seperator passed\n")
-
-
-    console.log("testing getWordMonth")
-    if (date.getWordMonth() !== "July") {
-        throw Error(`Word day ${date.getWordMonth()} from getWordDay does not match "July"`)
-    }
-    console.log("getWordMonth passed\n")
-
-
-    console.log("testing getWordDay")
-    if (date.getWordDay() !== "Wednesday") {
-        throw Error(`Word day ${date.getWordDay()} from getWordDay does not match "Wednesday"`)
-    }
-    console.log("getWordDay passed\n")
-
-
-    console.log("testing getElapsedDays")
-    const date2 = new Date(2020, 6, 31)
-
-    if (date.getElapsedDays(date2) !== 30) {
-        throw Error(`Elapsed days ${date.getElapsedDays(date2)} from getElapsedDays does not match 30`)
-    }
-    console.log("getElapsedDays passed\n")
-
-    
-    console.log("testing msToSecs")
-    let conv = DatePlus.msToSecs(2001)
-
-    if (conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted milliseconds {seconds: ${conv.seconds}, ms: ${conv.ms}} from msToSecs does not match {seconds: 2, ms: 1}`)
-    }
-    console.log("msToSecs passed\n")
-
-
-    console.log("testing msToMins")
-    conv = DatePlus.msToMins(182001)
-
-    if (conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted milliseconds {minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToMins does not match {minutes: 3, seconds: 2, ms: 1}`)
-    }
-    console.log("msToMins passed\n")
-
-
-    console.log("testing msToHrs")
-    conv = DatePlus.msToHrs(14582001)
-
-    if (conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted milliseconds {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToHrs does not match {hours: 4, minutes: 3, seconds: 2, ms: 1}`)
-    }
-    console.log("msToHrs passed\n")
-
-
-    console.log("testing msToDays")
-    conv = DatePlus.msToDays(446582001)
-
-    if (conv.days !== 5 || conv.hours !== 4 || conv.minutes !== 3 || conv.seconds !== 2 || conv.ms !== 1) {
-        throw Error(`Converted milliseconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}, ms: ${conv.ms}} from msToDays does not match {days: 5, hours: 4, minutes: 3, seconds: 2, ms: 1}`)
-    }
-    console.log("msToDays passed\n")
-
-
-    console.log("testing secsToMs")
-    if (DatePlus.secsToMs(12.1) !== 12100) {
-        throw Error(`Converted seconds ${DatePlus.secsToMs(12.1)} from secsToMs does not match 12100`)
-    }
-    console.log("secsToMs passed\n")
-
-
-    console.log("testing secsToMins")
-    conv = DatePlus.secsToMins(121)
-
-    if (conv.minutes !== 2 || conv.seconds !== 1) {
-        throw Error(`Converted seconds {minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToMins does not match {minutes: 2 seconds: 1}`)
-    }
-    console.log("secsToMins passed\n")
-
-
-    console.log("testing secsToHrs")
-    conv = DatePlus.secsToHrs(10921)
-
-    if (conv.hours !== 3 || conv.minutes !== 2 || conv.seconds !== 1) {
-        throw Error(`Converted seconds {hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToHrs does not match {hours: 3, minutes: 2 seconds: 1}`)
-    }
-    console.log("secsToHrs passed\n")
-
-
-    console.log("testing secsToDays")
-    conv = DatePlus.secsToDays(356521)
-
-    if (conv.days !== 4 || conv.hours !== 3 || conv.minutes !== 2 || conv.seconds !== 1) {
-        throw Error(`Converted seconds {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}, seconds: ${conv.seconds}} from secsToDays does not match {days: 4, hours: 3, minutes: 2 seconds: 1}`)
-    }
-    console.log("secsToDays passed\n")
-    
-
-    console.log("testing minsToMs")
-    if (DatePlus.minsToMs(2.5) !== 150000) {
-        throw Error(`Converted minutes ${DatePlus.minsToMs(2.5)} from minsToSecs does not match 150000`)
-    }
-    console.log("minsToMs passed\n")
-
-
-    console.log("testing minsToHrs")
-    conv = DatePlus.minsToHrs(121)
-
-    if (conv.hours !== 2 || conv.minutes !== 1) {
-        throw Error(`Converted minutes {hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToHrs does not match {hours: 2, minutes: 1}`)
-    }
-    console.log("minsToHrs passed\n")
-
-
-    console.log("testing minsToDays")
-    conv = DatePlus.minsToDays(4441)
-
-    if (conv.days !== 3 || conv.hours !== 2 || conv.minutes !== 1) {
-        throw Error(`Converted minutes {days: ${conv.days}, hours: ${conv.hours}, minutes: ${conv.minutes}} from minsToDays does not match {days: 3, hours: 2, minutes: 1}`)
-    }
-    console.log("minsToDays passed\n")
-
-
-    console.log("testing hrsToMs")
-    if (DatePlus.hrsToMs(2.5) !== 9000000) {
-        throw Error(`Converted hours ${DatePlus.hrsToMs(2.5)} from hrsToMs does not match 9000000`)
-    }
-    console.log("hrsToMs passed\n")
-
-
-    console.log("testing hrsToSecs")
-    if (DatePlus.hrsToSecs(2.5) !== 9000) {
-        throw Error(`Converted hours ${DatePlus.hrsToSecs(2.5)} from hrsToSecs does not match 9000`)
-    }
-    console.log("hrsToSecs passed\n")
-
-
-    console.log("testing hrsToMins")
-    if (DatePlus.hrsToMins(2.5) !== 150) {
-        throw Error(`Converted hours ${DatePlus.hrsToMins(2.5)} from hrsToMins does not match 130`)
-    }
-    console.log("hrsToMins passed\n")
-
-
-    console.log("testing hrsToDays")
-    conv = DatePlus.hrsToDays(49)
-
-    if (conv.days !== 2 || conv.hours !== 1) {
-        throw Error(`Converted hours {days: ${conv.days}, hours: ${conv.hours}} from hrsToDays does not match {days: 2, hours: 1}`)
-    }
-    console.log("hrsToDays passed\n")
-
-
-    console.log("testing daysToMs")
-    if (DatePlus.daysToMs(2.5) !== 216000000) {
-        throw Error(`Converted days ${DatePlus.daysToMs(2.5)} from daysToMs does not match 216000000`)
-    }
-    console.log("daysToMs passed\n")
-
-
-    console.log("testing daysToSecs")
-    if (DatePlus.daysToSecs(2.5) !== 216000) {
-        throw Error(`Converted days ${DatePlus.daysToSecs(2.5)} from daysToSecs does not match 216000`)
-    }
-    console.log("daysToSecs passed\n")
-
-
-    console.log("testing daysToMins")
-    if (DatePlus.daysToMins(2.5) !== 3600) {
-        throw Error(`Converted days ${DatePlus.daysToMins(2.5)} from daysToMins does not match 3600`)
-    }
-    console.log("daysToMins passed\n")
-
-
-    console.log("testing daysToHrs")
-    if (DatePlus.daysToHrs(2.5) !== 60) {
-        throw Error(`Converted days ${DatePlus.daysToSecs(2.5)} from daysToHrs does not match 60`)
-    }
-    console.log("daysToHrs passed\n")
 }
 
-console.log("TESTING AS NODE MODULE\n")
-test(require("..").default)
-console.log("NODE ENV PASSED\n\n\n")
+/**
+ * Main test function
+ * @param {DatePlus} DatePlus - dateplus instance
+ * @returns {void} void
+ */
+const test = (DatePlus) => {
+    const date = new DatePlus(2020, 6, 1),
+        formattedDate = DatePlus.formatDate(date)
 
-console.log("TESTING AS BROWSER SCRIPT\n")
-test(require("./browser").default)
-console.log("BROWSER ENV PASSED")
+    describe("formatDate", () => {
+        it("Should equal 2020/6/1", () => {
+            assert.strictEqual("2020/6/1", formattedDate)
+        })
+    })
+
+    describe("getDateValues", () => {
+        const dateVals = DatePlus.getDateValues("2020/06/1")
+
+        upwardConversion(dateVals, {year: 2020, month: 6, day: 1})
+
+        describe("getDateValueswith with a custom seperator", () => {
+            const dateVals2 = DatePlus.getDateValues("2020-06-1", "y:m:d", "-")
+    
+            upwardConversion(dateVals2, {year: 2020, month: 6, day: 1})
+        })
+    })
+
+    describe("addZeros", () => {
+        it("Should equal 2020/06/01", () => {
+            assert.strictEqual("2020/06/01", DatePlus.addZeros(formattedDate))
+        })
+
+        describe("addZeros with custom seperator", () => {
+            it("Should equal 2020-06-01", () => {
+                const date2 = new DatePlus(2020, 6, 10)
+
+                assert.strictEqual("2020-06-10", date2.addZeros("-"))
+            })
+        })
+    })
+
+    describe("get words values", () => {
+        describe("getWordMonth", () => {
+            it("Should equal July", () => {
+                assert.strictEqual("July", date.getWordMonth())
+            })
+
+            it("Should equal March", () => {
+                assert.strictEqual("March", DatePlus.getWordMonth(2))
+            })
+        })
+
+        describe("getWordDay", () => {
+            it("Should equal Wednesday", () => {
+                assert.strictEqual("Wednesday", date.getWordDay())
+            })
+
+            it("Should equal Wednesday", () => {
+                assert.strictEqual("Wednesday", DatePlus.getWordDay(3))
+            })
+        })
+    })
+
+    describe("Elapse", () => {
+        describe("getElapsedDays", () => {
+            it("Should equal 30", () => {
+                assert.strictEqual(30, date.getElapsedDays(new Date(2020, 6, 31)))
+            })
+        })
+
+        describe("getElapsedDays", () => {
+            it("Should equal 30", () => {
+                assert.strictEqual(30, DatePlus.getElapsedDays(date, new Date(2020, 6, 31)))
+            })
+        })
+    })
+
+    describe("Conversions", () => {
+        describe("Milliseconds conversions", () => {
+            describe("msToSecs", () => {
+                const conv = DatePlus.msToSecs(2001)
+    
+                upwardConversion(conv, {seconds: 2, ms: 1})
+            })
+    
+            describe("msToMins", () => {
+                const conv = DatePlus.msToMins(182001)
+    
+                upwardConversion(conv, {minutes: 3, seconds: 2, ms: 1})
+            })
+    
+            describe("msToHrs", () => {
+                const conv = DatePlus.msToHrs(14582001)
+    
+                upwardConversion(conv, {hours: 4, minutes: 3, seconds: 2, ms: 1})
+            })
+
+            describe("msToDays", () => {
+                const conv = DatePlus.msToDays(446582001)
+
+                upwardConversion(conv, {days: 5, hours: 4, minutes: 3, seconds: 2, ms: 1})
+            })
+        })
+
+        describe("Seconds conversions", () => {
+            describe("secsToMs", () => {
+                it("Should equal 12 100", () => {
+                    assert.strictEqual(12_100, DatePlus.secsToMs(12.1))
+                })
+            })
+
+            describe("secsToMins", () => {
+                const conv = DatePlus.secsToMins(121)
+
+                upwardConversion(conv, {minutes: 2, seconds: 1})
+            })
+
+            describe("secsToHrs", () => {
+                const conv = DatePlus.secsToHrs(10921)
+
+                upwardConversion(conv, {hours: 3, minutes: 2, seconds: 1})
+            })
+
+            describe("secsToDays", () => {
+                const conv = DatePlus.secsToDays(356521)
+
+                upwardConversion(conv, {days: 4, hours: 3, minutes: 2, seconds: 1})
+            })
+        })
+
+        describe("Minutes conversions", () => {
+            describe("minsToMs", () => {
+                it("Should equal 150 000", () => {
+                    assert.strictEqual(150_000, DatePlus.minsToMs(2.5))
+                })
+            })
+
+            describe("minsToSecs", () => {
+                it("Should equal 300", () => {
+                    assert.strictEqual(300, DatePlus.minsToSecs(5))
+                })
+            })
+
+            describe("minToHrs", () => {
+                const conv = DatePlus.minsToHrs(121)
+
+                upwardConversion(conv, {hours: 2, minutes: 1})
+            })
+
+            describe("minsToDays", () => {
+                const conv = DatePlus.minsToDays(4441)
+
+                upwardConversion(conv, {days: 3, hours: 2, minutes: 1})
+            })
+        })
+
+        describe("Hours conversions", () => {
+            describe("hrsToMs", () => {
+                it("Should equal 9 000 000", () => {
+                    assert.strictEqual(9_000_000, DatePlus.hrsToMs(2.5))
+                })
+            })
+
+            describe("hrsToSecs", () => {
+                it("Should equal 9 000", () => {
+                    assert.strictEqual(9_000, DatePlus.hrsToSecs(2.5))
+                })
+            })
+
+            describe("hrsToMins", () => {
+                it("Should equal 150", () => {
+                    assert.strictEqual(150, DatePlus.hrsToMins(2.5))
+                })
+            })
+
+            describe("hrsToDays", () => {
+                const conv = DatePlus.hrsToDays(49)
+
+                upwardConversion(conv, {days: 2, hours: 1})
+            })
+        })
+
+        describe("Days conversions", () => {
+            describe("daysToMs", () => {
+                it("Should equal 216 000 000", () => {
+                    assert.strictEqual(216_000_000, DatePlus.daysToMs(2.5))
+                })
+            })
+
+            describe("daysToSecs", () => {
+                it("Should equal 216 000", () => {
+                    assert.strictEqual(216_000, DatePlus.daysToSecs(2.5))
+                })
+            })
+
+            describe("daysToMins", () => {
+                it("Should equal 3 600", () => {
+                    assert.strictEqual(3_600, DatePlus.daysToMins(2.5))
+                })
+            })
+
+            describe("daysToHrs", () => {
+                it("Should equal 60", () => {
+                    assert.strictEqual(60, DatePlus.daysToHrs(2.5))
+                })
+            })
+        })
+    })
+}
+
+describe("Node Module", () => {
+    test(require("../lib").default)
+})
+
+describe("Browser Script", () => {
+    test(require("./dateplus.bundle").default)
+})

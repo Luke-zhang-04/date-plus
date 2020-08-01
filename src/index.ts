@@ -238,7 +238,7 @@ export default class DatePlus extends Alias {
      * @param {string} seperator - char the date is seperatred by
      * @returns {string} - date with zeros
      */
-    public addZeros = (seperator = "/"): string => DatePlus.addZeros(this.formatDate(), seperator)
+    public addZeros = (seperator = "/"): string => DatePlus.addZeros(this.formatDate(seperator), seperator)
 
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD

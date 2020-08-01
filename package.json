@@ -15,7 +15,7 @@
     "start": "bash build.sh --watch",
     "prepublishOnly": "yarn build",
     "lint": "make lint",
-    "test": "npx mocha",
+    "test": "npx mocha tests/test",
     "coverage": "npx nyc yarn test"
   },
   "repository": {

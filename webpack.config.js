@@ -24,11 +24,11 @@ const prod = {
         entry: "./lib/index.js",
         output: {
             path: path.resolve(__dirname, "tests"),
-            filename: "browser.js",
+            filename: "dateplus.bundle.js",
             library: "DatePlus",
             libraryTarget: "commonjs2",
         },
-        mode: "production",
+        mode: "none",
     }
 
 module.exports = [prod, dev, test]

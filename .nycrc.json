@@ -1,5 +1,5 @@
 {
-    "exclude": ["dist", "tests"],
-    "include": ["lib"],
+    "exclude": ["dist", "tests/index.js"],
+    "include": ["lib", "tests/dateplus.bundle.js"],
     "reporter": ["clover", "text"]
 }

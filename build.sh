@@ -20,7 +20,7 @@ build() {
     # Minify copy of bundle
     printf "${BICyan}Running ${BIYellow}Babel${Purple} on ${Yellow}./dist/dateplus.bundle.min.js/${Purple} and ${Blue}minifying${Purple}\n"
     npx babel ./dist/dateplus.bundle.min.js -o ./dist/dateplus.bundle.min.js --no-comments --no-babelrc --config-file ./.babelrc.min.js &
-    npx babel ./tests/browser.js -o ./tests/browser.js --no-comments --no-babelrc --config-file ./.babelrc.min.js &
+    npx babel ./tests/dateplus.bundle.js -o ./tests/dateplus.bundle.js &
 
     # Run babel on bundle
     printf "${BICyan}Running ${BIYellow}Babel${Purple} on ${Yellow}./dist/dateplus.bundle.min.js/${Purple}\n"
@@ -31,10 +31,12 @@ build() {
     # Format development dist
     printf "${BIPurple}Formatting ${Red}dist ${Green}bundle\n"
     npx eslint ./dist/dateplus.bundle.js --no-ignore --fix --env browser --rule "{\"no-var\": \"off\", \"prefer-arrow/prefer-arrow-functions\": \"off\", \"camelcase\": \"off\", \"id-length\": \"off\"}" > out.log &
+    npx eslint ./tests/dateplus.bundle.js --no-ignore --fix --env browser --rule "{\"no-var\": \"off\", \"prefer-arrow/prefer-arrow-functions\": \"off\", \"camelcase\": \"off\", \"id-length\": \"off\"}" > out.log &
 
     wait
 
     node build.js ./dist/dateplus.bundle.js
+    node build.js ./tests/dateplus.bundle.js
 
     echo "/**
  * DatePlus
@@ -58,7 +60,7 @@ $(cat ./dist/dateplus.bundle.min.js)" > ./dist/dateplus.bundle.min.js &
  * @license MIT
  * @version 2.0.3
  */
-$(cat ./tests/browser.js)" > ./tests/browser.js &
+$(cat ./tests/dateplus.bundle.js)" > ./tests/dateplus.bundle.js &
 
     wait
 
