@@ -15,9 +15,8 @@
     "start": "bash build.sh --watch",
     "prepublishOnly": "yarn build",
     "lint": "make lint",
-    "test": "node tests/test.js",
-    "test:quiet": "node tests/test.js -q",
-    "coverage": "npx nyc yarn test:quiet"
+    "test": "npx mocha",
+    "coverage": "npx nyc yarn test"
   },
   "repository": {
     "type": "git",
@@ -48,6 +47,7 @@
     "eslint": "^7.3.1",
     "eslint-config-recommended": "^4.1.0",
     "eslint-plugin-prefer-arrow": "^1.2.1",
+    "mocha": "^8.1.0",
     "nyc": "^15.1.0",
     "typescript": "^3.9.6",
     "webpack": "^4.43.0",
