@@ -7,11 +7,10 @@
  * @version 2.0.3
  */
 
-/* eslint-disable one-var */
+/* eslint-disable */
 
 const test = (DatePlus, quiet = false) => {
     const date = new DatePlus(2020, 6, 1)
-    /* eslint-enable one-var */
 
     quiet ? {} : console.log("testing formatDate")
     let formattedDate = date.formatDate()
@@ -29,6 +28,14 @@ const test = (DatePlus, quiet = false) => {
     }
     quiet ? {} : console.log("getDateValues passed\n")
 
+    quiet ? {} : console.log("testing getDateValueswith custom seperator ")
+    const dateVals2 = DatePlus.getDateValues("2020-06-1", "y:m:d", "-")
+
+    if (dateVals2.year !== 2020 || dateVals2.month !== 6 || dateVals2.day !== 1) {
+        throw Error(`Word day {year: ${dateVals2.year}, month: ${dateVals2.month}, day: ${dateVals2.day}} from getDateValues does not match {year: 2020, month: 6, day: 1}`)
+    }
+    quiet ? {} : console.log("getDateValues with custom seperator passed\n")
+
 
     quiet ? {} : console.log("testing addZeros")
     formattedDate = DatePlus.addZeros(formattedDate)
@@ -37,6 +44,15 @@ const test = (DatePlus, quiet = false) => {
         throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/06/01`)
     }
     quiet ? {} : console.log("addZeros passed\n")
+
+
+    quiet ? {} : console.log("testing addZeros with custom seperator")
+    formattedDate = DatePlus.addZeros(formattedDate.replace(/\//gu, "-"), "-")
+
+    if (formattedDate !== "2020-06-01") {
+        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020-06-01`)
+    }
+    quiet ? {} : console.log("addZeros with custom seperator passed\n")
 
 
     quiet ? {} : console.log("testing getWordMonth")
