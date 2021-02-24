@@ -162,9 +162,9 @@ export default class DatePlus extends Alias {
         date: Date | DatePlus,
         seperator = "/"
     ): string => {
-        const month = (date.getMonth()).toString(),
-            day = date.getDate().toString(),
-            year = date.getFullYear().toString()
+        const month = (date.getMonth()).toString()
+        const day = date.getDate().toString()
+        const year = date.getFullYear().toString()
     
         return [year, month, day].join(seperator)
     }
@@ -198,9 +198,9 @@ export default class DatePlus extends Alias {
             _seperator = seperator
         }
 
-        const dateData = date.split(_seperator),
-            dateFormat: KeysArr = format.split(":") as KeysArr,
-            output: {[key: string]: number} = {}
+        const dateData = date.split(_seperator)
+        const dateFormat: KeysArr = format.split(":") as KeysArr
+        const output: {[key: string]: number} = {}
 
         for (let index = 0; index < 3; index++) {
             const key = DatePlus._keysReference[dateFormat[index]]

@@ -40,11 +40,13 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
      */
     public static msToMins = (ms: number): interfaces.MinutesObj => {
-        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec,
-            seconds = ((ms - ms % Values.MsPerSec) / Values.MsPerSec) % Values.SecsPerMin,
-            minutes = (
-                ms - seconds * Values.MsPerSec - milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin)
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms - seconds * Values.MsPerSec - milliseconds
+        ) / (Values.MsPerSec * Values.SecsPerMin)
 
         return {
             ms: milliseconds,
@@ -61,17 +63,19 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
      */
     public static msToHrs = (ms: number): interfaces.HoursObj => {
-        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec,
-            seconds = ((ms - ms % Values.MsPerSec) / Values.MsPerSec) % Values.SecsPerMin,
-            minutes = (
-                ms - seconds * Values.MsPerSec - milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr,
-            hours = (
-                ms -
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms - seconds * Values.MsPerSec - milliseconds
+        ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr
+        const hours = (
+            ms -
                 minutes * Values.MsPerSec * Values.SecsPerMin -
                 seconds * Values.MsPerSec -
                 milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)
+        ) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)
 
         return {
             ms: milliseconds,
@@ -89,26 +93,35 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with days, hours, minutes, seconds, and milliseconds
      */
     public static msToDays = (ms: number): interfaces.DaysObj => {
-        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec,
-            seconds = ((ms - ms % Values.MsPerSec) / Values.MsPerSec) % Values.SecsPerMin,
-            minutes = (
-                ms -
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms -
                 seconds * Values.MsPerSec -
                 milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr,
-            hours = (
-                ms -
+        ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr
+        const hours = (
+            ms -
                 minutes * Values.MsPerSec * Values.SecsPerMin -
                 seconds * Values.MsPerSec -
                 milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr) % Values.HrsPerDay,
-            days = (
-                ms -
+        ) / (
+            Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr
+        ) % Values.HrsPerDay
+        const days = (
+            ms -
                 hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr -
                 minutes * Values.MsPerSec * Values.SecsPerMin -
                 seconds * Values.MsPerSec -
                 milliseconds
-            ) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay)
+        ) / (
+            Values.MsPerSec *
+            Values.SecsPerMin *
+            Values.MinsPerHr *
+            Values.HrsPerDay
+        )
 
         return {
             ms: milliseconds,
