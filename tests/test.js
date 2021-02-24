@@ -1,10 +1,10 @@
 /**
  * DatePlus/tests
  * Defines tests for DatePlus
- * @copyright Copyright (C) 2020 Luke Zhang
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 2.0.3
+ * @version 3.0.0
  */
 
 /* eslint-disable one-var */

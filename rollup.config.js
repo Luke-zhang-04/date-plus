@@ -5,8 +5,8 @@ import progress from "rollup-plugin-progress"
 import {terser} from "rollup-plugin-terser"
 
 const bannerProd = `/**
- * DatePlus v2.0.3 | A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 Luke Zhang
+ * DatePlus v3.0.0 | A simple program to assist with date manipulation
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @license MIT
  */
 `
@@ -14,10 +14,10 @@ const bannerProd = `/**
 const bannerDev = `/**
  * DatePlus
  * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 Luke Zhang
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 2.0.3
+ * @version 3.0.0
  */
 `
 
