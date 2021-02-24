@@ -6,17 +6,20 @@
  * @license MIT
  * @version 3.0.0
  * @exports Elapse
- * @file defines Elapse class for elapsed 
+ * @file defines Elapse class for elapsed
  */
 import Convert from "./conversions"
 import DatePlus from "."
 
+/* eslint-disable no-shadow */
 export enum Values {
     HrsPerDay = 24,
     MinsPerHr = 60,
     SecsPerMin = 60,
     MsPerSec = 1000,
 }
+/* eslint-enable no-shadow */
+
 
 /**
  * Elapse class and namespace
@@ -34,7 +37,7 @@ export default class Elapse extends Convert {
      */
     private static _oneDay: number =
         Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
-    
+
     /**
      * Calculates number of elapsed days between date1 and date2
      * @public
