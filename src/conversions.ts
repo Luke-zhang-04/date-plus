@@ -1,19 +1,15 @@
 /**
  * DatePlus
  * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 Luke Zhang
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 2.0.3
+ * @version 3.0.0
  * @exports Convert
  * @file defines Convert class for converting units 
  */
 import * as interfaces from "./interfaces"
-
-const hrsPerDay = 24,
-    minsPerHr = 60,
-    secsPerMin = 60,
-    msPerSec = 1000
+import {Values} from "./elapse"
 
 /**
  * Convert namespace
@@ -31,8 +27,8 @@ export default class Convert extends Date {
      */
     public static msToSecs = (ms: number): interfaces.SecondsObj => (
         {
-            ms: ms % msPerSec,
-            seconds: (ms - ms % msPerSec) / msPerSec,
+            ms: ms % Values.MsPerSec,
+            seconds: (ms - ms % Values.MsPerSec) / Values.MsPerSec,
         }
     )
     
@@ -44,11 +40,13 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
      */
     public static msToMins = (ms: number): interfaces.MinutesObj => {
-        const milliseconds = ms % msPerSec % msPerSec,
-            seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
-            minutes = (
-                ms - seconds * msPerSec - milliseconds
-            ) / (msPerSec * secsPerMin)
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms - seconds * Values.MsPerSec - milliseconds
+        ) / (Values.MsPerSec * Values.SecsPerMin)
 
         return {
             ms: milliseconds,
@@ -65,17 +63,19 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
      */
     public static msToHrs = (ms: number): interfaces.HoursObj => {
-        const milliseconds = ms % msPerSec % msPerSec,
-            seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
-            minutes = (
-                ms - seconds * msPerSec - milliseconds
-            ) / (msPerSec * secsPerMin) % minsPerHr,
-            hours = (
-                ms -
-                minutes * msPerSec * secsPerMin -
-                seconds * msPerSec -
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms - seconds * Values.MsPerSec - milliseconds
+        ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr
+        const hours = (
+            ms -
+                minutes * Values.MsPerSec * Values.SecsPerMin -
+                seconds * Values.MsPerSec -
                 milliseconds
-            ) / (msPerSec * secsPerMin * minsPerHr)
+        ) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)
 
         return {
             ms: milliseconds,
@@ -93,26 +93,35 @@ export default class Convert extends Date {
      * @returns {Object.<string, number>} object with days, hours, minutes, seconds, and milliseconds
      */
     public static msToDays = (ms: number): interfaces.DaysObj => {
-        const milliseconds = ms % msPerSec % msPerSec,
-            seconds = ((ms - ms % msPerSec) / msPerSec) % secsPerMin,
-            minutes = (
-                ms -
-                seconds * msPerSec -
+        const milliseconds = ms % Values.MsPerSec % Values.MsPerSec
+        const seconds = (
+            (ms - ms % Values.MsPerSec) / Values.MsPerSec
+        ) % Values.SecsPerMin
+        const minutes = (
+            ms -
+                seconds * Values.MsPerSec -
                 milliseconds
-            ) / (msPerSec * secsPerMin) % minsPerHr,
-            hours = (
-                ms -
-                minutes * msPerSec * secsPerMin -
-                seconds * msPerSec -
+        ) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr
+        const hours = (
+            ms -
+                minutes * Values.MsPerSec * Values.SecsPerMin -
+                seconds * Values.MsPerSec -
                 milliseconds
-            ) / (msPerSec * secsPerMin * minsPerHr) % hrsPerDay,
-            days = (
-                ms -
-                hours * msPerSec * secsPerMin * minsPerHr -
-                minutes * msPerSec * secsPerMin -
-                seconds * msPerSec -
+        ) / (
+            Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr
+        ) % Values.HrsPerDay
+        const days = (
+            ms -
+                hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr -
+                minutes * Values.MsPerSec * Values.SecsPerMin -
+                seconds * Values.MsPerSec -
                 milliseconds
-            ) / (msPerSec * secsPerMin * minsPerHr * hrsPerDay)
+        ) / (
+            Values.MsPerSec *
+            Values.SecsPerMin *
+            Values.MinsPerHr *
+            Values.HrsPerDay
+        )
 
         return {
             ms: milliseconds,
@@ -131,7 +140,7 @@ export default class Convert extends Date {
      * @param {number} secs - seconds to convert
      * @returns {number} converted milliseconds
      */
-    public static secsToMs = (secs: number): number => secs * msPerSec
+    public static secsToMs = (secs: number): number => secs * Values.MsPerSec
 
     /**
      * Converts seconds to minutes with remainders
@@ -167,7 +176,7 @@ export default class Convert extends Date {
      * @param {number} mins - minutes to convert
      * @returns {number} converted milliseconds
      */
-    public static minsToMs = (mins: number): number => mins * secsPerMin * msPerSec
+    public static minsToMs = (mins: number): number => mins * Values.SecsPerMin * Values.MsPerSec
 
     /**
      * Converts hours to seconds 
@@ -176,7 +185,7 @@ export default class Convert extends Date {
      * @param {number} mins - minutes to convert
      * @returns {number} converted seconds
      */
-    public static minsToSecs = (mins: number): number => mins * secsPerMin
+    public static minsToSecs = (mins: number): number => mins * Values.SecsPerMin
 
     /**
      * Converts minutes to hours with remainders
@@ -204,7 +213,7 @@ export default class Convert extends Date {
      * @param {number} hours - hours to convert
      * @returns {number} converted milliseconds
      */
-    public static hrsToMs = (hours: number): number => hours * minsPerHr * secsPerMin * msPerSec
+    public static hrsToMs = (hours: number): number => hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
 
     /**
      * Converts hours to seconds 
@@ -213,7 +222,7 @@ export default class Convert extends Date {
      * @param {number} hours - hours to convert
      * @returns {number} converted seconds
      */
-    public static hrsToSecs = (hours: number): number => hours * minsPerHr * secsPerMin
+    public static hrsToSecs = (hours: number): number => hours * Values.MinsPerHr * Values.SecsPerMin
 
     /**
      * Converts hours to minutes
@@ -222,7 +231,7 @@ export default class Convert extends Date {
      * @param {number} hours - hours to convert
      * @returns {number} converted minutes
      */
-    public static hrsToMins = (hours: number): number => hours * minsPerHr
+    public static hrsToMins = (hours: number): number => hours * Values.MinsPerHr
 
     /**
      * Converts hours to days with remainders
@@ -240,7 +249,7 @@ export default class Convert extends Date {
      * @param {number} days - days to convert
      * @returns {number} converted milliseconds
      */
-    public static daysToMs = (days: number): number => days * hrsPerDay * minsPerHr * secsPerMin * msPerSec
+    public static daysToMs = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
 
     /**
      * Converts days to seconds 
@@ -249,7 +258,7 @@ export default class Convert extends Date {
      * @param {number} days - days to convert
      * @returns {number} converted seconds
      */
-    public static daysToSecs = (days: number): number => days * hrsPerDay * minsPerHr * secsPerMin
+    public static daysToSecs = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin
 
     /**
      * Converts days to minutes 
@@ -258,7 +267,7 @@ export default class Convert extends Date {
      * @param {number} days - days to convert
      * @returns {number} converted minutes
      */
-    public static daysToMins = (days: number): number => days * hrsPerDay * minsPerHr
+    public static daysToMins = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr
 
     /**
      * Converts days to hours 
@@ -267,7 +276,7 @@ export default class Convert extends Date {
      * @param {number} days - days to convert
      * @returns {number} converted hours
      */
-    public static daysToHrs = (days: number): number => days * hrsPerDay
+    public static daysToHrs = (days: number): number => days * Values.HrsPerDay
     /* eslint-enable max-len */
 
 }

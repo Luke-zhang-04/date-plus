@@ -1,20 +1,25 @@
 /**
  * DatePlus
  * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 Luke Zhang
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 2.0.3
+ * @version 3.0.0
  * @exports Elapse
- * @file defines Elapse class for elapsed 
+ * @file defines Elapse class for elapsed
  */
 import Convert from "./conversions"
 import DatePlus from "."
 
-const hrsPerDay = 24,
-    minsPerHr = 60,
-    secsPerMin = 60,
-    msPerSec = 1000
+/* eslint-disable no-shadow */
+export enum Values {
+    HrsPerDay = 24,
+    MinsPerHr = 60,
+    SecsPerMin = 60,
+    MsPerSec = 1000,
+}
+/* eslint-enable no-shadow */
+
 
 /**
  * Elapse class and namespace
@@ -31,8 +36,8 @@ export default class Elapse extends Convert {
      * @type {number}
      */
     private static _oneDay: number =
-        hrsPerDay * minsPerHr * secsPerMin * msPerSec
-    
+        Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
+
     /**
      * Calculates number of elapsed days between date1 and date2
      * @public

@@ -126,16 +126,20 @@ typings/
 
 .github
 src/
+test
 wiki
-.babelrc.js
-.babelrc.min.js
+.browserslistrc
+.codeclimate.yml
+.editorconfig
 .eslintignore
 .eslintrc.json
 .gitattributes
 .gitmodules
-build.js
-*.sh
-*.config.js
-makefile
+.nycrc.json
+build.sh
+colours.sh
+rollup.config.json
+tsbuildinfo.json
 tsconfig.json
+tsbuildinfo.json
 yarn.lock
