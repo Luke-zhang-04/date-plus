@@ -9,6 +9,8 @@
 
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -802,6 +804,13 @@ var DatePlus = function (_Alias) {
 
   return DatePlus;
 }(Alias);
+/**
+ * Reference to days of the week, zero indexed
+ * @private
+ * @static
+ * @type {Object.<number, string>}
+ */
+
 DatePlus._daysReference = {
   0: "Sunday",
   1: "Monday",
@@ -964,5 +973,6 @@ DatePlus.getWordMonth = function (numerical) {
   return DatePlus._monthsReference[numerical];
 };
 
-module.exports = DatePlus;
+exports.DatePlus = DatePlus;
+exports.default = DatePlus;
 //# sourceMappingURL=dateplus.cjs.map

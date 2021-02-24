@@ -7,7 +7,7 @@
  * @version 3.0.0
  */
 
-var DatePlus = (function () {
+var DatePlus = (function (exports) {
     'use strict';
 
     /**
@@ -667,7 +667,12 @@ var DatePlus = (function () {
 
     DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
 
-    return DatePlus;
+    exports.DatePlus = DatePlus;
+    exports.default = DatePlus;
 
-}());
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+    return exports;
+
+}({}));
 //# sourceMappingURL=dateplus.js.map

@@ -665,4 +665,5 @@ DatePlus.getWordDay = numerical => DatePlus._daysReference[numerical];
 DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
 
 export default DatePlus;
+export { DatePlus };
 //# sourceMappingURL=dateplus.js.map

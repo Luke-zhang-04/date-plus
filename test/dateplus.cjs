@@ -9,6 +9,8 @@
 
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /**
  * Convert namespace
  * @classdesc A namespace program to convert units
@@ -666,5 +668,6 @@ DatePlus.getWordDay = numerical => DatePlus._daysReference[numerical];
 
 DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
 
-module.exports = DatePlus;
+exports.DatePlus = DatePlus;
+exports.default = DatePlus;
 //# sourceMappingURL=dateplus.cjs.map

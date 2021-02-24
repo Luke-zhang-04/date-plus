@@ -7,7 +7,7 @@
  * @version 3.0.0
  */
 
-var DatePlus = (function () {
+var DatePlus = (function (exports) {
   'use strict';
 
   function _classCallCheck(instance, Constructor) {
@@ -803,6 +803,13 @@ var DatePlus = (function () {
 
     return DatePlus;
   }(Alias);
+  /**
+   * Reference to days of the week, zero indexed
+   * @private
+   * @static
+   * @type {Object.<number, string>}
+   */
+
   DatePlus._daysReference = {
     0: "Sunday",
     1: "Monday",
@@ -965,7 +972,12 @@ var DatePlus = (function () {
     return DatePlus._monthsReference[numerical];
   };
 
-  return DatePlus;
+  exports.DatePlus = DatePlus;
+  exports.default = DatePlus;
 
-}());
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+  return exports;
+
+}({}));
 //# sourceMappingURL=dateplus.js.map
