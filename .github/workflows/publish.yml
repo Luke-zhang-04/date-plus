@@ -1,9 +1,7 @@
 name: Publish to package
 on:
   release:
-    types: [publish]
-  push:
-    branches: [master]
+    types: [published]
 
 jobs:
   publish:
@@ -13,23 +11,28 @@ jobs:
 
     - uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: '14.x'
         registry-url: 'https://registry.npmjs.org'
 
     - name: install deps
-      run: yarn --frozen-lockfile
+      run: yarn install --frozen-lockfile
+
+    # No need to build. Build is executed before publish automatically
 
     - name: publish to NPM
-      run: yarn publish --access public
+      # Don't fail if version already exists
+      run: yarn publish --access public || echo "Version already published" && exit 0
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-    - uses: actions/setup-node@v1
-      with:
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@luke-zhang-04'
+    - name: archive files
+      run: tar -czvf dateplus.tar.gz dist && zip -rv dateplus.zip dist
 
-    - name: publish to GPR
-      run: yarn publish
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./dateplus.tar.gz
+          ./dateplus.zip
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
