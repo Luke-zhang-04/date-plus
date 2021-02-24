@@ -1,5 +1,5 @@
 /**
- * DatePlus v3.0.0 | A simple program to assist with date manipulation
+ * DatePlus v3.0.1 | A simple program to assist with date manipulation
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @license MIT
  */
