@@ -13,18 +13,11 @@ import Alias from "./alias"
 
 type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
 
-/**
- * Base interface for Date and Month references
- */
-interface Reference {
-    [index: number]: string,
-}
-
 /* eslint-disable no-magic-numbers */
 /**
  * Interface for datereference
  */
-interface Days extends Reference {
+interface Days {
     0: "Sunday",
     1: "Monday",
     2: "Tuesday",
@@ -47,7 +40,7 @@ interface Keys {
 /**
  * Interface for datereference
  */
-interface Months extends Reference {
+interface Months {
     0: "January",
     1: "Feburary",
     2: "March",
@@ -69,7 +62,7 @@ interface Months extends Reference {
  * @class
  * @namespace
  */
-export default class DatePlus extends Alias {
+export class DatePlus extends Alias {
 
     /**
      * Reference to days of the week, zero indexed
@@ -121,7 +114,7 @@ export default class DatePlus extends Alias {
         10: "November",
         11: "December",
     }
-    
+
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
      * @public
@@ -165,7 +158,7 @@ export default class DatePlus extends Alias {
         const month = (date.getMonth()).toString()
         const day = date.getDate().toString()
         const year = date.getFullYear().toString()
-    
+
         return [year, month, day].join(seperator)
     }
 
@@ -219,7 +212,7 @@ export default class DatePlus extends Alias {
      * @param {number} numerical - numerical day of week, 0 indexed (0-6)
      * @returns {string} stringed day of week
      */
-    public static getWordDay = (numerical: number): string => DatePlus._daysReference[numerical]
+    public static getWordDay = (numerical: keyof Days): string => DatePlus._daysReference[numerical]
 
     /**
      * Converts numerical month into word form (e.g 0 => "January")
@@ -228,7 +221,7 @@ export default class DatePlus extends Alias {
      * @param {number} numerical - numerical day of week, 0 indexed (0-11)
      * @returns {string} stringed worded month
      */
-    public static getWordMonth = (numerical: number): string => DatePlus._monthsReference[numerical]
+    public static getWordMonth = (numerical: keyof Months): string => DatePlus._monthsReference[numerical]
 
     /**
      * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
@@ -254,7 +247,7 @@ export default class DatePlus extends Alias {
      * @instance
      * @returns {string} stringed day of week
      */
-    public getWordDay = (): string => DatePlus._daysReference[this.getDay()]
+    public getWordDay = (): string => DatePlus._daysReference[this.getDay() as keyof Days]
 
     /**
      * Gets instantiated month in word form (e.g 0 => "January")
@@ -262,7 +255,9 @@ export default class DatePlus extends Alias {
      * @instance
      * @returns {string} stringed worded month
      */
-    public getWordMonth = (): string => DatePlus._monthsReference[this.getMonth()]
+    public getWordMonth = (): string => DatePlus._monthsReference[this.getMonth() as keyof Months]
     /* eslint-enable max-len */
 
 }
+
+export default DatePlus
