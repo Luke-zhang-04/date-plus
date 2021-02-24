@@ -11,10 +11,12 @@
 import Convert from "./conversions"
 import DatePlus from "."
 
-const hrsPerDay = 24,
-    minsPerHr = 60,
-    secsPerMin = 60,
-    msPerSec = 1000
+export enum Values {
+    HrsPerDay = 24,
+    MinsPerHr = 60,
+    SecsPerMin = 60,
+    MsPerSec = 1000,
+}
 
 /**
  * Elapse class and namespace
@@ -31,7 +33,7 @@ export default class Elapse extends Convert {
      * @type {number}
      */
     private static _oneDay: number =
-        hrsPerDay * minsPerHr * secsPerMin * msPerSec
+        Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
     
     /**
      * Calculates number of elapsed days between date1 and date2
