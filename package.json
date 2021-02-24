@@ -17,9 +17,9 @@
     "prepublishOnly": "yarn build",
     "lint": "eslint \"*/**/*.ts\"",
     "lint:fix": "eslint \"*/**/*.ts\" --fix",
-    "test": "node tests/test.js",
-    "test:quiet": "node tests/test.js -q",
-    "coverage": "npx nyc yarn test:quiet"
+    "test": "node test/index.cjs",
+    "test:quiet": "node test/index.cjs --quiet",
+    "coverage": "nyc node test/index.cjs --quiet"
   },
   "repository": {
     "type": "git",

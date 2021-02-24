@@ -17,6 +17,8 @@ build() {
     # Run Rollup on ./build and es5
     echo -e "${BIBlue}Packing ${Yellow}./build/index.js${Purple} files with ${ICyan}Rollup${Purple} and sending to ${Yellow}./dist/${Purple}"
     "$bin"/rollup -c rollup.config.js
+
+    cp dist/cjs/dateplus.cjs test/dateplus.cjs --verbose
 }
 
 buildDev() {
@@ -27,6 +29,8 @@ buildDev() {
     # Run Rollup on ./build and es5
     echo -e "${BIBlue}Packing ${Yellow}./build/index.js${Purple} files with ${ICyan}Rollup${Purple} and sending to ${Yellow}./dist/${Purple}"
     "$bin"/rollup -c rollup.config.js
+
+    cp dist/cjs/dateplus.cjs test/dateplus.cjs --verbose
 }
 
 # Watches for file changes and executes build
