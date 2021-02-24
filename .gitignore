@@ -125,3 +125,4 @@ cli/*.js
 .env.test.local
 .env.production.local
 .vscode
+tsbuildinfo.json
