@@ -14,7 +14,8 @@
     "build": "bash build.sh",
     "start": "bash build.sh --watch",
     "prepublishOnly": "yarn build",
-    "lint": "make lint",
+    "lint": "eslint \"*/**/*.ts\"",
+    "lint:fix": "eslint \"*/**/*.ts\" --fix",
     "test": "node tests/test.js",
     "test:quiet": "node tests/test.js -q",
     "coverage": "npx nyc yarn test:quiet"
