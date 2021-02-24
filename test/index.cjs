@@ -217,4 +217,4 @@ const test = (DatePlus, quiet = false) => {
 
 const quiet = process.argv.includes("--quiet") || process.argv.includes("-q")
 
-test(require("./dateplus.cjs"), quiet)
+test(require("./dateplus.cjs").default, quiet)
