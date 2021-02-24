@@ -1,14 +1,16 @@
 # Distribution is generated
-./dist/*.js linguist-generated=true
-
-# So is this file
-tests/browser.js linguist-generated=true
+dist/**/* linguist-generated=true
 
 # Enforce Unix newlines
 * text=auto eol=lf
 
+# Don't diff or textually merge source maps or dist
+*.map binary
+dist/**/* binary
+
 # Remove config files
 *.config.js linguist-detectable=false
 
-# Remove babel files
-.babelrc.* linguist-detectable=false
+# Ignore some test files
+test/**/* linguist-detectable=false
+docs/**/* linguist-documentation=true
