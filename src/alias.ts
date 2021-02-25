@@ -40,7 +40,7 @@ export default class Alias extends Elapse {
     public static msToHours = Alias.msToHrs
 
     /**
-     * Converts seconds to milliseconds 
+     * Converts seconds to milliseconds
      * @public
      * @static
      * @param {number} secs - seconds to convert
@@ -76,7 +76,7 @@ export default class Alias extends Elapse {
     public static secondsToDays = Alias.secsToDays
 
     /**
-     * Converts hours to milliseconds 
+     * Converts hours to milliseconds
      * @public
      * @static
      * @param {number} mins - minutes to convert
@@ -85,7 +85,7 @@ export default class Alias extends Elapse {
     public static minutesToMs = Alias.minsToMs
 
     /**
-     * Converts hours to seconds 
+     * Converts hours to seconds
      * @public
      * @static
      * @param {number} mins - minutes to convert
@@ -112,7 +112,7 @@ export default class Alias extends Elapse {
     public static minutesToDays = Alias.minsToDays
 
     /**
-     * Converts hours to milliseconds 
+     * Converts hours to milliseconds
      * @public
      * @static
      * @param {number} hours - hours to convert
@@ -121,7 +121,7 @@ export default class Alias extends Elapse {
     public static hoursToMs = Alias.hrsToMs
 
     /**
-     * Converts hours to seconds 
+     * Converts hours to seconds
      * @public
      * @static
      * @param {number} hours - hours to convert
@@ -148,7 +148,7 @@ export default class Alias extends Elapse {
     public static hoursToDays = Alias.hrsToDays
 
     /**
-     * Converts days to seconds 
+     * Converts days to seconds
      * @public
      * @static
      * @param {number} days - days to convert
@@ -157,7 +157,7 @@ export default class Alias extends Elapse {
     public static daysToSeconds = Alias.daysToSecs
 
     /**
-     * Converts days to minutes 
+     * Converts days to minutes
      * @public
      * @static
      * @param {number} days - days to convert
@@ -166,7 +166,7 @@ export default class Alias extends Elapse {
     public static daysToMinutes = Alias.daysToMins
 
     /**
-     * Converts days to hours 
+     * Converts days to hours
      * @public
      * @static
      * @param {number} days - days to convert

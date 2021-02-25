@@ -6,7 +6,7 @@
  * @license MIT
  * @version 3.0.1
  * @exports Convert
- * @file defines Convert class for converting units 
+ * @file defines Convert class for converting units
  */
 import * as interfaces from "./interfaces"
 import {Values} from "./elapse"
@@ -31,7 +31,7 @@ export default class Convert extends Date {
             seconds: (ms - ms % Values.MsPerSec) / Values.MsPerSec,
         }
     )
-    
+
     /**
      * Converts milliseconds to minutes with remainders
      * @public
@@ -134,7 +134,7 @@ export default class Convert extends Date {
 
     /* eslint-disable max-len */
     /**
-     * Converts seconds to milliseconds 
+     * Converts seconds to milliseconds
      * @public
      * @static
      * @param {number} secs - seconds to convert
@@ -170,7 +170,7 @@ export default class Convert extends Date {
     public static secsToDays = (secs: number): interfaces.DaysObj => Convert.msToDays(Convert.secsToMs(secs))
 
     /**
-     * Converts hours to milliseconds 
+     * Converts hours to milliseconds
      * @public
      * @static
      * @param {number} mins - minutes to convert
@@ -179,7 +179,7 @@ export default class Convert extends Date {
     public static minsToMs = (mins: number): number => mins * Values.SecsPerMin * Values.MsPerSec
 
     /**
-     * Converts hours to seconds 
+     * Converts hours to seconds
      * @public
      * @static
      * @param {number} mins - minutes to convert
@@ -205,9 +205,9 @@ export default class Convert extends Date {
      */
     public static minsToDays = (mins: number): interfaces.DaysObj => Convert.msToDays(Convert.minsToMs(mins))
 
-    
+
     /**
-     * Converts hours to milliseconds 
+     * Converts hours to milliseconds
      * @public
      * @static
      * @param {number} hours - hours to convert
@@ -216,7 +216,7 @@ export default class Convert extends Date {
     public static hrsToMs = (hours: number): number => hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
 
     /**
-     * Converts hours to seconds 
+     * Converts hours to seconds
      * @public
      * @static
      * @param {number} hours - hours to convert
@@ -243,7 +243,7 @@ export default class Convert extends Date {
     public static hrsToDays = (hrs: number): interfaces.DaysObj => Convert.msToDays(Convert.hrsToMs(hrs))
 
     /**
-     * Converts days to milliseconds 
+     * Converts days to milliseconds
      * @public
      * @static
      * @param {number} days - days to convert
@@ -252,7 +252,7 @@ export default class Convert extends Date {
     public static daysToMs = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
 
     /**
-     * Converts days to seconds 
+     * Converts days to seconds
      * @public
      * @static
      * @param {number} days - days to convert
@@ -261,7 +261,7 @@ export default class Convert extends Date {
     public static daysToSecs = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin
 
     /**
-     * Converts days to minutes 
+     * Converts days to minutes
      * @public
      * @static
      * @param {number} days - days to convert
@@ -270,7 +270,7 @@ export default class Convert extends Date {
     public static daysToMins = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr
 
     /**
-     * Converts days to hours 
+     * Converts days to hours
      * @public
      * @static
      * @param {number} days - days to convert
