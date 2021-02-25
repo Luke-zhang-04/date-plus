@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 3.0.0
+ * @version 3.0.1
  * @exports Elapse
  * @file defines Elapse class for elapsed
  */
