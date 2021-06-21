@@ -29,7 +29,7 @@ module.exports = {
         eqeqeq: "error",
         "id-length": ["error", {exceptions: ["_", "$"]}],
         "max-len": "off",
-        "max-lines": ["warn", 500],
+        "max-lines": "off",
         "max-statements": ["warn", {max: 25}],
         "no-else-return": "warn",
         "no-empty": ["warn", {allowEmptyCatch: true}],

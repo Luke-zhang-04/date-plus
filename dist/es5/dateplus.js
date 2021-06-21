@@ -150,6 +150,44 @@ var DatePlus = (function (exports) {
     };
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+
+    var _s, _e;
+
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -167,10 +205,14 @@ var DatePlus = (function (exports) {
     return arr2;
   }
 
-  function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it;
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
 
-    if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+
+    if (!it) {
       if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
         if (it) o = it;
         var i = 0;
@@ -203,7 +245,7 @@ var DatePlus = (function (exports) {
         err;
     return {
       s: function () {
-        it = o[Symbol.iterator]();
+        it = it.call(o);
       },
       n: function () {
         var step = it.next();
@@ -225,26 +267,12 @@ var DatePlus = (function (exports) {
   }
 
   /**
-   * Convert namespace
+   * Converts milliseconds to seconds with remainders
    *
-   * @namespace
-   * @classdesc A namespace program to convert units
+   * @param ms - Milliseconds to convert
+   * @returns Object with seconds and milliseconds
    */
-  var Convert = function (_Date) {
-    _inherits(Convert, _Date);
-
-    var _super = _createSuper(Convert);
-
-    function Convert() {
-      _classCallCheck(this, Convert);
-
-      return _super.apply(this, arguments);
-    }
-
-    return Convert;
-  }(_wrapNativeSuper(Date));
-
-  Convert.msToSecs = function (ms) {
+  var msToSecs = function msToSecs(ms) {
     return {
       ms: ms % 1000,
       seconds: (ms - ms % 1000) / 1000
@@ -253,14 +281,11 @@ var DatePlus = (function (exports) {
   /**
    * Converts milliseconds to minutes with remainders
    *
-   * @param {number} ms - Milliseconds to convert
-   * @returns {Object<string, number>} Object with minutes, seconds, and milliseconds
-   * @public
-   * @static
+   * @param ms - Milliseconds to convert
+   * @returns Object with minutes, seconds, and milliseconds
    */
 
-
-  Convert.msToMins = function (ms) {
+  var msToMins = function msToMins(ms) {
     var milliseconds = ms % 1000 % 1000;
     var seconds = (ms - ms % 1000) / 1000 % 60;
     var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
@@ -273,14 +298,11 @@ var DatePlus = (function (exports) {
   /**
    * Converts milliseconds to hours with remainders
    *
-   * @param {number} ms - Milliseconds to convert
-   * @returns {Object<string, number>} Object with hours, minutes, seconds, and milliseconds
-   * @public
-   * @static
+   * @param ms - Milliseconds to convert
+   * @returns Object with hours, minutes, seconds, and milliseconds
    */
 
-
-  Convert.msToHrs = function (ms) {
+  var msToHrs = function msToHrs(ms) {
     var milliseconds = ms % 1000 % 1000;
     var seconds = (ms - ms % 1000) / 1000 % 60;
     var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
@@ -295,14 +317,11 @@ var DatePlus = (function (exports) {
   /**
    * Converts milliseconds to days with remainders
    *
-   * @param {number} ms - Milliseconds to convert
-   * @returns {Object<string, number>} Object with days, hours, minutes, seconds, and milliseconds
-   * @public
-   * @static
+   * @param ms - Milliseconds to convert
+   * @returns Object with days, hours, minutes, seconds, and milliseconds
    */
 
-
-  Convert.msToDays = function (ms) {
+  var msToDays = function msToDays(ms) {
     var milliseconds = ms % 1000 % 1000;
     var seconds = (ms - ms % 1000) / 1000 % 60;
     var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
@@ -319,534 +338,195 @@ var DatePlus = (function (exports) {
   /**
    * Converts seconds to milliseconds
    *
-   * @param {number} secs - Seconds to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
+   * @param secs - Seconds to convert
+   * @returns Converted milliseconds
    */
 
-
-  Convert.secsToMs = function (secs) {
+  var secsToMs = function secsToMs(secs) {
     return secs * 1000;
   };
   /**
    * Converts seconds to minutes with remainders
    *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted minutes
-   * @public
-   * @static
+   * @param secs - Seconds to convert
+   * @returns Converted minutes
    */
 
-
-  Convert.secsToMins = function (secs) {
-    return Convert.msToMins(Convert.secsToMs(secs));
+  var secsToMins = function secsToMins(secs) {
+    return msToMins(secsToMs(secs));
   };
   /**
    * Converts seconds to hours with remainders
    *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted hours
-   * @public
-   * @static
+   * @param secs - Seconds to convert
+   * @returns Converted hours
    */
 
-
-  Convert.secsToHrs = function (secs) {
-    return Convert.msToHrs(Convert.secsToMs(secs));
+  var secsToHrs = function secsToHrs(secs) {
+    return msToHrs(secsToMs(secs));
   };
   /**
    * Converts seconds to days with remainders
    *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
+   * @param secs - Seconds to convert
+   * @returns Converted days
    */
 
-
-  Convert.secsToDays = function (secs) {
-    return Convert.msToDays(Convert.secsToMs(secs));
+  var secsToDays = function secsToDays(secs) {
+    return msToDays(secsToMs(secs));
   };
   /**
    * Converts hours to milliseconds
    *
-   * @param {number} mins - Minutes to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
+   * @param mins - Minutes to convert
+   * @returns Converted milliseconds
    */
 
-
-  Convert.minsToMs = function (mins) {
+  var minsToMs = function minsToMs(mins) {
     return mins * 60 * 1000;
   };
   /**
    * Converts hours to seconds
    *
-   * @param {number} mins - Minutes to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
+   * @param mins - Minutes to convert
+   * @returns Converted seconds
    */
 
-
-  Convert.minsToSecs = function (mins) {
+  var minsToSecs = function minsToSecs(mins) {
     return mins * 60;
   };
   /**
    * Converts minutes to hours with remainders
    *
-   * @param {number} mins - Minutes to convert
-   * @returns {Object<string, number>} Converted hours
-   * @public
-   * @static
+   * @param mins - Minutes to convert
+   * @returns Converted hours
    */
 
-
-  Convert.minsToHrs = function (mins) {
-    return Convert.msToHrs(Convert.minsToMs(mins));
+  var minsToHrs = function minsToHrs(mins) {
+    return msToHrs(minsToMs(mins));
   };
   /**
    * Converts minutes to days with remainders
    *
-   * @param {number} mins - Minutes to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
+   * @param mins - Minutes to convert
+   * @returns Converted days
    */
 
-
-  Convert.minsToDays = function (mins) {
-    return Convert.msToDays(Convert.minsToMs(mins));
+  var minsToDays = function minsToDays(mins) {
+    return msToDays(minsToMs(mins));
   };
   /**
    * Converts hours to milliseconds
    *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
+   * @param hours - Hours to convert
+   * @returns Converted milliseconds
    */
 
-
-  Convert.hrsToMs = function (hours) {
+  var hrsToMs = function hrsToMs(hours) {
     return hours * 60 * 60 * 1000;
   };
   /**
    * Converts hours to seconds
    *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
+   * @param hours - Hours to convert
+   * @returns Converted seconds
    */
 
-
-  Convert.hrsToSecs = function (hours) {
+  var hrsToSecs = function hrsToSecs(hours) {
     return hours * 60 * 60;
   };
   /**
    * Converts hours to minutes
    *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted minutes
-   * @public
-   * @static
+   * @param hours - Hours to convert
+   * @returns Converted minutes
    */
 
-
-  Convert.hrsToMins = function (hours) {
+  var hrsToMins = function hrsToMins(hours) {
     return hours * 60;
   };
   /**
    * Converts hours to days with remainders
    *
-   * @param {number} hrs - Hours to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
+   * @param hrs - Hours to convert
+   * @returns Converted days
    */
 
-
-  Convert.hrsToDays = function (hrs) {
-    return Convert.msToDays(Convert.hrsToMs(hrs));
+  var hrsToDays = function hrsToDays(hrs) {
+    return msToDays(hrsToMs(hrs));
   };
   /**
    * Converts days to milliseconds
    *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
+   * @param days - Days to convert
+   * @returns Converted milliseconds
    */
 
-
-  Convert.daysToMs = function (days) {
+  var daysToMs = function daysToMs(days) {
     return days * 24 * 60 * 60 * 1000;
   };
   /**
    * Converts days to seconds
    *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
+   * @param days - Days to convert
+   * @returns Converted seconds
    */
 
-
-  Convert.daysToSecs = function (days) {
+  var daysToSecs = function daysToSecs(days) {
     return days * 24 * 60 * 60;
   };
   /**
    * Converts days to minutes
    *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted minutes
-   * @public
-   * @static
+   * @param days - Days to convert
+   * @returns Converted minutes
    */
 
-
-  Convert.daysToMins = function (days) {
+  var daysToMins = function daysToMins(days) {
     return days * 24 * 60;
   };
   /**
    * Converts days to hours
    *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted hours
-   * @public
-   * @static
+   * @param days - Days to convert
+   * @returns Converted hours
    */
 
-
-  Convert.daysToHrs = function (days) {
+  var daysToHrs = function daysToHrs(days) {
     return days * 24;
   };
 
-  /**
-   * Elapse class and namespace
-   *
-   * @namespace
-   * @class
-   * @classdesc A class and namespace program to find elapsed times
-   */
+  var conversions = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    msToSecs: msToSecs,
+    msToMins: msToMins,
+    msToHrs: msToHrs,
+    msToDays: msToDays,
+    secsToMs: secsToMs,
+    secsToMins: secsToMins,
+    secsToHrs: secsToHrs,
+    secsToDays: secsToDays,
+    minsToMs: minsToMs,
+    minsToSecs: minsToSecs,
+    minsToHrs: minsToHrs,
+    minsToDays: minsToDays,
+    hrsToMs: hrsToMs,
+    hrsToSecs: hrsToSecs,
+    hrsToMins: hrsToMins,
+    hrsToDays: hrsToDays,
+    daysToMs: daysToMs,
+    daysToSecs: daysToSecs,
+    daysToMins: daysToMins,
+    daysToHrs: daysToHrs
+  });
 
-  var Elapse = function (_Convert) {
-    _inherits(Elapse, _Convert);
-
-    var _super = _createSuper(Elapse);
-
-    function Elapse() {
-      var _this;
-
-      _classCallCheck(this, Elapse);
-
-      _this = _super.apply(this, arguments);
-      /**
-       * Calculates number of elapsed days between instantiated date and dae
-       *
-       * @param {Date | DatePlus} date - Ending date object to calculate
-       * @returns {number} - Number of elapsed days
-       * @public
-       * @instance
-       */
-
-      _this.getElapsedDays = function (date) {
-        return Math.round((_this.getTime() - date.getTime()) / Elapse._oneDay) * -1;
-      };
-
-      return _this;
-    }
-
-    return Elapse;
-  }(Convert);
-  Elapse._oneDay = 24 * 60 * 60 * 1000;
-  /**
-   * Calculates number of elapsed days between date1 and date2
-   *
-   * @param {Date | DatePlus} date1 - Starting date object to calculate
-   * @param {Date | DatePlus} date2 - Ending date object to calculate
-   * @returns {number} - Number of elapsed days
-   * @public
-   * @static
-   */
-
-  Elapse.getElapsedDays = function (date1, date2) {
-    return Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1;
+  var values = {
+    hrsPerDay: 24,
+    minsPerHr: 60,
+    secsPerMin: 60,
+    msPerSec: 1000
   };
-
-  var Alias = function (_Elapse) {
-    _inherits(Alias, _Elapse);
-
-    var _super = _createSuper(Alias);
-
-    function Alias() {
-      _classCallCheck(this, Alias);
-
-      return _super.apply(this, arguments);
-    }
-
-    return Alias;
-  }(Elapse);
-  Alias.msToSeconds = Alias.msToSecs;
-  /**
-   * Converts milliseconds to minutes with remainders
-   *
-   * @param {number} ms - Milliseconds to convert
-   * @returns {Object<string, number>} Object with minutes, seconds, and milliseconds
-   * @public
-   * @static
-   */
-
-  Alias.msToMinutes = Alias.msToMins;
-  /**
-   * Converts milliseconds to hours with remainders
-   *
-   * @param {number} ms - Milliseconds to convert
-   * @returns {Object<string, number>} Object with hours, minutes, seconds, and milliseconds
-   * @public
-   * @static
-   */
-
-  Alias.msToHours = Alias.msToHrs;
-  /**
-   * Converts seconds to milliseconds
-   *
-   * @param {number} secs - Seconds to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
-   */
-
-  Alias.secondsToMs = Alias.secsToMs;
-  /**
-   * Converts seconds to minutes with remainders
-   *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted minutes
-   * @public
-   * @static
-   */
-
-  Alias.secondsToMinutes = Alias.secsToMins;
-  /**
-   * Converts seconds to hours with remainders
-   *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted hours
-   * @public
-   * @static
-   */
-
-  Alias.secondsToHours = Alias.secsToHrs;
-  /**
-   * Converts seconds to days with remainders
-   *
-   * @param {number} secs - Seconds to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
-   */
-
-  Alias.secondsToDays = Alias.secsToDays;
-  /**
-   * Converts hours to milliseconds
-   *
-   * @param {number} mins - Minutes to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
-   */
-
-  Alias.minutesToMs = Alias.minsToMs;
-  /**
-   * Converts hours to seconds
-   *
-   * @param {number} mins - Minutes to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
-   */
-
-  Alias.minutesToSeconds = Alias.minsToSecs;
-  /**
-   * Converts minutes to hours with remainders
-   *
-   * @param {number} mins - Minutes to convert
-   * @returns {Object<string, number>} Converted hours
-   * @public
-   * @static
-   */
-
-  Alias.minutesToHours = Alias.minsToHrs;
-  /**
-   * Converts minutes to days with remainders
-   *
-   * @param {number} mins - Minutes to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
-   */
-
-  Alias.minutesToDays = Alias.minsToDays;
-  /**
-   * Converts hours to milliseconds
-   *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted milliseconds
-   * @public
-   * @static
-   */
-
-  Alias.hoursToMs = Alias.hrsToMs;
-  /**
-   * Converts hours to seconds
-   *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
-   */
-
-  Alias.hoursToSeconds = Alias.hrsToSecs;
-  /**
-   * Converts hours to minutes
-   *
-   * @param {number} hours - Hours to convert
-   * @returns {number} Converted minutes
-   * @public
-   * @static
-   */
-
-  Alias.hoursToMinutes = Alias.hrsToMins;
-  /**
-   * Converts hours to days with remainders
-   *
-   * @param {number} hrs - Hours to convert
-   * @returns {Object<string, number>} Converted days
-   * @public
-   * @static
-   */
-
-  Alias.hoursToDays = Alias.hrsToDays;
-  /**
-   * Converts days to seconds
-   *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted seconds
-   * @public
-   * @static
-   */
-
-  Alias.daysToSeconds = Alias.daysToSecs;
-  /**
-   * Converts days to minutes
-   *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted minutes
-   * @public
-   * @static
-   */
-
-  Alias.daysToMinutes = Alias.daysToMins;
-  /**
-   * Converts days to hours
-   *
-   * @param {number} days - Days to convert
-   * @returns {number} Converted hours
-   * @public
-   * @static
-   */
-
-  Alias.daysToHours = Alias.daysToHrs;
-
-  /**
-   * Dateplus class and namespace
-   *
-   * @namespace
-   * @class
-   * @classdesc A class and namespace program to assist with date manipulation
-   */
-
-  var DatePlus = function (_Alias) {
-    _inherits(DatePlus, _Alias);
-
-    var _super = _createSuper(DatePlus);
-
-    function DatePlus() {
-      var _this;
-
-      _classCallCheck(this, DatePlus);
-
-      _this = _super.apply(this, arguments);
-      /**
-       * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
-       *
-       * @param {string} seperator - Char the date is seperatred by
-       * @returns {string} - Date with zeros
-       * @public
-       * @instance
-       */
-
-      _this.addZeros = function () {
-        var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-        return DatePlus.addZeros(_this.formatDate(), seperator);
-      };
-      /**
-       * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-       *
-       * @param {string} seperator - Char to seperate date with
-       * @returns {string} Formatted date
-       * @public
-       * @instance
-       */
-
-
-      _this.formatDate = function () {
-        var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-        return DatePlus.formatDate(_assertThisInitialized(_this), seperator);
-      };
-      /**
-       * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-       *
-       * @returns {string} Stringed day of week
-       * @public
-       * @instance
-       */
-
-
-      _this.getWordDay = function () {
-        return DatePlus._daysReference[_this.getDay()];
-      };
-      /**
-       * Gets instantiated month in word form (e.g 0 => "January")
-       *
-       * @returns {string} Stringed worded month
-       * @public
-       * @instance
-       */
-
-
-      _this.getWordMonth = function () {
-        return DatePlus._monthsReference[_this.getMonth()];
-      };
-
-      return _this;
-    }
-
-    return DatePlus;
-  }(Alias);
-  /**
-   * Reference to days of the week, zero indexed
-   *
-   * @private
-   * @type {Object<number, string>}
-   * @static
-   */
-
-  DatePlus._daysReference = {
+  var daysReference = {
     0: "Sunday",
     1: "Monday",
     2: "Tuesday",
@@ -855,28 +535,7 @@ var DatePlus = (function (exports) {
     5: "Friday",
     6: "Saturday"
   };
-  /**
-   * Reference to months of a year, zero indexed
-   *
-   * @private
-   * @type {Object<number, string>}
-   * @static
-   */
-
-  DatePlus._keysReference = {
-    y: "year",
-    m: "month",
-    d: "day"
-  };
-  /**
-   * Reference to months of a year, zero indexed
-   *
-   * @private
-   * @type {Object<number, string>}
-   * @static
-   */
-
-  DatePlus._monthsReference = {
+  var monthsReference = {
     0: "January",
     1: "Feburary",
     2: "March",
@@ -890,17 +549,30 @@ var DatePlus = (function (exports) {
     10: "November",
     11: "December"
   };
+  var oneDay = 24 * 60 * 60 * 1000;
+
+  var values$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    values: values,
+    daysReference: daysReference,
+    monthsReference: monthsReference,
+    oneDay: oneDay
+  });
+
+  var keysReference = {
+    y: "year",
+    m: "month",
+    d: "day"
+  };
   /**
    * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
    *
-   * @param {string} date - String date to format
-   * @param {string} seperator - Char the date is seperatred by
-   * @returns {string} - Date with zeros
-   * @public
-   * @static
+   * @param date - String date to format
+   * @param seperator - Char the date is seperatred by
+   * @returns - Date with zeros
    */
 
-  DatePlus.addZeros = function (date) {
+  var addZeros = function addZeros(date) {
     var seperator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
     var newDate = "";
 
@@ -923,15 +595,12 @@ var DatePlus = (function (exports) {
   /**
    * Format date into a string in the form YYYY{seperator}MM{seperator}DD
    *
-   * @param {Date | DatePlus} date - Date object to format
-   * @param {string} seperator - String to seperate date values with
-   * @returns {string} Formatted date
-   * @public
-   * @static
+   * @param {Date} date - Date object to format
+   * @param seperator - String to seperate date values with
+   * @returns Formatted date
    */
 
-
-  DatePlus.formatDate = function (date) {
+  var formatDate = function formatDate(date) {
     var seperator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
     var month = date.getMonth().toString();
     var day = date.getDate().toString();
@@ -941,17 +610,13 @@ var DatePlus = (function (exports) {
   /**
    * Gets date values and outputs an object
    *
-   * @param {string} date - Date to extract values from, months zero indexed
-   * @param {DateFormat} format - Format of string date
-   * @param {string} seperator - Seperator the date works with; leave auto for auto detection,
-   *   limited to 1 char
-   * @returns {Object<string, number>} Object with all values
-   * @public
-   * @static
+   * @param date - Date to extract values from, months zero indexed
+   * @param format - Format of string date
+   * @param seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
+   * @returns Object with all values
    */
 
-
-  DatePlus.getDateValues = function (date) {
+  var getDateValues = function getDateValues(date) {
     var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "y:m:d";
     var seperator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "auto";
     var _seperator = "/";
@@ -983,7 +648,7 @@ var DatePlus = (function (exports) {
     var output = {};
 
     for (var index = 0; index < 3; index++) {
-      var key = DatePlus._keysReference[dateFormat[index]];
+      var key = keysReference[dateFormat[index]];
       output[key] = Number(dateData[index]);
     }
 
@@ -992,32 +657,132 @@ var DatePlus = (function (exports) {
   /**
    * Converts numerical day of week into word form (e.g 0 => "Sunday")
    *
-   * @param {number} numerical - Numerical day of week, 0 indexed (0-6)
-   * @returns {string} Stringed day of week
-   * @public
-   * @static
+   * @param numerical - Numerical day of week, 0 indexed (0-6)
+   * @returns Stringed day of week
    */
 
-
-  DatePlus.getWordDay = function (numerical) {
-    return DatePlus._daysReference[numerical];
+  var getWordDay = function getWordDay(numerical) {
+    return daysReference[numerical];
   };
   /**
    * Converts numerical month into word form (e.g 0 => "January")
    *
-   * @param {number} numerical - Numerical day of week, 0 indexed (0-11)
-   * @returns {string} Stringed worded month
-   * @public
-   * @static
+   * @param numerical - Numerical day of week, 0 indexed (0-11)
+   * @returns Stringed worded month
    */
 
+  var getWordMonth = function getWordMonth(numerical) {
+    return monthsReference[numerical];
+  };
+  /**
+   * Calculates number of elapsed days between date1 and date2
+   *
+   * @param date1 - Starting date object to calculate
+   * @param date2 - Ending date object to calculate
+   * @returns - Number of elapsed days
+   */
 
-  DatePlus.getWordMonth = function (numerical) {
-    return DatePlus._monthsReference[numerical];
+  var getElapsedDays = function getElapsedDays(date1, date2) {
+    return Math.round((date1.getTime() - date2.getTime()) / oneDay) * -1;
   };
 
+  var utils = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    addZeros: addZeros,
+    formatDate: formatDate,
+    getDateValues: getDateValues,
+    getWordDay: getWordDay,
+    getWordMonth: getWordMonth,
+    getElapsedDays: getElapsedDays
+  });
+
+  var DatePlus = function (_Date) {
+    _inherits(DatePlus, _Date);
+
+    var _super = _createSuper(DatePlus);
+
+    function DatePlus() {
+      var _this;
+
+      _classCallCheck(this, DatePlus);
+
+      _this = _super.apply(this, arguments);
+      /**
+       * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
+       *
+       * @param date - String date to format
+       * @param seperator - Char the date is seperatred by
+       * @returns - Date with zeros
+       */
+
+      _this.addZeros = function () {
+        var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
+        return addZeros(_this.formatDate(), seperator);
+      };
+      /**
+       * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+       *
+       * @param seperator - Char to seperate date with
+       * @returns Formatted date
+       */
+
+
+      _this.formatDate = function () {
+        var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
+        return formatDate(_assertThisInitialized(_this), seperator);
+      };
+      /**
+       * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+       *
+       * @returns Stringed day of week
+       */
+
+
+      _this.getWordDay = function () {
+        return daysReference[_this.getDay()];
+      };
+      /**
+       * Gets instantiated month in word form (e.g 0 => "January")
+       *
+       * @returns Stringed worded month
+       */
+
+
+      _this.getWordMonth = function () {
+        return monthsReference[_this.getMonth()];
+      };
+      /**
+       * Calculates number of elapsed days between instantiated date and dae
+       *
+       * @param date - Ending date object to calculate
+       * @returns - Number of elapsed days
+       */
+
+
+      _this.getElapsedDays = function (date) {
+        return Math.round((_this.getTime() - date.getTime()) / oneDay) * -1;
+      };
+
+      return _this;
+    }
+
+    return DatePlus;
+  }(_wrapNativeSuper(Date));
+
+  for (var _i = 0, _Object$entries = Object.entries(Object.assign(Object.assign(Object.assign({}, conversions), utils), values$1)); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    // @ts-expect-error
+    DatePlus[key] = value;
+  }
+
   exports.DatePlus = DatePlus;
+  exports.conversions = conversions;
   exports.default = DatePlus;
+  exports.utils = utils;
+  exports.values = values$1;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

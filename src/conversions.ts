@@ -4,293 +4,321 @@
  * @license MIT
  * @version 3.1.0
  * @author Luke Zhang luke-zhang-04.github.io
- * @file defines Convert class for converting units
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
- * @exports Convert
  */
 
-import * as interfaces from "./interfaces"
-import {Values} from "./elapse"
+import {Values} from "."
 
 /**
- * Convert namespace
- *
- * @namespace
- * @classdesc A namespace program to convert units
+ * Object that stores milliseconds with the ms key
  */
-export default class Convert extends Date {
-    /**
-     * Converts milliseconds to seconds with remainders
-     *
-     * @param {number} ms - Milliseconds to convert
-     * @returns {Object<string, number>} Object with seconds and milliseconds
-     * @public
-     * @static
-     */
-    public static msToSecs = (ms: number): interfaces.SecondsObj => ({
-        ms: ms % Values.MsPerSec,
-        seconds: (ms - (ms % Values.MsPerSec)) / Values.MsPerSec,
-    })
-
-    /**
-     * Converts milliseconds to minutes with remainders
-     *
-     * @param {number} ms - Milliseconds to convert
-     * @returns {Object<string, number>} Object with minutes, seconds, and milliseconds
-     * @public
-     * @static
-     */
-    public static msToMins = (ms: number): interfaces.MinutesObj => {
-        const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
-        const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
-        const minutes =
-            (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin)
-
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-        }
-    }
-
-    /**
-     * Converts milliseconds to hours with remainders
-     *
-     * @param {number} ms - Milliseconds to convert
-     * @returns {Object<string, number>} Object with hours, minutes, seconds, and milliseconds
-     * @public
-     * @static
-     */
-    public static msToHrs = (ms: number): interfaces.HoursObj => {
-        const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
-        const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
-        const minutes =
-            ((ms - seconds * Values.MsPerSec - milliseconds) /
-                (Values.MsPerSec * Values.SecsPerMin)) %
-            Values.MinsPerHr
-        const hours =
-            (ms -
-                minutes * Values.MsPerSec * Values.SecsPerMin -
-                seconds * Values.MsPerSec -
-                milliseconds) /
-            (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)
-
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-            hours,
-        }
-    }
-
-    /**
-     * Converts milliseconds to days with remainders
-     *
-     * @param {number} ms - Milliseconds to convert
-     * @returns {Object<string, number>} Object with days, hours, minutes, seconds, and milliseconds
-     * @public
-     * @static
-     */
-    public static msToDays = (ms: number): interfaces.DaysObj => {
-        const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
-        const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
-        const minutes =
-            ((ms - seconds * Values.MsPerSec - milliseconds) /
-                (Values.MsPerSec * Values.SecsPerMin)) %
-            Values.MinsPerHr
-        const hours =
-            ((ms -
-                minutes * Values.MsPerSec * Values.SecsPerMin -
-                seconds * Values.MsPerSec -
-                milliseconds) /
-                (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)) %
-            Values.HrsPerDay
-        const days =
-            (ms -
-                hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr -
-                minutes * Values.MsPerSec * Values.SecsPerMin -
-                seconds * Values.MsPerSec -
-                milliseconds) /
-            (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay)
-
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-            hours,
-            days,
-        }
-    }
-
-    /* eslint-disable max-len */
-    /**
-     * Converts seconds to milliseconds
-     *
-     * @param {number} secs - Seconds to convert
-     * @returns {number} Converted milliseconds
-     * @public
-     * @static
-     */
-    public static secsToMs = (secs: number): number => secs * Values.MsPerSec
-
-    /**
-     * Converts seconds to minutes with remainders
-     *
-     * @param {number} secs - Seconds to convert
-     * @returns {Object<string, number>} Converted minutes
-     * @public
-     * @static
-     */
-    public static secsToMins = (secs: number): interfaces.MinutesObj =>
-        Convert.msToMins(Convert.secsToMs(secs))
-
-    /**
-     * Converts seconds to hours with remainders
-     *
-     * @param {number} secs - Seconds to convert
-     * @returns {Object<string, number>} Converted hours
-     * @public
-     * @static
-     */
-    public static secsToHrs = (secs: number): interfaces.HoursObj =>
-        Convert.msToHrs(Convert.secsToMs(secs))
-
-    /**
-     * Converts seconds to days with remainders
-     *
-     * @param {number} secs - Seconds to convert
-     * @returns {Object<string, number>} Converted days
-     * @public
-     * @static
-     */
-    public static secsToDays = (secs: number): interfaces.DaysObj =>
-        Convert.msToDays(Convert.secsToMs(secs))
-
-    /**
-     * Converts hours to milliseconds
-     *
-     * @param {number} mins - Minutes to convert
-     * @returns {number} Converted milliseconds
-     * @public
-     * @static
-     */
-    public static minsToMs = (mins: number): number => mins * Values.SecsPerMin * Values.MsPerSec
-
-    /**
-     * Converts hours to seconds
-     *
-     * @param {number} mins - Minutes to convert
-     * @returns {number} Converted seconds
-     * @public
-     * @static
-     */
-    public static minsToSecs = (mins: number): number => mins * Values.SecsPerMin
-
-    /**
-     * Converts minutes to hours with remainders
-     *
-     * @param {number} mins - Minutes to convert
-     * @returns {Object<string, number>} Converted hours
-     * @public
-     * @static
-     */
-    public static minsToHrs = (mins: number): interfaces.HoursObj =>
-        Convert.msToHrs(Convert.minsToMs(mins))
-
-    /**
-     * Converts minutes to days with remainders
-     *
-     * @param {number} mins - Minutes to convert
-     * @returns {Object<string, number>} Converted days
-     * @public
-     * @static
-     */
-    public static minsToDays = (mins: number): interfaces.DaysObj =>
-        Convert.msToDays(Convert.minsToMs(mins))
-
-    /**
-     * Converts hours to milliseconds
-     *
-     * @param {number} hours - Hours to convert
-     * @returns {number} Converted milliseconds
-     * @public
-     * @static
-     */
-    public static hrsToMs = (hours: number): number =>
-        hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
-
-    /**
-     * Converts hours to seconds
-     *
-     * @param {number} hours - Hours to convert
-     * @returns {number} Converted seconds
-     * @public
-     * @static
-     */
-    public static hrsToSecs = (hours: number): number =>
-        hours * Values.MinsPerHr * Values.SecsPerMin
-
-    /**
-     * Converts hours to minutes
-     *
-     * @param {number} hours - Hours to convert
-     * @returns {number} Converted minutes
-     * @public
-     * @static
-     */
-    public static hrsToMins = (hours: number): number => hours * Values.MinsPerHr
-
-    /**
-     * Converts hours to days with remainders
-     *
-     * @param {number} hrs - Hours to convert
-     * @returns {Object<string, number>} Converted days
-     * @public
-     * @static
-     */
-    public static hrsToDays = (hrs: number): interfaces.DaysObj =>
-        Convert.msToDays(Convert.hrsToMs(hrs))
-
-    /**
-     * Converts days to milliseconds
-     *
-     * @param {number} days - Days to convert
-     * @returns {number} Converted milliseconds
-     * @public
-     * @static
-     */
-    public static daysToMs = (days: number): number =>
-        days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
-
-    /**
-     * Converts days to seconds
-     *
-     * @param {number} days - Days to convert
-     * @returns {number} Converted seconds
-     * @public
-     * @static
-     */
-    public static daysToSecs = (days: number): number =>
-        days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin
-
-    /**
-     * Converts days to minutes
-     *
-     * @param {number} days - Days to convert
-     * @returns {number} Converted minutes
-     * @public
-     * @static
-     */
-    public static daysToMins = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr
-
-    /**
-     * Converts days to hours
-     *
-     * @param {number} days - Days to convert
-     * @returns {number} Converted hours
-     * @public
-     * @static
-     */
-    public static daysToHrs = (days: number): number => days * Values.HrsPerDay
-    /* eslint-enable max-len */
+export interface MsObj {
+    [index: string]: number
+    ms: number
 }
+
+/**
+ * Object that stores seconds and milliseconds with the seconds and ms keys
+ */
+export interface SecondsObj extends MsObj {
+    seconds: number
+}
+
+/**
+ * Object that stores minutes, seconds, and milliseconds with the minutes, seconds, and ms keys
+ */
+export interface MinutesObj extends SecondsObj {
+    minutes: number
+}
+
+/**
+ * Object that stores hours, minutes, seconds, and milliseconds with the hours, minutes, seconds, and ms keys
+ */
+export interface HoursObj extends MinutesObj {
+    hours: number
+}
+
+/**
+ * Object that stores days, hours, minutes, seconds, and milliseconds with the days, hours,
+ * minutes, seconds, and ms keys
+ */
+export interface DaysObj {
+    [index: string]: number | undefined
+    ms?: number
+    seconds?: number
+    minutes?: number
+    hours?: number
+    days: number
+}
+
+/**
+ * Object that stores weeks, days, hours, minutes, seconds, and milliseconds with the weeks, days,
+ * hours, minutes, seconds, and ms keys
+ */
+export interface WeeksObj extends DaysObj {
+    weeks: number
+}
+
+/**
+ * Object that stores months, weeks, days, hours, minutes, seconds, and milliseconds with the
+ * months, weeks, days, hours, minutes, seconds, and ms keys
+ */
+export interface MonthsObj extends DaysObj {
+    weeks?: number
+    months: number
+}
+
+/**
+ * Object that stores years, months, weeks, days, hours, minutes, seconds, and milliseconds with
+ * the years, months, weeks, days, hours, minutes, seconds, and ms keys
+ */
+export interface YearsObj extends MonthsObj {
+    years: number
+}
+
+/**
+ * Object that stores day, with the day key
+ */
+export interface DayObj {
+    [index: string]: number
+    day: number
+}
+
+/**
+ * Object that stores month and day, with the month and day keys
+ */
+export interface MonthObj extends DayObj {
+    month: number
+}
+
+/**
+ * Object that stores year, month, and day, with the year, month, and day keys
+ */
+export interface YearObj extends MonthObj {
+    year: number
+}
+
+/**
+ * Converts milliseconds to seconds with remainders
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with seconds and milliseconds
+ */
+export const msToSecs = (ms: number): SecondsObj => ({
+    ms: ms % Values.MsPerSec,
+    seconds: (ms - (ms % Values.MsPerSec)) / Values.MsPerSec,
+})
+
+/**
+ * Converts milliseconds to minutes with remainders
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with minutes, seconds, and milliseconds
+ */
+export const msToMins = (ms: number): MinutesObj => {
+    const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
+    const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
+    const minutes =
+        (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin)
+
+    return {
+        ms: milliseconds,
+        seconds,
+        minutes,
+    }
+}
+
+/**
+ * Converts milliseconds to hours with remainders
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with hours, minutes, seconds, and milliseconds
+ */
+export const msToHrs = (ms: number): HoursObj => {
+    const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
+    const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
+    const minutes =
+        ((ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin)) %
+        Values.MinsPerHr
+    const hours =
+        (ms -
+            minutes * Values.MsPerSec * Values.SecsPerMin -
+            seconds * Values.MsPerSec -
+            milliseconds) /
+        (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)
+
+    return {
+        ms: milliseconds,
+        seconds,
+        minutes,
+        hours,
+    }
+}
+
+/**
+ * Converts milliseconds to days with remainders
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with days, hours, minutes, seconds, and milliseconds
+ */
+export const msToDays = (ms: number): DaysObj => {
+    const milliseconds = (ms % Values.MsPerSec) % Values.MsPerSec
+    const seconds = ((ms - (ms % Values.MsPerSec)) / Values.MsPerSec) % Values.SecsPerMin
+    const minutes =
+        ((ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin)) %
+        Values.MinsPerHr
+    const hours =
+        ((ms -
+            minutes * Values.MsPerSec * Values.SecsPerMin -
+            seconds * Values.MsPerSec -
+            milliseconds) /
+            (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr)) %
+        Values.HrsPerDay
+    const days =
+        (ms -
+            hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr -
+            minutes * Values.MsPerSec * Values.SecsPerMin -
+            seconds * Values.MsPerSec -
+            milliseconds) /
+        (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay)
+
+    return {
+        ms: milliseconds,
+        seconds,
+        minutes,
+        hours,
+        days,
+    }
+}
+
+/* eslint-disable max-len */
+/**
+ * Converts seconds to milliseconds
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted milliseconds
+ */
+export const secsToMs = (secs: number): number => secs * Values.MsPerSec
+
+/**
+ * Converts seconds to minutes with remainders
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted minutes
+ */
+export const secsToMins = (secs: number): MinutesObj => msToMins(secsToMs(secs))
+
+/**
+ * Converts seconds to hours with remainders
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted hours
+ */
+export const secsToHrs = (secs: number): HoursObj => msToHrs(secsToMs(secs))
+
+/**
+ * Converts seconds to days with remainders
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted days
+ */
+export const secsToDays = (secs: number): DaysObj => msToDays(secsToMs(secs))
+
+/**
+ * Converts hours to milliseconds
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted milliseconds
+ */
+export const minsToMs = (mins: number): number => mins * Values.SecsPerMin * Values.MsPerSec
+
+/**
+ * Converts hours to seconds
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted seconds
+ */
+export const minsToSecs = (mins: number): number => mins * Values.SecsPerMin
+
+/**
+ * Converts minutes to hours with remainders
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted hours
+ */
+export const minsToHrs = (mins: number): HoursObj => msToHrs(minsToMs(mins))
+
+/**
+ * Converts minutes to days with remainders
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted days
+ */
+export const minsToDays = (mins: number): DaysObj => msToDays(minsToMs(mins))
+
+/**
+ * Converts hours to milliseconds
+ *
+ * @param hours - Hours to convert
+ * @returns Converted milliseconds
+ */
+export const hrsToMs = (hours: number): number =>
+    hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
+
+/**
+ * Converts hours to seconds
+ *
+ * @param hours - Hours to convert
+ * @returns Converted seconds
+ */
+export const hrsToSecs = (hours: number): number => hours * Values.MinsPerHr * Values.SecsPerMin
+
+/**
+ * Converts hours to minutes
+ *
+ * @param hours - Hours to convert
+ * @returns Converted minutes
+ */
+export const hrsToMins = (hours: number): number => hours * Values.MinsPerHr
+
+/**
+ * Converts hours to days with remainders
+ *
+ * @param hrs - Hours to convert
+ * @returns Converted days
+ */
+export const hrsToDays = (hrs: number): DaysObj => msToDays(hrsToMs(hrs))
+
+/**
+ * Converts days to milliseconds
+ *
+ * @param days - Days to convert
+ * @returns Converted milliseconds
+ */
+export const daysToMs = (days: number): number =>
+    days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
+
+/**
+ * Converts days to seconds
+ *
+ * @param days - Days to convert
+ * @returns Converted seconds
+ */
+export const daysToSecs = (days: number): number =>
+    days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin
+
+/**
+ * Converts days to minutes
+ *
+ * @param days - Days to convert
+ * @returns Converted minutes
+ */
+export const daysToMins = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr
+
+/**
+ * Converts days to hours
+ *
+ * @param days - Days to convert
+ * @returns Converted hours
+ */
+export const daysToHrs = (days: number): number => days * Values.HrsPerDay
