@@ -1,15 +1,15 @@
 /**
- * DatePlus A simple program to assist with date manipulation
- *
+ * DatePlus
+ * A simple program to assist with date manipulation
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
+ * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
  * @version 3.1.0
- * @author Luke Zhang luke-zhang-04.github.io
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
-"use strict"
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {value: true})
+Object.defineProperty(exports, '__esModule', { value: true });
 
 /**
  * Convert namespace
@@ -27,10 +27,10 @@ class Convert extends Date {}
  * @static
  */
 
-Convert.msToSecs = (ms) => ({
-    ms: ms % 1000,
-    seconds: (ms - (ms % 1000)) / 1000,
-})
+Convert.msToSecs = ms => ({
+  ms: ms % 1000,
+  seconds: (ms - ms % 1000) / 1000
+});
 /**
  * Converts milliseconds to minutes with remainders
  *
@@ -40,16 +40,17 @@ Convert.msToSecs = (ms) => ({
  * @static
  */
 
-Convert.msToMins = (ms) => {
-    const milliseconds = (ms % 1000) % 1000
-    const seconds = ((ms - (ms % 1000)) / 1000) % 60
-    const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60)
-    return {
-        ms: milliseconds,
-        seconds,
-        minutes,
-    }
-}
+
+Convert.msToMins = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
+  return {
+    ms: milliseconds,
+    seconds,
+    minutes
+  };
+};
 /**
  * Converts milliseconds to hours with remainders
  *
@@ -59,18 +60,19 @@ Convert.msToMins = (ms) => {
  * @static
  */
 
-Convert.msToHrs = (ms) => {
-    const milliseconds = (ms % 1000) % 1000
-    const seconds = ((ms - (ms % 1000)) / 1000) % 60
-    const minutes = ((ms - seconds * 1000 - milliseconds) / (1000 * 60)) % 60
-    const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60)
-    return {
-        ms: milliseconds,
-        seconds,
-        minutes,
-        hours,
-    }
-}
+
+Convert.msToHrs = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60);
+  return {
+    ms: milliseconds,
+    seconds,
+    minutes,
+    hours
+  };
+};
 /**
  * Converts milliseconds to days with remainders
  *
@@ -80,23 +82,21 @@ Convert.msToHrs = (ms) => {
  * @static
  */
 
-Convert.msToDays = (ms) => {
-    const milliseconds = (ms % 1000) % 1000
-    const seconds = ((ms - (ms % 1000)) / 1000) % 60
-    const minutes = ((ms - seconds * 1000 - milliseconds) / (1000 * 60)) % 60
-    const hours =
-        ((ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60)) % 24
-    const days =
-        (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) /
-        (1000 * 60 * 60 * 24)
-    return {
-        ms: milliseconds,
-        seconds,
-        minutes,
-        hours,
-        days,
-    }
-}
+
+Convert.msToDays = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60) % 24;
+  const days = (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60 * 24);
+  return {
+    ms: milliseconds,
+    seconds,
+    minutes,
+    hours,
+    days
+  };
+};
 /**
  * Converts seconds to milliseconds
  *
@@ -106,7 +106,8 @@ Convert.msToDays = (ms) => {
  * @static
  */
 
-Convert.secsToMs = (secs) => secs * 1000
+
+Convert.secsToMs = secs => secs * 1000;
 /**
  * Converts seconds to minutes with remainders
  *
@@ -116,7 +117,8 @@ Convert.secsToMs = (secs) => secs * 1000
  * @static
  */
 
-Convert.secsToMins = (secs) => Convert.msToMins(Convert.secsToMs(secs))
+
+Convert.secsToMins = secs => Convert.msToMins(Convert.secsToMs(secs));
 /**
  * Converts seconds to hours with remainders
  *
@@ -126,7 +128,8 @@ Convert.secsToMins = (secs) => Convert.msToMins(Convert.secsToMs(secs))
  * @static
  */
 
-Convert.secsToHrs = (secs) => Convert.msToHrs(Convert.secsToMs(secs))
+
+Convert.secsToHrs = secs => Convert.msToHrs(Convert.secsToMs(secs));
 /**
  * Converts seconds to days with remainders
  *
@@ -136,7 +139,8 @@ Convert.secsToHrs = (secs) => Convert.msToHrs(Convert.secsToMs(secs))
  * @static
  */
 
-Convert.secsToDays = (secs) => Convert.msToDays(Convert.secsToMs(secs))
+
+Convert.secsToDays = secs => Convert.msToDays(Convert.secsToMs(secs));
 /**
  * Converts hours to milliseconds
  *
@@ -146,7 +150,8 @@ Convert.secsToDays = (secs) => Convert.msToDays(Convert.secsToMs(secs))
  * @static
  */
 
-Convert.minsToMs = (mins) => mins * 60 * 1000
+
+Convert.minsToMs = mins => mins * 60 * 1000;
 /**
  * Converts hours to seconds
  *
@@ -156,7 +161,8 @@ Convert.minsToMs = (mins) => mins * 60 * 1000
  * @static
  */
 
-Convert.minsToSecs = (mins) => mins * 60
+
+Convert.minsToSecs = mins => mins * 60;
 /**
  * Converts minutes to hours with remainders
  *
@@ -166,7 +172,8 @@ Convert.minsToSecs = (mins) => mins * 60
  * @static
  */
 
-Convert.minsToHrs = (mins) => Convert.msToHrs(Convert.minsToMs(mins))
+
+Convert.minsToHrs = mins => Convert.msToHrs(Convert.minsToMs(mins));
 /**
  * Converts minutes to days with remainders
  *
@@ -176,7 +183,8 @@ Convert.minsToHrs = (mins) => Convert.msToHrs(Convert.minsToMs(mins))
  * @static
  */
 
-Convert.minsToDays = (mins) => Convert.msToDays(Convert.minsToMs(mins))
+
+Convert.minsToDays = mins => Convert.msToDays(Convert.minsToMs(mins));
 /**
  * Converts hours to milliseconds
  *
@@ -186,7 +194,8 @@ Convert.minsToDays = (mins) => Convert.msToDays(Convert.minsToMs(mins))
  * @static
  */
 
-Convert.hrsToMs = (hours) => hours * 60 * 60 * 1000
+
+Convert.hrsToMs = hours => hours * 60 * 60 * 1000;
 /**
  * Converts hours to seconds
  *
@@ -196,7 +205,8 @@ Convert.hrsToMs = (hours) => hours * 60 * 60 * 1000
  * @static
  */
 
-Convert.hrsToSecs = (hours) => hours * 60 * 60
+
+Convert.hrsToSecs = hours => hours * 60 * 60;
 /**
  * Converts hours to minutes
  *
@@ -206,7 +216,8 @@ Convert.hrsToSecs = (hours) => hours * 60 * 60
  * @static
  */
 
-Convert.hrsToMins = (hours) => hours * 60
+
+Convert.hrsToMins = hours => hours * 60;
 /**
  * Converts hours to days with remainders
  *
@@ -216,7 +227,8 @@ Convert.hrsToMins = (hours) => hours * 60
  * @static
  */
 
-Convert.hrsToDays = (hrs) => Convert.msToDays(Convert.hrsToMs(hrs))
+
+Convert.hrsToDays = hrs => Convert.msToDays(Convert.hrsToMs(hrs));
 /**
  * Converts days to milliseconds
  *
@@ -226,7 +238,8 @@ Convert.hrsToDays = (hrs) => Convert.msToDays(Convert.hrsToMs(hrs))
  * @static
  */
 
-Convert.daysToMs = (days) => days * 24 * 60 * 60 * 1000
+
+Convert.daysToMs = days => days * 24 * 60 * 60 * 1000;
 /**
  * Converts days to seconds
  *
@@ -236,7 +249,8 @@ Convert.daysToMs = (days) => days * 24 * 60 * 60 * 1000
  * @static
  */
 
-Convert.daysToSecs = (days) => days * 24 * 60 * 60
+
+Convert.daysToSecs = days => days * 24 * 60 * 60;
 /**
  * Converts days to minutes
  *
@@ -246,7 +260,8 @@ Convert.daysToSecs = (days) => days * 24 * 60 * 60
  * @static
  */
 
-Convert.daysToMins = (days) => days * 24 * 60
+
+Convert.daysToMins = days => days * 24 * 60;
 /**
  * Converts days to hours
  *
@@ -256,7 +271,8 @@ Convert.daysToMins = (days) => days * 24 * 60
  * @static
  */
 
-Convert.daysToHrs = (days) => days * 24
+
+Convert.daysToHrs = days => days * 24;
 
 /**
  * Elapse class and namespace
@@ -267,20 +283,20 @@ Convert.daysToHrs = (days) => days * 24
  */
 
 class Elapse extends Convert {
-    constructor() {
-        super(...arguments)
-        /**
-         * Calculates number of elapsed days between instantiated date and dae
-         *
-         * @param {Date | DatePlus} date - Ending date object to calculate
-         * @returns {number} - Number of elapsed days
-         * @public
-         * @instance
-         */
+  constructor() {
+    super(...arguments);
+    /**
+     * Calculates number of elapsed days between instantiated date and dae
+     *
+     * @param {Date | DatePlus} date - Ending date object to calculate
+     * @returns {number} - Number of elapsed days
+     * @public
+     * @instance
+     */
 
-        this.getElapsedDays = (date) =>
-            Math.round((this.getTime() - date.getTime()) / Elapse._oneDay) * -1
-    }
+    this.getElapsedDays = date => Math.round((this.getTime() - date.getTime()) / Elapse._oneDay) * -1;
+  }
+
 }
 /**
  * Gets milliseconds per day
@@ -290,7 +306,7 @@ class Elapse extends Convert {
  * @static
  */
 
-Elapse._oneDay = 24 * 60 * 60 * 1000
+Elapse._oneDay = 24 * 60 * 60 * 1000;
 /**
  * Calculates number of elapsed days between date1 and date2
  *
@@ -301,8 +317,7 @@ Elapse._oneDay = 24 * 60 * 60 * 1000
  * @static
  */
 
-Elapse.getElapsedDays = (date1, date2) =>
-    Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1
+Elapse.getElapsedDays = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1;
 
 class Alias extends Elapse {}
 /**
@@ -314,7 +329,7 @@ class Alias extends Elapse {}
  * @static
  */
 
-Alias.msToSeconds = Alias.msToSecs
+Alias.msToSeconds = Alias.msToSecs;
 /**
  * Converts milliseconds to minutes with remainders
  *
@@ -324,7 +339,7 @@ Alias.msToSeconds = Alias.msToSecs
  * @static
  */
 
-Alias.msToMinutes = Alias.msToMins
+Alias.msToMinutes = Alias.msToMins;
 /**
  * Converts milliseconds to hours with remainders
  *
@@ -334,7 +349,7 @@ Alias.msToMinutes = Alias.msToMins
  * @static
  */
 
-Alias.msToHours = Alias.msToHrs
+Alias.msToHours = Alias.msToHrs;
 /**
  * Converts seconds to milliseconds
  *
@@ -344,7 +359,7 @@ Alias.msToHours = Alias.msToHrs
  * @static
  */
 
-Alias.secondsToMs = Alias.secsToMs
+Alias.secondsToMs = Alias.secsToMs;
 /**
  * Converts seconds to minutes with remainders
  *
@@ -354,7 +369,7 @@ Alias.secondsToMs = Alias.secsToMs
  * @static
  */
 
-Alias.secondsToMinutes = Alias.secsToMins
+Alias.secondsToMinutes = Alias.secsToMins;
 /**
  * Converts seconds to hours with remainders
  *
@@ -364,7 +379,7 @@ Alias.secondsToMinutes = Alias.secsToMins
  * @static
  */
 
-Alias.secondsToHours = Alias.secsToHrs
+Alias.secondsToHours = Alias.secsToHrs;
 /**
  * Converts seconds to days with remainders
  *
@@ -374,7 +389,7 @@ Alias.secondsToHours = Alias.secsToHrs
  * @static
  */
 
-Alias.secondsToDays = Alias.secsToDays
+Alias.secondsToDays = Alias.secsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -384,7 +399,7 @@ Alias.secondsToDays = Alias.secsToDays
  * @static
  */
 
-Alias.minutesToMs = Alias.minsToMs
+Alias.minutesToMs = Alias.minsToMs;
 /**
  * Converts hours to seconds
  *
@@ -394,7 +409,7 @@ Alias.minutesToMs = Alias.minsToMs
  * @static
  */
 
-Alias.minutesToSeconds = Alias.minsToSecs
+Alias.minutesToSeconds = Alias.minsToSecs;
 /**
  * Converts minutes to hours with remainders
  *
@@ -404,7 +419,7 @@ Alias.minutesToSeconds = Alias.minsToSecs
  * @static
  */
 
-Alias.minutesToHours = Alias.minsToHrs
+Alias.minutesToHours = Alias.minsToHrs;
 /**
  * Converts minutes to days with remainders
  *
@@ -414,7 +429,7 @@ Alias.minutesToHours = Alias.minsToHrs
  * @static
  */
 
-Alias.minutesToDays = Alias.minsToDays
+Alias.minutesToDays = Alias.minsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -424,7 +439,7 @@ Alias.minutesToDays = Alias.minsToDays
  * @static
  */
 
-Alias.hoursToMs = Alias.hrsToMs
+Alias.hoursToMs = Alias.hrsToMs;
 /**
  * Converts hours to seconds
  *
@@ -434,7 +449,7 @@ Alias.hoursToMs = Alias.hrsToMs
  * @static
  */
 
-Alias.hoursToSeconds = Alias.hrsToSecs
+Alias.hoursToSeconds = Alias.hrsToSecs;
 /**
  * Converts hours to minutes
  *
@@ -444,7 +459,7 @@ Alias.hoursToSeconds = Alias.hrsToSecs
  * @static
  */
 
-Alias.hoursToMinutes = Alias.hrsToMins
+Alias.hoursToMinutes = Alias.hrsToMins;
 /**
  * Converts hours to days with remainders
  *
@@ -454,7 +469,7 @@ Alias.hoursToMinutes = Alias.hrsToMins
  * @static
  */
 
-Alias.hoursToDays = Alias.hrsToDays
+Alias.hoursToDays = Alias.hrsToDays;
 /**
  * Converts days to seconds
  *
@@ -464,7 +479,7 @@ Alias.hoursToDays = Alias.hrsToDays
  * @static
  */
 
-Alias.daysToSeconds = Alias.daysToSecs
+Alias.daysToSeconds = Alias.daysToSecs;
 /**
  * Converts days to minutes
  *
@@ -474,7 +489,7 @@ Alias.daysToSeconds = Alias.daysToSecs
  * @static
  */
 
-Alias.daysToMinutes = Alias.daysToMins
+Alias.daysToMinutes = Alias.daysToMins;
 /**
  * Converts days to hours
  *
@@ -484,7 +499,7 @@ Alias.daysToMinutes = Alias.daysToMins
  * @static
  */
 
-Alias.daysToHours = Alias.daysToHrs
+Alias.daysToHours = Alias.daysToHrs;
 
 /**
  * Dateplus class and namespace
@@ -495,47 +510,51 @@ Alias.daysToHours = Alias.daysToHrs
  */
 
 class DatePlus extends Alias {
-    constructor() {
-        super(...arguments)
-        /**
-         * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
-         *
-         * @param {string} seperator - Char the date is seperatred by
-         * @returns {string} - Date with zeros
-         * @public
-         * @instance
-         */
+  constructor() {
+    super(...arguments);
+    /**
+     * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
+     *
+     * @param {string} seperator - Char the date is seperatred by
+     * @returns {string} - Date with zeros
+     * @public
+     * @instance
+     */
 
-        this.addZeros = (seperator = "/") => DatePlus.addZeros(this.formatDate(), seperator)
-        /**
-         * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-         *
-         * @param {string} seperator - Char to seperate date with
-         * @returns {string} Formatted date
-         * @public
-         * @instance
-         */
+    this.addZeros = (seperator = "/") => DatePlus.addZeros(this.formatDate(), seperator);
+    /**
+     * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+     *
+     * @param {string} seperator - Char to seperate date with
+     * @returns {string} Formatted date
+     * @public
+     * @instance
+     */
 
-        this.formatDate = (seperator = "/") => DatePlus.formatDate(this, seperator)
-        /**
-         * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-         *
-         * @returns {string} Stringed day of week
-         * @public
-         * @instance
-         */
 
-        this.getWordDay = () => DatePlus._daysReference[this.getDay()]
-        /**
-         * Gets instantiated month in word form (e.g 0 => "January")
-         *
-         * @returns {string} Stringed worded month
-         * @public
-         * @instance
-         */
+    this.formatDate = (seperator = "/") => DatePlus.formatDate(this, seperator);
+    /**
+     * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+     *
+     * @returns {string} Stringed day of week
+     * @public
+     * @instance
+     */
 
-        this.getWordMonth = () => DatePlus._monthsReference[this.getMonth()]
-    }
+
+    this.getWordDay = () => DatePlus._daysReference[this.getDay()];
+    /**
+     * Gets instantiated month in word form (e.g 0 => "January")
+     *
+     * @returns {string} Stringed worded month
+     * @public
+     * @instance
+     */
+
+
+    this.getWordMonth = () => DatePlus._monthsReference[this.getMonth()];
+  }
+
 }
 /**
  * Reference to days of the week, zero indexed
@@ -546,14 +565,14 @@ class DatePlus extends Alias {
  */
 
 DatePlus._daysReference = {
-    0: "Sunday",
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
-}
+  0: "Sunday",
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday"
+};
 /**
  * Reference to months of a year, zero indexed
  *
@@ -563,10 +582,10 @@ DatePlus._daysReference = {
  */
 
 DatePlus._keysReference = {
-    y: "year",
-    m: "month",
-    d: "day",
-}
+  y: "year",
+  m: "month",
+  d: "day"
+};
 /**
  * Reference to months of a year, zero indexed
  *
@@ -576,19 +595,19 @@ DatePlus._keysReference = {
  */
 
 DatePlus._monthsReference = {
-    0: "January",
-    1: "Feburary",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "June",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
-}
+  0: "January",
+  1: "Feburary",
+  2: "March",
+  3: "April",
+  4: "May",
+  5: "June",
+  6: "July",
+  7: "August",
+  8: "September",
+  9: "October",
+  10: "November",
+  11: "December"
+};
 /**
  * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
  *
@@ -600,24 +619,24 @@ DatePlus._monthsReference = {
  */
 
 DatePlus.addZeros = (date, seperator = "/") => {
-    let newDate = ""
+  let newDate = "";
 
-    for (let index = 0; index < 2; index++) {
-        if (date.split(seperator)[index].length < 2) {
-            newDate += "0".concat(date.split(seperator)[index]).concat(seperator)
-        } else {
-            newDate += "".concat(date.split(seperator)[index]).concat(seperator)
-        }
-    }
-
-    if (date.split(seperator)[2].length < 2) {
-        newDate += "0".concat(date.split(seperator)[2])
+  for (let index = 0; index < 2; index++) {
+    if (date.split(seperator)[index].length < 2) {
+      newDate += "0".concat(date.split(seperator)[index]).concat(seperator);
     } else {
-        newDate += date.split(seperator)[2]
+      newDate += "".concat(date.split(seperator)[index]).concat(seperator);
     }
+  }
 
-    return newDate
-}
+  if (date.split(seperator)[2].length < 2) {
+    newDate += "0".concat(date.split(seperator)[2]);
+  } else {
+    newDate += date.split(seperator)[2];
+  }
+
+  return newDate;
+};
 /**
  * Format date into a string in the form YYYY{seperator}MM{seperator}DD
  *
@@ -628,12 +647,13 @@ DatePlus.addZeros = (date, seperator = "/") => {
  * @static
  */
 
+
 DatePlus.formatDate = (date, seperator = "/") => {
-    const month = date.getMonth().toString()
-    const day = date.getDate().toString()
-    const year = date.getFullYear().toString()
-    return [year, month, day].join(seperator)
-}
+  const month = date.getMonth().toString();
+  const day = date.getDate().toString();
+  const year = date.getFullYear().toString();
+  return [year, month, day].join(seperator);
+};
 /**
  * Gets date values and outputs an object
  *
@@ -646,31 +666,32 @@ DatePlus.formatDate = (date, seperator = "/") => {
  * @static
  */
 
+
 DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
-    let _seperator = "/"
+  let _seperator = "/";
 
-    if (seperator === "auto") {
-        for (const letter of date) {
-            if (isNaN(Number(letter))) {
-                _seperator = letter
-                break
-            }
-        }
-    } else {
-        _seperator = seperator
+  if (seperator === "auto") {
+    for (const letter of date) {
+      if (isNaN(Number(letter))) {
+        _seperator = letter;
+        break;
+      }
     }
+  } else {
+    _seperator = seperator;
+  }
 
-    const dateData = date.split(_seperator)
-    const dateFormat = format.split(":")
-    const output = {}
+  const dateData = date.split(_seperator);
+  const dateFormat = format.split(":");
+  const output = {};
 
-    for (let index = 0; index < 3; index++) {
-        const key = DatePlus._keysReference[dateFormat[index]]
-        output[key] = Number(dateData[index])
-    }
+  for (let index = 0; index < 3; index++) {
+    const key = DatePlus._keysReference[dateFormat[index]];
+    output[key] = Number(dateData[index]);
+  }
 
-    return output
-}
+  return output;
+};
 /**
  * Converts numerical day of week into word form (e.g 0 => "Sunday")
  *
@@ -680,7 +701,8 @@ DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
  * @static
  */
 
-DatePlus.getWordDay = (numerical) => DatePlus._daysReference[numerical]
+
+DatePlus.getWordDay = numerical => DatePlus._daysReference[numerical];
 /**
  * Converts numerical month into word form (e.g 0 => "January")
  *
@@ -690,8 +712,9 @@ DatePlus.getWordDay = (numerical) => DatePlus._daysReference[numerical]
  * @static
  */
 
-DatePlus.getWordMonth = (numerical) => DatePlus._monthsReference[numerical]
 
-exports.DatePlus = DatePlus
-exports.default = DatePlus
+DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
+
+exports.DatePlus = DatePlus;
+exports.default = DatePlus;
 //# sourceMappingURL=dateplus.cjs.map

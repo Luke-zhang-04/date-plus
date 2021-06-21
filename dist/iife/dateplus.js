@@ -1,14 +1,14 @@
 /**
- * DatePlus A simple program to assist with date manipulation
- *
+ * DatePlus
+ * A simple program to assist with date manipulation
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
+ * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
  * @version 3.1.0
- * @author Luke Zhang luke-zhang-04.github.io
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
 var DatePlus = (function (exports) {
-    "use strict"
+    'use strict';
 
     /**
      * Convert namespace
@@ -26,10 +26,10 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.msToSecs = (ms) => ({
-        ms: ms % 1000,
-        seconds: (ms - (ms % 1000)) / 1000,
-    })
+    Convert.msToSecs = ms => ({
+      ms: ms % 1000,
+      seconds: (ms - ms % 1000) / 1000
+    });
     /**
      * Converts milliseconds to minutes with remainders
      *
@@ -39,16 +39,17 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.msToMins = (ms) => {
-        const milliseconds = (ms % 1000) % 1000
-        const seconds = ((ms - (ms % 1000)) / 1000) % 60
-        const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60)
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-        }
-    }
+
+    Convert.msToMins = ms => {
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
+      return {
+        ms: milliseconds,
+        seconds,
+        minutes
+      };
+    };
     /**
      * Converts milliseconds to hours with remainders
      *
@@ -58,18 +59,19 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.msToHrs = (ms) => {
-        const milliseconds = (ms % 1000) % 1000
-        const seconds = ((ms - (ms % 1000)) / 1000) % 60
-        const minutes = ((ms - seconds * 1000 - milliseconds) / (1000 * 60)) % 60
-        const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60)
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-            hours,
-        }
-    }
+
+    Convert.msToHrs = ms => {
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+      const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60);
+      return {
+        ms: milliseconds,
+        seconds,
+        minutes,
+        hours
+      };
+    };
     /**
      * Converts milliseconds to days with remainders
      *
@@ -79,23 +81,21 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.msToDays = (ms) => {
-        const milliseconds = (ms % 1000) % 1000
-        const seconds = ((ms - (ms % 1000)) / 1000) % 60
-        const minutes = ((ms - seconds * 1000 - milliseconds) / (1000 * 60)) % 60
-        const hours =
-            ((ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60)) % 24
-        const days =
-            (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) /
-            (1000 * 60 * 60 * 24)
-        return {
-            ms: milliseconds,
-            seconds,
-            minutes,
-            hours,
-            days,
-        }
-    }
+
+    Convert.msToDays = ms => {
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+      const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60) % 24;
+      const days = (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60 * 24);
+      return {
+        ms: milliseconds,
+        seconds,
+        minutes,
+        hours,
+        days
+      };
+    };
     /**
      * Converts seconds to milliseconds
      *
@@ -105,7 +105,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.secsToMs = (secs) => secs * 1000
+
+    Convert.secsToMs = secs => secs * 1000;
     /**
      * Converts seconds to minutes with remainders
      *
@@ -115,7 +116,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.secsToMins = (secs) => Convert.msToMins(Convert.secsToMs(secs))
+
+    Convert.secsToMins = secs => Convert.msToMins(Convert.secsToMs(secs));
     /**
      * Converts seconds to hours with remainders
      *
@@ -125,7 +127,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.secsToHrs = (secs) => Convert.msToHrs(Convert.secsToMs(secs))
+
+    Convert.secsToHrs = secs => Convert.msToHrs(Convert.secsToMs(secs));
     /**
      * Converts seconds to days with remainders
      *
@@ -135,7 +138,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.secsToDays = (secs) => Convert.msToDays(Convert.secsToMs(secs))
+
+    Convert.secsToDays = secs => Convert.msToDays(Convert.secsToMs(secs));
     /**
      * Converts hours to milliseconds
      *
@@ -145,7 +149,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.minsToMs = (mins) => mins * 60 * 1000
+
+    Convert.minsToMs = mins => mins * 60 * 1000;
     /**
      * Converts hours to seconds
      *
@@ -155,7 +160,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.minsToSecs = (mins) => mins * 60
+
+    Convert.minsToSecs = mins => mins * 60;
     /**
      * Converts minutes to hours with remainders
      *
@@ -165,7 +171,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.minsToHrs = (mins) => Convert.msToHrs(Convert.minsToMs(mins))
+
+    Convert.minsToHrs = mins => Convert.msToHrs(Convert.minsToMs(mins));
     /**
      * Converts minutes to days with remainders
      *
@@ -175,7 +182,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.minsToDays = (mins) => Convert.msToDays(Convert.minsToMs(mins))
+
+    Convert.minsToDays = mins => Convert.msToDays(Convert.minsToMs(mins));
     /**
      * Converts hours to milliseconds
      *
@@ -185,7 +193,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.hrsToMs = (hours) => hours * 60 * 60 * 1000
+
+    Convert.hrsToMs = hours => hours * 60 * 60 * 1000;
     /**
      * Converts hours to seconds
      *
@@ -195,7 +204,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.hrsToSecs = (hours) => hours * 60 * 60
+
+    Convert.hrsToSecs = hours => hours * 60 * 60;
     /**
      * Converts hours to minutes
      *
@@ -205,7 +215,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.hrsToMins = (hours) => hours * 60
+
+    Convert.hrsToMins = hours => hours * 60;
     /**
      * Converts hours to days with remainders
      *
@@ -215,7 +226,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.hrsToDays = (hrs) => Convert.msToDays(Convert.hrsToMs(hrs))
+
+    Convert.hrsToDays = hrs => Convert.msToDays(Convert.hrsToMs(hrs));
     /**
      * Converts days to milliseconds
      *
@@ -225,7 +237,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.daysToMs = (days) => days * 24 * 60 * 60 * 1000
+
+    Convert.daysToMs = days => days * 24 * 60 * 60 * 1000;
     /**
      * Converts days to seconds
      *
@@ -235,7 +248,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.daysToSecs = (days) => days * 24 * 60 * 60
+
+    Convert.daysToSecs = days => days * 24 * 60 * 60;
     /**
      * Converts days to minutes
      *
@@ -245,7 +259,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.daysToMins = (days) => days * 24 * 60
+
+    Convert.daysToMins = days => days * 24 * 60;
     /**
      * Converts days to hours
      *
@@ -255,7 +270,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Convert.daysToHrs = (days) => days * 24
+
+    Convert.daysToHrs = days => days * 24;
 
     /**
      * Elapse class and namespace
@@ -266,20 +282,20 @@ var DatePlus = (function (exports) {
      */
 
     class Elapse extends Convert {
-        constructor() {
-            super(...arguments)
-            /**
-             * Calculates number of elapsed days between instantiated date and dae
-             *
-             * @param {Date | DatePlus} date - Ending date object to calculate
-             * @returns {number} - Number of elapsed days
-             * @public
-             * @instance
-             */
+      constructor() {
+        super(...arguments);
+        /**
+         * Calculates number of elapsed days between instantiated date and dae
+         *
+         * @param {Date | DatePlus} date - Ending date object to calculate
+         * @returns {number} - Number of elapsed days
+         * @public
+         * @instance
+         */
 
-            this.getElapsedDays = (date) =>
-                Math.round((this.getTime() - date.getTime()) / Elapse._oneDay) * -1
-        }
+        this.getElapsedDays = date => Math.round((this.getTime() - date.getTime()) / Elapse._oneDay) * -1;
+      }
+
     }
     /**
      * Gets milliseconds per day
@@ -289,7 +305,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Elapse._oneDay = 24 * 60 * 60 * 1000
+    Elapse._oneDay = 24 * 60 * 60 * 1000;
     /**
      * Calculates number of elapsed days between date1 and date2
      *
@@ -300,8 +316,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Elapse.getElapsedDays = (date1, date2) =>
-        Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1
+    Elapse.getElapsedDays = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1;
 
     class Alias extends Elapse {}
     /**
@@ -313,7 +328,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.msToSeconds = Alias.msToSecs
+    Alias.msToSeconds = Alias.msToSecs;
     /**
      * Converts milliseconds to minutes with remainders
      *
@@ -323,7 +338,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.msToMinutes = Alias.msToMins
+    Alias.msToMinutes = Alias.msToMins;
     /**
      * Converts milliseconds to hours with remainders
      *
@@ -333,7 +348,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.msToHours = Alias.msToHrs
+    Alias.msToHours = Alias.msToHrs;
     /**
      * Converts seconds to milliseconds
      *
@@ -343,7 +358,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.secondsToMs = Alias.secsToMs
+    Alias.secondsToMs = Alias.secsToMs;
     /**
      * Converts seconds to minutes with remainders
      *
@@ -353,7 +368,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.secondsToMinutes = Alias.secsToMins
+    Alias.secondsToMinutes = Alias.secsToMins;
     /**
      * Converts seconds to hours with remainders
      *
@@ -363,7 +378,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.secondsToHours = Alias.secsToHrs
+    Alias.secondsToHours = Alias.secsToHrs;
     /**
      * Converts seconds to days with remainders
      *
@@ -373,7 +388,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.secondsToDays = Alias.secsToDays
+    Alias.secondsToDays = Alias.secsToDays;
     /**
      * Converts hours to milliseconds
      *
@@ -383,7 +398,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.minutesToMs = Alias.minsToMs
+    Alias.minutesToMs = Alias.minsToMs;
     /**
      * Converts hours to seconds
      *
@@ -393,7 +408,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.minutesToSeconds = Alias.minsToSecs
+    Alias.minutesToSeconds = Alias.minsToSecs;
     /**
      * Converts minutes to hours with remainders
      *
@@ -403,7 +418,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.minutesToHours = Alias.minsToHrs
+    Alias.minutesToHours = Alias.minsToHrs;
     /**
      * Converts minutes to days with remainders
      *
@@ -413,7 +428,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.minutesToDays = Alias.minsToDays
+    Alias.minutesToDays = Alias.minsToDays;
     /**
      * Converts hours to milliseconds
      *
@@ -423,7 +438,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.hoursToMs = Alias.hrsToMs
+    Alias.hoursToMs = Alias.hrsToMs;
     /**
      * Converts hours to seconds
      *
@@ -433,7 +448,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.hoursToSeconds = Alias.hrsToSecs
+    Alias.hoursToSeconds = Alias.hrsToSecs;
     /**
      * Converts hours to minutes
      *
@@ -443,7 +458,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.hoursToMinutes = Alias.hrsToMins
+    Alias.hoursToMinutes = Alias.hrsToMins;
     /**
      * Converts hours to days with remainders
      *
@@ -453,7 +468,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.hoursToDays = Alias.hrsToDays
+    Alias.hoursToDays = Alias.hrsToDays;
     /**
      * Converts days to seconds
      *
@@ -463,7 +478,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.daysToSeconds = Alias.daysToSecs
+    Alias.daysToSeconds = Alias.daysToSecs;
     /**
      * Converts days to minutes
      *
@@ -473,7 +488,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.daysToMinutes = Alias.daysToMins
+    Alias.daysToMinutes = Alias.daysToMins;
     /**
      * Converts days to hours
      *
@@ -483,7 +498,7 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    Alias.daysToHours = Alias.daysToHrs
+    Alias.daysToHours = Alias.daysToHrs;
 
     /**
      * Dateplus class and namespace
@@ -494,47 +509,51 @@ var DatePlus = (function (exports) {
      */
 
     class DatePlus extends Alias {
-        constructor() {
-            super(...arguments)
-            /**
-             * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
-             *
-             * @param {string} seperator - Char the date is seperatred by
-             * @returns {string} - Date with zeros
-             * @public
-             * @instance
-             */
+      constructor() {
+        super(...arguments);
+        /**
+         * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
+         *
+         * @param {string} seperator - Char the date is seperatred by
+         * @returns {string} - Date with zeros
+         * @public
+         * @instance
+         */
 
-            this.addZeros = (seperator = "/") => DatePlus.addZeros(this.formatDate(), seperator)
-            /**
-             * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-             *
-             * @param {string} seperator - Char to seperate date with
-             * @returns {string} Formatted date
-             * @public
-             * @instance
-             */
+        this.addZeros = (seperator = "/") => DatePlus.addZeros(this.formatDate(), seperator);
+        /**
+         * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+         *
+         * @param {string} seperator - Char to seperate date with
+         * @returns {string} Formatted date
+         * @public
+         * @instance
+         */
 
-            this.formatDate = (seperator = "/") => DatePlus.formatDate(this, seperator)
-            /**
-             * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-             *
-             * @returns {string} Stringed day of week
-             * @public
-             * @instance
-             */
 
-            this.getWordDay = () => DatePlus._daysReference[this.getDay()]
-            /**
-             * Gets instantiated month in word form (e.g 0 => "January")
-             *
-             * @returns {string} Stringed worded month
-             * @public
-             * @instance
-             */
+        this.formatDate = (seperator = "/") => DatePlus.formatDate(this, seperator);
+        /**
+         * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+         *
+         * @returns {string} Stringed day of week
+         * @public
+         * @instance
+         */
 
-            this.getWordMonth = () => DatePlus._monthsReference[this.getMonth()]
-        }
+
+        this.getWordDay = () => DatePlus._daysReference[this.getDay()];
+        /**
+         * Gets instantiated month in word form (e.g 0 => "January")
+         *
+         * @returns {string} Stringed worded month
+         * @public
+         * @instance
+         */
+
+
+        this.getWordMonth = () => DatePlus._monthsReference[this.getMonth()];
+      }
+
     }
     /**
      * Reference to days of the week, zero indexed
@@ -545,14 +564,14 @@ var DatePlus = (function (exports) {
      */
 
     DatePlus._daysReference = {
-        0: "Sunday",
-        1: "Monday",
-        2: "Tuesday",
-        3: "Wednesday",
-        4: "Thursday",
-        5: "Friday",
-        6: "Saturday",
-    }
+      0: "Sunday",
+      1: "Monday",
+      2: "Tuesday",
+      3: "Wednesday",
+      4: "Thursday",
+      5: "Friday",
+      6: "Saturday"
+    };
     /**
      * Reference to months of a year, zero indexed
      *
@@ -562,10 +581,10 @@ var DatePlus = (function (exports) {
      */
 
     DatePlus._keysReference = {
-        y: "year",
-        m: "month",
-        d: "day",
-    }
+      y: "year",
+      m: "month",
+      d: "day"
+    };
     /**
      * Reference to months of a year, zero indexed
      *
@@ -575,19 +594,19 @@ var DatePlus = (function (exports) {
      */
 
     DatePlus._monthsReference = {
-        0: "January",
-        1: "Feburary",
-        2: "March",
-        3: "April",
-        4: "May",
-        5: "June",
-        6: "July",
-        7: "August",
-        8: "September",
-        9: "October",
-        10: "November",
-        11: "December",
-    }
+      0: "January",
+      1: "Feburary",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December"
+    };
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
      *
@@ -599,24 +618,24 @@ var DatePlus = (function (exports) {
      */
 
     DatePlus.addZeros = (date, seperator = "/") => {
-        let newDate = ""
+      let newDate = "";
 
-        for (let index = 0; index < 2; index++) {
-            if (date.split(seperator)[index].length < 2) {
-                newDate += "0".concat(date.split(seperator)[index]).concat(seperator)
-            } else {
-                newDate += "".concat(date.split(seperator)[index]).concat(seperator)
-            }
-        }
-
-        if (date.split(seperator)[2].length < 2) {
-            newDate += "0".concat(date.split(seperator)[2])
+      for (let index = 0; index < 2; index++) {
+        if (date.split(seperator)[index].length < 2) {
+          newDate += "0".concat(date.split(seperator)[index]).concat(seperator);
         } else {
-            newDate += date.split(seperator)[2]
+          newDate += "".concat(date.split(seperator)[index]).concat(seperator);
         }
+      }
 
-        return newDate
-    }
+      if (date.split(seperator)[2].length < 2) {
+        newDate += "0".concat(date.split(seperator)[2]);
+      } else {
+        newDate += date.split(seperator)[2];
+      }
+
+      return newDate;
+    };
     /**
      * Format date into a string in the form YYYY{seperator}MM{seperator}DD
      *
@@ -627,12 +646,13 @@ var DatePlus = (function (exports) {
      * @static
      */
 
+
     DatePlus.formatDate = (date, seperator = "/") => {
-        const month = date.getMonth().toString()
-        const day = date.getDate().toString()
-        const year = date.getFullYear().toString()
-        return [year, month, day].join(seperator)
-    }
+      const month = date.getMonth().toString();
+      const day = date.getDate().toString();
+      const year = date.getFullYear().toString();
+      return [year, month, day].join(seperator);
+    };
     /**
      * Gets date values and outputs an object
      *
@@ -645,31 +665,32 @@ var DatePlus = (function (exports) {
      * @static
      */
 
+
     DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
-        let _seperator = "/"
+      let _seperator = "/";
 
-        if (seperator === "auto") {
-            for (const letter of date) {
-                if (isNaN(Number(letter))) {
-                    _seperator = letter
-                    break
-                }
-            }
-        } else {
-            _seperator = seperator
+      if (seperator === "auto") {
+        for (const letter of date) {
+          if (isNaN(Number(letter))) {
+            _seperator = letter;
+            break;
+          }
         }
+      } else {
+        _seperator = seperator;
+      }
 
-        const dateData = date.split(_seperator)
-        const dateFormat = format.split(":")
-        const output = {}
+      const dateData = date.split(_seperator);
+      const dateFormat = format.split(":");
+      const output = {};
 
-        for (let index = 0; index < 3; index++) {
-            const key = DatePlus._keysReference[dateFormat[index]]
-            output[key] = Number(dateData[index])
-        }
+      for (let index = 0; index < 3; index++) {
+        const key = DatePlus._keysReference[dateFormat[index]];
+        output[key] = Number(dateData[index]);
+      }
 
-        return output
-    }
+      return output;
+    };
     /**
      * Converts numerical day of week into word form (e.g 0 => "Sunday")
      *
@@ -679,7 +700,8 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    DatePlus.getWordDay = (numerical) => DatePlus._daysReference[numerical]
+
+    DatePlus.getWordDay = numerical => DatePlus._daysReference[numerical];
     /**
      * Converts numerical month into word form (e.g 0 => "January")
      *
@@ -689,13 +711,15 @@ var DatePlus = (function (exports) {
      * @static
      */
 
-    DatePlus.getWordMonth = (numerical) => DatePlus._monthsReference[numerical]
 
-    exports.DatePlus = DatePlus
-    exports.default = DatePlus
+    DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
 
-    Object.defineProperty(exports, "__esModule", {value: true})
+    exports.DatePlus = DatePlus;
+    exports.default = DatePlus;
 
-    return exports
-})({})
+    Object.defineProperty(exports, '__esModule', { value: true });
+
+    return exports;
+
+}({}));
 //# sourceMappingURL=dateplus.js.map
