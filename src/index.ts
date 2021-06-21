@@ -1,13 +1,14 @@
 /**
- * DatePlus
- * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
- * @author Luke Zhang luke-zhang-04.github.io
+ * DatePlus A simple program to assist with date manipulation
+ *
  * @license MIT
  * @version 3.0.1
+ * @author Luke Zhang luke-zhang-04.github.io
+ * @file exports Main dateplus object
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @exports DatePlus
- * @file exports main dateplus object
  */
+
 import * as interfaces from "./interfaces"
 import Alias from "./alias"
 
@@ -18,57 +19,58 @@ type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
  * Interface for datereference
  */
 interface Days {
-    0: "Sunday",
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
+    0: "Sunday"
+    1: "Monday"
+    2: "Tuesday"
+    3: "Wednesday"
+    4: "Thursday"
+    5: "Friday"
+    6: "Saturday"
 }
 
 /**
  * Object for date keys
  */
 interface Keys {
-    [index: string]: string,
-    y: "year" | "years",
-    m: "month" | "months",
-    d: "day" | "days",
+    [index: string]: string
+    y: "year" | "years"
+    m: "month" | "months"
+    d: "day" | "days"
 }
 
 /**
  * Interface for datereference
  */
 interface Months {
-    0: "January",
-    1: "Feburary",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "June",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
+    0: "January"
+    1: "Feburary"
+    2: "March"
+    3: "April"
+    4: "May"
+    5: "June"
+    6: "July"
+    7: "August"
+    8: "September"
+    9: "October"
+    10: "November"
+    11: "December"
 }
 /* eslint-enable no-magic-numbers */
 
 /**
  * Dateplus class and namespace
- * @classdesc A class and namespace program to assist with date manipulation
- * @class
+ *
  * @namespace
+ * @class
+ * @classdesc A class and namespace program to assist with date manipulation
  */
 export class DatePlus extends Alias {
-
     /**
      * Reference to days of the week, zero indexed
+     *
      * @private
+     * @type {Object<number, string>}
      * @static
-     * @type {Object.<number, string>}
      */
     private static _daysReference: Days = {
         0: "Sunday",
@@ -83,9 +85,10 @@ export class DatePlus extends Alias {
     /* eslint-disable id-length */
     /**
      * Reference to months of a year, zero indexed
+     *
      * @private
+     * @type {Object<number, string>}
      * @static
-     * @type {Object.<number, string>}
      */
     private static _keysReference: Keys = {
         y: "year",
@@ -96,9 +99,10 @@ export class DatePlus extends Alias {
 
     /**
      * Reference to months of a year, zero indexed
+     *
      * @private
+     * @type {Object<number, string>}
      * @static
-     * @type {Object.<number, string>}
      */
     private static _monthsReference: Months = {
         0: "January",
@@ -117,11 +121,12 @@ export class DatePlus extends Alias {
 
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
+     *
+     * @param {string} date - String date to format
+     * @param {string} seperator - Char the date is seperatred by
+     * @returns {string} - Date with zeros
      * @public
      * @static
-     * @param {string} date - string date to format
-     * @param {string} seperator - char the date is seperatred by
-     * @returns {string} - date with zeros
      */
     public static addZeros = (date: string, seperator = "/"): string => {
         let newDate = ""
@@ -145,17 +150,15 @@ export class DatePlus extends Alias {
 
     /**
      * Format date into a string in the form YYYY{seperator}MM{seperator}DD
+     *
+     * @param {Date | DatePlus} date - Date object to format
+     * @param {string} seperator - String to seperate date values with
+     * @returns {string} Formatted date
      * @public
      * @static
-     * @param {Date | DatePlus} date - date object to format
-     * @param {string} seperator - string to seperate date values with
-     * @returns {string} formatted date
      */
-    public static formatDate = (
-        date: Date | DatePlus,
-        seperator = "/"
-    ): string => {
-        const month = (date.getMonth()).toString()
+    public static formatDate = (date: Date | DatePlus, seperator = "/"): string => {
+        const month = date.getMonth().toString()
         const day = date.getDate().toString()
         const year = date.getFullYear().toString()
 
@@ -164,12 +167,14 @@ export class DatePlus extends Alias {
 
     /**
      * Gets date values and outputs an object
+     *
+     * @param {string} date - Date to extract values from, months zero indexed
+     * @param {DateFormat} format - Format of string date
+     * @param {string} seperator - Seperator the date works with; leave auto for auto detection,
+     *   limited to 1 char
+     * @returns {Object<string, number>} Object with all values
      * @public
      * @static
-     * @param {string} date - date to extract values from, months zero indexed
-     * @param {DateFormat}format - format of string date
-     * @param {string} seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
-     * @returns {Object<string, number>} object with all values
      */
     public static getDateValues = (
         date: string,
@@ -207,57 +212,64 @@ export class DatePlus extends Alias {
     /* eslint-disable max-len */
     /**
      * Converts numerical day of week into word form (e.g 0 => "Sunday")
+     *
+     * @param {number} numerical - Numerical day of week, 0 indexed (0-6)
+     * @returns {string} Stringed day of week
      * @public
      * @static
-     * @param {number} numerical - numerical day of week, 0 indexed (0-6)
-     * @returns {string} stringed day of week
      */
-    public static getWordDay = (numerical: keyof Days): string => DatePlus._daysReference[numerical]
+    public static getWordDay = (numerical: keyof Days): string =>
+        DatePlus._daysReference[numerical]
 
     /**
      * Converts numerical month into word form (e.g 0 => "January")
+     *
+     * @param {number} numerical - Numerical day of week, 0 indexed (0-11)
+     * @returns {string} Stringed worded month
      * @public
      * @static
-     * @param {number} numerical - numerical day of week, 0 indexed (0-11)
-     * @returns {string} stringed worded month
      */
-    public static getWordMonth = (numerical: keyof Months): string => DatePlus._monthsReference[numerical]
+    public static getWordMonth = (numerical: keyof Months): string =>
+        DatePlus._monthsReference[numerical]
 
     /**
      * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
+     *
+     * @param {string} seperator - Char the date is seperatred by
+     * @returns {string} - Date with zeros
      * @public
      * @instance
-     * @param {string} seperator - char the date is seperatred by
-     * @returns {string} - date with zeros
      */
     public addZeros = (seperator = "/"): string => DatePlus.addZeros(this.formatDate(), seperator)
 
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+     *
+     * @param {string} seperator - Char to seperate date with
+     * @returns {string} Formatted date
      * @public
      * @instance
-     * @param {string} seperator - char to seperate date with
-     * @returns {string} formatted date
      */
     public formatDate = (seperator = "/"): string => DatePlus.formatDate(this, seperator)
 
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+     *
+     * @returns {string} Stringed day of week
      * @public
      * @instance
-     * @returns {string} stringed day of week
      */
     public getWordDay = (): string => DatePlus._daysReference[this.getDay() as keyof Days]
 
     /**
      * Gets instantiated month in word form (e.g 0 => "January")
+     *
+     * @returns {string} Stringed worded month
      * @public
      * @instance
-     * @returns {string} stringed worded month
      */
     public getWordMonth = (): string => DatePlus._monthsReference[this.getMonth() as keyof Months]
     /* eslint-enable max-len */
-
 }
 
 export default DatePlus

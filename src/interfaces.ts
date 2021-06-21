@@ -1,106 +1,99 @@
 /**
- * DatePlus
- * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
- * @author Luke Zhang luke-zhang-04.github.io
+ * DatePlus A simple program to assist with date manipulation
+ *
  * @license MIT
  * @version 3.0.1
- * @file defines interfaces shared across one or more files'
+ * @author Luke Zhang luke-zhang-04.github.io
+ * @file defines Interfaces shared across one or more files'
  * @namespace
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
 /**
- * Object that stores milliseconds
- * with the ms key
+ * Object that stores milliseconds with the ms key
  */
 export interface MsObj {
-    [index: string]: number,
-    ms: number,
+    [index: string]: number
+    ms: number
 }
 
 /**
- * Object that stores seconds and milliseconds
- * with the seconds and ms keys
+ * Object that stores seconds and milliseconds with the seconds and ms keys
  */
 export interface SecondsObj extends MsObj {
-    seconds: number,
+    seconds: number
 }
 
 /**
- * Object that stores minutes, seconds, and milliseconds
- * with the minutes, seconds, and ms keys
+ * Object that stores minutes, seconds, and milliseconds with the minutes, seconds, and ms keys
  */
 export interface MinutesObj extends SecondsObj {
-    minutes: number,
+    minutes: number
 }
 
 /**
- * Object that stores hours, minutes, seconds, and milliseconds
- * with the hours, minutes, seconds, and ms keys
+ * Object that stores hours, minutes, seconds, and milliseconds with the hours, minutes, seconds, and ms keys
  */
 export interface HoursObj extends MinutesObj {
-    hours: number,
+    hours: number
 }
 
 /**
- * Object that stores days, hours, minutes, seconds, and milliseconds
- * with the days, hours, minutes, seconds, and ms keys
+ * Object that stores days, hours, minutes, seconds, and milliseconds with the days, hours,
+ * minutes, seconds, and ms keys
  */
 export interface DaysObj {
-    [index: string]: number | undefined,
-    ms?: number,
-    seconds?: number,
-    minutes?: number,
-    hours?: number,
-    days: number,
+    [index: string]: number | undefined
+    ms?: number
+    seconds?: number
+    minutes?: number
+    hours?: number
+    days: number
 }
 
 /**
- * Object that stores weeks, days, hours, minutes, seconds, and milliseconds
- * with the weeks, days, hours, minutes, seconds, and ms keys
+ * Object that stores weeks, days, hours, minutes, seconds, and milliseconds with the weeks, days,
+ * hours, minutes, seconds, and ms keys
  */
 export interface WeeksObj extends DaysObj {
-    weeks: number,
+    weeks: number
 }
 
 /**
- * Object that stores months, weeks, days, hours, minutes, seconds, and milliseconds
- * with the months, weeks, days, hours, minutes, seconds, and ms keys
+ * Object that stores months, weeks, days, hours, minutes, seconds, and milliseconds with the
+ * months, weeks, days, hours, minutes, seconds, and ms keys
  */
 export interface MonthsObj extends DaysObj {
-    weeks?: number,
-    months: number,
+    weeks?: number
+    months: number
 }
 
 /**
- * Object that stores years, months, weeks, days, hours, minutes, seconds, and milliseconds
- * with the years, months, weeks, days, hours, minutes, seconds, and ms keys
+ * Object that stores years, months, weeks, days, hours, minutes, seconds, and milliseconds with
+ * the years, months, weeks, days, hours, minutes, seconds, and ms keys
  */
 export interface YearsObj extends MonthsObj {
-    years: number,
+    years: number
 }
 
 /**
- * Object that stores day,
- * with the day key
+ * Object that stores day, with the day key
  */
 export interface DayObj {
-    [index: string]: number,
-    day: number,
+    [index: string]: number
+    day: number
 }
 
 /**
- * Object that stores month and day,
- * with the month and day keys
+ * Object that stores month and day, with the month and day keys
  */
 export interface MonthObj extends DayObj {
-    month: number,
+    month: number
 }
 
 /**
- * Object that stores year, month, and day,
- * with the year, month, and day keys
+ * Object that stores year, month, and day, with the year, month, and day keys
  */
 export interface YearObj extends MonthObj {
-    year: number,
+    year: number
 }
