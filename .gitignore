@@ -126,3 +126,4 @@ cli/*.js
 .env.production.local
 .vscode
 tsbuildinfo.json
+typedoc-output
