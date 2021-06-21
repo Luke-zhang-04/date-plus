@@ -108,6 +108,7 @@ export const msToSecs = (ms: number): SecondsObj => ({
     ms: ms % Values.MsPerSec,
     seconds: (ms - (ms % Values.MsPerSec)) / Values.MsPerSec,
 })
+export const msToSeconds = msToSecs
 
 /**
  * Converts milliseconds to minutes with remainders
@@ -127,6 +128,7 @@ export const msToMins = (ms: number): MinutesObj => {
         minutes,
     }
 }
+export const msToMinutes = msToMins
 
 /**
  * Converts milliseconds to hours with remainders
@@ -154,6 +156,7 @@ export const msToHrs = (ms: number): HoursObj => {
         hours,
     }
 }
+export const msToHours = msToHrs
 
 /**
  * Converts milliseconds to days with remainders
@@ -199,6 +202,7 @@ export const msToDays = (ms: number): DaysObj => {
  * @returns Converted milliseconds
  */
 export const secsToMs = (secs: number): number => secs * Values.MsPerSec
+export const secondsToMs = secsToMs
 
 /**
  * Converts seconds to minutes with remainders
@@ -207,6 +211,7 @@ export const secsToMs = (secs: number): number => secs * Values.MsPerSec
  * @returns Converted minutes
  */
 export const secsToMins = (secs: number): MinutesObj => msToMins(secsToMs(secs))
+export const secondsToMinutes = secsToMins
 
 /**
  * Converts seconds to hours with remainders
@@ -215,6 +220,7 @@ export const secsToMins = (secs: number): MinutesObj => msToMins(secsToMs(secs))
  * @returns Converted hours
  */
 export const secsToHrs = (secs: number): HoursObj => msToHrs(secsToMs(secs))
+export const secondsToHours = secsToHrs
 
 /**
  * Converts seconds to days with remainders
@@ -223,6 +229,7 @@ export const secsToHrs = (secs: number): HoursObj => msToHrs(secsToMs(secs))
  * @returns Converted days
  */
 export const secsToDays = (secs: number): DaysObj => msToDays(secsToMs(secs))
+export const secondsToDays = secsToDays
 
 /**
  * Converts hours to milliseconds
@@ -231,6 +238,7 @@ export const secsToDays = (secs: number): DaysObj => msToDays(secsToMs(secs))
  * @returns Converted milliseconds
  */
 export const minsToMs = (mins: number): number => mins * Values.SecsPerMin * Values.MsPerSec
+export const minutesToMs = secsToDays
 
 /**
  * Converts hours to seconds
@@ -239,6 +247,7 @@ export const minsToMs = (mins: number): number => mins * Values.SecsPerMin * Val
  * @returns Converted seconds
  */
 export const minsToSecs = (mins: number): number => mins * Values.SecsPerMin
+export const minutesToSeconds = minsToSecs
 
 /**
  * Converts minutes to hours with remainders
@@ -247,6 +256,7 @@ export const minsToSecs = (mins: number): number => mins * Values.SecsPerMin
  * @returns Converted hours
  */
 export const minsToHrs = (mins: number): HoursObj => msToHrs(minsToMs(mins))
+export const minutesToHours = minsToHrs
 
 /**
  * Converts minutes to days with remainders
@@ -255,6 +265,7 @@ export const minsToHrs = (mins: number): HoursObj => msToHrs(minsToMs(mins))
  * @returns Converted days
  */
 export const minsToDays = (mins: number): DaysObj => msToDays(minsToMs(mins))
+export const minutesToDays = minsToDays
 
 /**
  * Converts hours to milliseconds
@@ -264,6 +275,7 @@ export const minsToDays = (mins: number): DaysObj => msToDays(minsToMs(mins))
  */
 export const hrsToMs = (hours: number): number =>
     hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
+export const hoursToMs = hrsToMs
 
 /**
  * Converts hours to seconds
@@ -272,6 +284,7 @@ export const hrsToMs = (hours: number): number =>
  * @returns Converted seconds
  */
 export const hrsToSecs = (hours: number): number => hours * Values.MinsPerHr * Values.SecsPerMin
+export const hoursToSeconds = hrsToSecs
 
 /**
  * Converts hours to minutes
@@ -280,6 +293,7 @@ export const hrsToSecs = (hours: number): number => hours * Values.MinsPerHr * V
  * @returns Converted minutes
  */
 export const hrsToMins = (hours: number): number => hours * Values.MinsPerHr
+export const hoursToMinutes = hrsToMins
 
 /**
  * Converts hours to days with remainders
@@ -288,6 +302,7 @@ export const hrsToMins = (hours: number): number => hours * Values.MinsPerHr
  * @returns Converted days
  */
 export const hrsToDays = (hrs: number): DaysObj => msToDays(hrsToMs(hrs))
+export const hoursToDays = hrsToDays
 
 /**
  * Converts days to milliseconds
@@ -306,6 +321,7 @@ export const daysToMs = (days: number): number =>
  */
 export const daysToSecs = (days: number): number =>
     days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin
+export const daysToSeconds = daysToSecs
 
 /**
  * Converts days to minutes
@@ -314,6 +330,7 @@ export const daysToSecs = (days: number): number =>
  * @returns Converted minutes
  */
 export const daysToMins = (days: number): number => days * Values.HrsPerDay * Values.MinsPerHr
+export const daysToMinutes = daysToMins
 
 /**
  * Converts days to hours
@@ -322,3 +339,4 @@ export const daysToMins = (days: number): number => days * Values.HrsPerDay * Va
  * @returns Converted hours
  */
 export const daysToHrs = (days: number): number => days * Values.HrsPerDay
+export const daysToHours = daysToHrs

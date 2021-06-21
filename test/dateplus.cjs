@@ -21,6 +21,7 @@ const msToSecs = ms => ({
   ms: ms % 1000,
   seconds: (ms - ms % 1000) / 1000
 });
+const msToSeconds = msToSecs;
 /**
  * Converts milliseconds to minutes with remainders
  *
@@ -38,6 +39,7 @@ const msToMins = ms => {
     minutes
   };
 };
+const msToMinutes = msToMins;
 /**
  * Converts milliseconds to hours with remainders
  *
@@ -57,6 +59,7 @@ const msToHrs = ms => {
     hours
   };
 };
+const msToHours = msToHrs;
 /**
  * Converts milliseconds to days with remainders
  *
@@ -86,6 +89,7 @@ const msToDays = ms => {
  */
 
 const secsToMs = secs => secs * 1000;
+const secondsToMs = secsToMs;
 /**
  * Converts seconds to minutes with remainders
  *
@@ -94,6 +98,7 @@ const secsToMs = secs => secs * 1000;
  */
 
 const secsToMins = secs => msToMins(secsToMs(secs));
+const secondsToMinutes = secsToMins;
 /**
  * Converts seconds to hours with remainders
  *
@@ -102,6 +107,7 @@ const secsToMins = secs => msToMins(secsToMs(secs));
  */
 
 const secsToHrs = secs => msToHrs(secsToMs(secs));
+const secondsToHours = secsToHrs;
 /**
  * Converts seconds to days with remainders
  *
@@ -110,6 +116,7 @@ const secsToHrs = secs => msToHrs(secsToMs(secs));
  */
 
 const secsToDays = secs => msToDays(secsToMs(secs));
+const secondsToDays = secsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -118,6 +125,7 @@ const secsToDays = secs => msToDays(secsToMs(secs));
  */
 
 const minsToMs = mins => mins * 60 * 1000;
+const minutesToMs = secsToDays;
 /**
  * Converts hours to seconds
  *
@@ -126,6 +134,7 @@ const minsToMs = mins => mins * 60 * 1000;
  */
 
 const minsToSecs = mins => mins * 60;
+const minutesToSeconds = minsToSecs;
 /**
  * Converts minutes to hours with remainders
  *
@@ -134,6 +143,7 @@ const minsToSecs = mins => mins * 60;
  */
 
 const minsToHrs = mins => msToHrs(minsToMs(mins));
+const minutesToHours = minsToHrs;
 /**
  * Converts minutes to days with remainders
  *
@@ -142,6 +152,7 @@ const minsToHrs = mins => msToHrs(minsToMs(mins));
  */
 
 const minsToDays = mins => msToDays(minsToMs(mins));
+const minutesToDays = minsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -150,6 +161,7 @@ const minsToDays = mins => msToDays(minsToMs(mins));
  */
 
 const hrsToMs = hours => hours * 60 * 60 * 1000;
+const hoursToMs = hrsToMs;
 /**
  * Converts hours to seconds
  *
@@ -158,6 +170,7 @@ const hrsToMs = hours => hours * 60 * 60 * 1000;
  */
 
 const hrsToSecs = hours => hours * 60 * 60;
+const hoursToSeconds = hrsToSecs;
 /**
  * Converts hours to minutes
  *
@@ -166,6 +179,7 @@ const hrsToSecs = hours => hours * 60 * 60;
  */
 
 const hrsToMins = hours => hours * 60;
+const hoursToMinutes = hrsToMins;
 /**
  * Converts hours to days with remainders
  *
@@ -174,6 +188,7 @@ const hrsToMins = hours => hours * 60;
  */
 
 const hrsToDays = hrs => msToDays(hrsToMs(hrs));
+const hoursToDays = hrsToDays;
 /**
  * Converts days to milliseconds
  *
@@ -190,6 +205,7 @@ const daysToMs = days => days * 24 * 60 * 60 * 1000;
  */
 
 const daysToSecs = days => days * 24 * 60 * 60;
+const daysToSeconds = daysToSecs;
 /**
  * Converts days to minutes
  *
@@ -198,6 +214,7 @@ const daysToSecs = days => days * 24 * 60 * 60;
  */
 
 const daysToMins = days => days * 24 * 60;
+const daysToMinutes = daysToMins;
 /**
  * Converts days to hours
  *
@@ -206,29 +223,48 @@ const daysToMins = days => days * 24 * 60;
  */
 
 const daysToHrs = days => days * 24;
+const daysToHours = daysToHrs;
 
 var conversions = /*#__PURE__*/Object.freeze({
     __proto__: null,
     msToSecs: msToSecs,
+    msToSeconds: msToSeconds,
     msToMins: msToMins,
+    msToMinutes: msToMinutes,
     msToHrs: msToHrs,
+    msToHours: msToHours,
     msToDays: msToDays,
     secsToMs: secsToMs,
+    secondsToMs: secondsToMs,
     secsToMins: secsToMins,
+    secondsToMinutes: secondsToMinutes,
     secsToHrs: secsToHrs,
+    secondsToHours: secondsToHours,
     secsToDays: secsToDays,
+    secondsToDays: secondsToDays,
     minsToMs: minsToMs,
+    minutesToMs: minutesToMs,
     minsToSecs: minsToSecs,
+    minutesToSeconds: minutesToSeconds,
     minsToHrs: minsToHrs,
+    minutesToHours: minutesToHours,
     minsToDays: minsToDays,
+    minutesToDays: minutesToDays,
     hrsToMs: hrsToMs,
+    hoursToMs: hoursToMs,
     hrsToSecs: hrsToSecs,
+    hoursToSeconds: hoursToSeconds,
     hrsToMins: hrsToMins,
+    hoursToMinutes: hoursToMinutes,
     hrsToDays: hrsToDays,
+    hoursToDays: hoursToDays,
     daysToMs: daysToMs,
     daysToSecs: daysToSecs,
+    daysToSeconds: daysToSeconds,
     daysToMins: daysToMins,
-    daysToHrs: daysToHrs
+    daysToMinutes: daysToMinutes,
+    daysToHrs: daysToHrs,
+    daysToHours: daysToHours
 });
 
 const values = {

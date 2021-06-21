@@ -295,6 +295,7 @@ var msToSecs = function msToSecs(ms) {
     seconds: (ms - ms % 1000) / 1000
   };
 };
+var msToSeconds = msToSecs;
 /**
  * Converts milliseconds to minutes with remainders
  *
@@ -312,6 +313,7 @@ var msToMins = function msToMins(ms) {
     minutes: minutes
   };
 };
+var msToMinutes = msToMins;
 /**
  * Converts milliseconds to hours with remainders
  *
@@ -331,6 +333,7 @@ var msToHrs = function msToHrs(ms) {
     hours: hours
   };
 };
+var msToHours = msToHrs;
 /**
  * Converts milliseconds to days with remainders
  *
@@ -362,6 +365,7 @@ var msToDays = function msToDays(ms) {
 var secsToMs = function secsToMs(secs) {
   return secs * 1000;
 };
+var secondsToMs = secsToMs;
 /**
  * Converts seconds to minutes with remainders
  *
@@ -372,6 +376,7 @@ var secsToMs = function secsToMs(secs) {
 var secsToMins = function secsToMins(secs) {
   return msToMins(secsToMs(secs));
 };
+var secondsToMinutes = secsToMins;
 /**
  * Converts seconds to hours with remainders
  *
@@ -382,6 +387,7 @@ var secsToMins = function secsToMins(secs) {
 var secsToHrs = function secsToHrs(secs) {
   return msToHrs(secsToMs(secs));
 };
+var secondsToHours = secsToHrs;
 /**
  * Converts seconds to days with remainders
  *
@@ -392,6 +398,7 @@ var secsToHrs = function secsToHrs(secs) {
 var secsToDays = function secsToDays(secs) {
   return msToDays(secsToMs(secs));
 };
+var secondsToDays = secsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -402,6 +409,7 @@ var secsToDays = function secsToDays(secs) {
 var minsToMs = function minsToMs(mins) {
   return mins * 60 * 1000;
 };
+var minutesToMs = secsToDays;
 /**
  * Converts hours to seconds
  *
@@ -412,6 +420,7 @@ var minsToMs = function minsToMs(mins) {
 var minsToSecs = function minsToSecs(mins) {
   return mins * 60;
 };
+var minutesToSeconds = minsToSecs;
 /**
  * Converts minutes to hours with remainders
  *
@@ -422,6 +431,7 @@ var minsToSecs = function minsToSecs(mins) {
 var minsToHrs = function minsToHrs(mins) {
   return msToHrs(minsToMs(mins));
 };
+var minutesToHours = minsToHrs;
 /**
  * Converts minutes to days with remainders
  *
@@ -432,6 +442,7 @@ var minsToHrs = function minsToHrs(mins) {
 var minsToDays = function minsToDays(mins) {
   return msToDays(minsToMs(mins));
 };
+var minutesToDays = minsToDays;
 /**
  * Converts hours to milliseconds
  *
@@ -442,6 +453,7 @@ var minsToDays = function minsToDays(mins) {
 var hrsToMs = function hrsToMs(hours) {
   return hours * 60 * 60 * 1000;
 };
+var hoursToMs = hrsToMs;
 /**
  * Converts hours to seconds
  *
@@ -452,6 +464,7 @@ var hrsToMs = function hrsToMs(hours) {
 var hrsToSecs = function hrsToSecs(hours) {
   return hours * 60 * 60;
 };
+var hoursToSeconds = hrsToSecs;
 /**
  * Converts hours to minutes
  *
@@ -462,6 +475,7 @@ var hrsToSecs = function hrsToSecs(hours) {
 var hrsToMins = function hrsToMins(hours) {
   return hours * 60;
 };
+var hoursToMinutes = hrsToMins;
 /**
  * Converts hours to days with remainders
  *
@@ -472,6 +486,7 @@ var hrsToMins = function hrsToMins(hours) {
 var hrsToDays = function hrsToDays(hrs) {
   return msToDays(hrsToMs(hrs));
 };
+var hoursToDays = hrsToDays;
 /**
  * Converts days to milliseconds
  *
@@ -492,6 +507,7 @@ var daysToMs = function daysToMs(days) {
 var daysToSecs = function daysToSecs(days) {
   return days * 24 * 60 * 60;
 };
+var daysToSeconds = daysToSecs;
 /**
  * Converts days to minutes
  *
@@ -502,6 +518,7 @@ var daysToSecs = function daysToSecs(days) {
 var daysToMins = function daysToMins(days) {
   return days * 24 * 60;
 };
+var daysToMinutes = daysToMins;
 /**
  * Converts days to hours
  *
@@ -512,29 +529,48 @@ var daysToMins = function daysToMins(days) {
 var daysToHrs = function daysToHrs(days) {
   return days * 24;
 };
+var daysToHours = daysToHrs;
 
 var conversions = /*#__PURE__*/Object.freeze({
   __proto__: null,
   msToSecs: msToSecs,
+  msToSeconds: msToSeconds,
   msToMins: msToMins,
+  msToMinutes: msToMinutes,
   msToHrs: msToHrs,
+  msToHours: msToHours,
   msToDays: msToDays,
   secsToMs: secsToMs,
+  secondsToMs: secondsToMs,
   secsToMins: secsToMins,
+  secondsToMinutes: secondsToMinutes,
   secsToHrs: secsToHrs,
+  secondsToHours: secondsToHours,
   secsToDays: secsToDays,
+  secondsToDays: secondsToDays,
   minsToMs: minsToMs,
+  minutesToMs: minutesToMs,
   minsToSecs: minsToSecs,
+  minutesToSeconds: minutesToSeconds,
   minsToHrs: minsToHrs,
+  minutesToHours: minutesToHours,
   minsToDays: minsToDays,
+  minutesToDays: minutesToDays,
   hrsToMs: hrsToMs,
+  hoursToMs: hoursToMs,
   hrsToSecs: hrsToSecs,
+  hoursToSeconds: hoursToSeconds,
   hrsToMins: hrsToMins,
+  hoursToMinutes: hoursToMinutes,
   hrsToDays: hrsToDays,
+  hoursToDays: hoursToDays,
   daysToMs: daysToMs,
   daysToSecs: daysToSecs,
+  daysToSeconds: daysToSeconds,
   daysToMins: daysToMins,
-  daysToHrs: daysToHrs
+  daysToMinutes: daysToMinutes,
+  daysToHrs: daysToHrs,
+  daysToHours: daysToHours
 });
 
 var values = {
