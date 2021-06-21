@@ -786,6 +786,44 @@ var getElapsedSeconds = function getElapsedSeconds(date1, date2) {
 var getElapsedMs = function getElapsedMs(date1, date2) {
   return Math.round(date1.getTime() - date2.getTime()) * -1;
 };
+/**
+ * Calculates elapsed time between current and previous
+ *
+ * @param start- Start date
+ * @param end - End date
+ * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+ * @returns Time difference in string form, e.g "3 seconds ago"
+ */
+
+var getElapsedString = function getElapsedString(start, end) {
+  var approx = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "about";
+  var daysPerMonth = 30;
+  var daysPerYear = 365;
+  var msPerMonth = oneDay * daysPerMonth;
+  var msPerYear = oneDay * daysPerYear;
+  var elapsed = getElapsedMs(start, end);
+  var val;
+
+  if (elapsed < oneMinute) {
+    val = Math.round(elapsed / 1000);
+    return "".concat(val, " second").concat(val === 1 ? "" : "s", " ago");
+  } else if (elapsed < oneHour) {
+    val = Math.round(elapsed / oneMinute);
+    return "".concat(val, " minute").concat(val === 1 ? "" : "s", " ago");
+  } else if (elapsed < oneDay) {
+    val = Math.round(elapsed / oneHour);
+    return "".concat(val, " hour").concat(val === 1 ? "" : "s", " ago");
+  } else if (elapsed < msPerMonth) {
+    val = Math.round(elapsed / oneDay);
+    return "".concat(approx, " ").concat(val, " day").concat(val === 1 ? "" : "s", " ago");
+  } else if (elapsed < msPerYear) {
+    val = Math.round(elapsed / msPerMonth);
+    return "".concat(approx, " ").concat(val, " month").concat(val === 1 ? "" : "s", " ago");
+  }
+
+  val = Math.round(elapsed / msPerYear);
+  return "".concat(approx, " ").concat(val, " year").concat(val === 1 ? "" : "s", " ago");
+};
 
 var utils = /*#__PURE__*/Object.freeze({
   __proto__: null,
@@ -798,7 +836,8 @@ var utils = /*#__PURE__*/Object.freeze({
   getElapsedHours: getElapsedHours,
   getElapsedMinutes: getElapsedMinutes,
   getElapsedSeconds: getElapsedSeconds,
-  getElapsedMs: getElapsedMs
+  getElapsedMs: getElapsedMs,
+  getElapsedString: getElapsedString
 });
 
 var DatePlus = function (_Date) {
@@ -807,22 +846,38 @@ var DatePlus = function (_Date) {
   var _super = _createSuper(DatePlus);
 
   function DatePlus() {
+    var _this;
+
     _classCallCheck(this, DatePlus);
 
-    return _super.apply(this, arguments);
+    _this = _super.apply(this, arguments);
+    /**
+     * Calculates elapsed time between current and previous
+     *
+     * @param date - End date
+     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+     * @returns Time difference in string form, e.g "3 seconds ago"
+     */
+
+    _this.getElapsedString = function (date) {
+      var approx = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "about";
+      return getElapsedString(_assertThisInitialized(_this), date, approx);
+    };
+
+    return _this;
   }
+  /**
+   * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
+   *
+   * @param date - String date to format
+   * @param seperator - Char the date is seperatred by
+   * @returns - Date with zeros
+   */
+
 
   _createClass(DatePlus, [{
     key: "addZeros",
-    value:
-    /**
-     * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
-     *
-     * @param date - String date to format
-     * @param seperator - Char the date is seperatred by
-     * @returns - Date with zeros
-     */
-    function addZeros$1() {
+    value: function addZeros$1() {
       var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
       return addZeros(this.formatDate(), seperator);
     }
@@ -876,7 +931,7 @@ var DatePlus = function (_Date) {
     /**
      * Calculates number of elapsed hours between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed hours
      */
 
@@ -888,7 +943,7 @@ var DatePlus = function (_Date) {
     /**
      * Calculates number of elapsed minutes between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed minutes
      */
 
@@ -900,7 +955,7 @@ var DatePlus = function (_Date) {
     /**
      * Calculates number of elapsed seconds between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed seconds
      */
 
@@ -912,7 +967,7 @@ var DatePlus = function (_Date) {
     /**
      * Calculates number of elapsed milliseconds between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed milliseconds
      */
 

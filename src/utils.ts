@@ -183,3 +183,47 @@ export const getElapsedSeconds = (date1: Date, date2: Date): number =>
  */
 export const getElapsedMs = (date1: Date, date2: Date): number =>
     Math.round(date1.getTime() - date2.getTime()) * -1
+
+/**
+ * Calculates elapsed time between current and previous
+ *
+ * @param start- Start date
+ * @param end - End date
+ * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+ * @returns Time difference in string form, e.g "3 seconds ago"
+ */
+export const getElapsedString = (start: Date, end: Date, approx = "about"): string => {
+    const daysPerMonth = 30
+    const daysPerYear = 365
+    const msPerMonth = oneDay * daysPerMonth
+    const msPerYear = oneDay * daysPerYear
+    const elapsed = getElapsedMs(start, end)
+
+    let val
+
+    if (elapsed < oneMinute) {
+        val = Math.round(elapsed / Values.MsPerSec)
+
+        return `${val} second${val === 1 ? "" : "s"} ago`
+    } else if (elapsed < oneHour) {
+        val = Math.round(elapsed / oneMinute)
+
+        return `${val} minute${val === 1 ? "" : "s"} ago`
+    } else if (elapsed < oneDay) {
+        val = Math.round(elapsed / oneHour)
+
+        return `${val} hour${val === 1 ? "" : "s"} ago`
+    } else if (elapsed < msPerMonth) {
+        val = Math.round(elapsed / oneDay)
+
+        return `${approx} ${val} day${val === 1 ? "" : "s"} ago`
+    } else if (elapsed < msPerYear) {
+        val = Math.round(elapsed / msPerMonth)
+
+        return `${approx} ${val} month${val === 1 ? "" : "s"} ago`
+    }
+
+    val = Math.round(elapsed / msPerYear)
+
+    return `${approx} ${val} year${val === 1 ? "" : "s"} ago`
+}

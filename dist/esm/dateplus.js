@@ -447,6 +447,43 @@ const getElapsedSeconds = (date1, date2) => Math.round((date1.getTime() - date2.
  */
 
 const getElapsedMs = (date1, date2) => Math.round(date1.getTime() - date2.getTime()) * -1;
+/**
+ * Calculates elapsed time between current and previous
+ *
+ * @param start- Start date
+ * @param end - End date
+ * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+ * @returns Time difference in string form, e.g "3 seconds ago"
+ */
+
+const getElapsedString = (start, end, approx = "about") => {
+  const daysPerMonth = 30;
+  const daysPerYear = 365;
+  const msPerMonth = oneDay * daysPerMonth;
+  const msPerYear = oneDay * daysPerYear;
+  const elapsed = getElapsedMs(start, end);
+  let val;
+
+  if (elapsed < oneMinute) {
+    val = Math.round(elapsed / 1000);
+    return `${val} second${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < oneHour) {
+    val = Math.round(elapsed / oneMinute);
+    return `${val} minute${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < oneDay) {
+    val = Math.round(elapsed / oneHour);
+    return `${val} hour${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < msPerMonth) {
+    val = Math.round(elapsed / oneDay);
+    return `${approx} ${val} day${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < msPerYear) {
+    val = Math.round(elapsed / msPerMonth);
+    return `${approx} ${val} month${val === 1 ? "" : "s"} ago`;
+  }
+
+  val = Math.round(elapsed / msPerYear);
+  return `${approx} ${val} year${val === 1 ? "" : "s"} ago`;
+};
 
 var utils = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -459,10 +496,23 @@ var utils = /*#__PURE__*/Object.freeze({
     getElapsedHours: getElapsedHours,
     getElapsedMinutes: getElapsedMinutes,
     getElapsedSeconds: getElapsedSeconds,
-    getElapsedMs: getElapsedMs
+    getElapsedMs: getElapsedMs,
+    getElapsedString: getElapsedString
 });
 
 class DatePlus extends Date {
+  constructor() {
+    super(...arguments);
+    /**
+     * Calculates elapsed time between current and previous
+     *
+     * @param date - End date
+     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+     * @returns Time difference in string form, e.g "3 seconds ago"
+     */
+
+    this.getElapsedString = (date, approx = "about") => getElapsedString(this, date, approx);
+  }
   /**
    * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
    *
@@ -470,6 +520,8 @@ class DatePlus extends Date {
    * @param seperator - Char the date is seperatred by
    * @returns - Date with zeros
    */
+
+
   addZeros(seperator = "/") {
     return addZeros(this.formatDate(), seperator);
   }
@@ -518,7 +570,7 @@ class DatePlus extends Date {
   /**
    * Calculates number of elapsed hours between date1 and date2
    *
-   * @param date - Starting date object to calculate
+   * @param date - Ending date object to calculate
    * @returns - Number of elapsed hours
    */
 
@@ -529,7 +581,7 @@ class DatePlus extends Date {
   /**
    * Calculates number of elapsed minutes between date1 and date2
    *
-   * @param date - Starting date object to calculate
+   * @param date - Ending date object to calculate
    * @returns - Number of elapsed minutes
    */
 
@@ -540,7 +592,7 @@ class DatePlus extends Date {
   /**
    * Calculates number of elapsed seconds between date1 and date2
    *
-   * @param date - Starting date object to calculate
+   * @param date - Ending date object to calculate
    * @returns - Number of elapsed seconds
    */
 
@@ -551,7 +603,7 @@ class DatePlus extends Date {
   /**
    * Calculates number of elapsed milliseconds between date1 and date2
    *
-   * @param date - Starting date object to calculate
+   * @param date - Ending date object to calculate
    * @returns - Number of elapsed milliseconds
    */
 

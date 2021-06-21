@@ -7,10 +7,13 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
-// TODO: use Mocha for tests
+// TODO: use Mocha for tests, since this file is a big mess
 
 /* eslint-disable one-var */
 
+/**
+ * @param {import("../lib").default} DatePlus
+ */
 const test = (DatePlus, quiet = false) => {
     const date = new DatePlus(2020, 6, 1)
     /* eslint-enable one-var */
@@ -100,6 +103,67 @@ const test = (DatePlus, quiet = false) => {
         )
     }
     !quiet && console.log("getElapsedMs passed\n")
+
+    !quiet && console.log("testing getElapsedString")
+    if (date.getElapsedString(new Date(date.getTime() + 2000)) !== "2 seconds ago") {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"2 seconds ago\"`,
+        )
+    }
+
+    if (
+        date.getElapsedString(new Date(date.getTime() + DatePlus.minsToMs(2))) !== "2 minutes ago"
+    ) {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"2 minutes ago\"`,
+        )
+    }
+
+    if (date.getElapsedString(new Date(date.getTime() + DatePlus.hrsToMs(2))) !== "2 hours ago") {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"2 hours ago\"`,
+        )
+    }
+
+    if (
+        date.getElapsedString(new Date(date.getTime() + DatePlus.daysToMs(2))) !==
+        "about 2 days ago"
+    ) {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"about 2 days ago\"`,
+        )
+    }
+
+    if (
+        date.getElapsedString(new Date(date.getTime() + DatePlus.daysToMs(2) * 30)) !==
+        "about 2 months ago"
+    ) {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"about 2 months ago\"`,
+        )
+    }
+
+    if (
+        date.getElapsedString(new Date(date.getTime() + DatePlus.daysToMs(2) * 365)) !==
+        "about 2 years ago"
+    ) {
+        throw Error(
+            `Elapsed string \"${date.getElapsedString(
+                new Date(date.getTime() + 2000),
+            )}\" from getElapsedString does not match \"about 2 years ago\"`,
+        )
+    }
+    !quiet && console.log("getElapsedString passed\n")
 
     !quiet && console.log("testing msToSecs")
     let conv = DatePlus.msToSecs(2001)

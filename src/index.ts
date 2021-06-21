@@ -151,7 +151,7 @@ export class DatePlus extends Date {
     /**
      * Calculates number of elapsed hours between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed hours
      */
     public getElapsedHours(date: Date): number {
@@ -161,7 +161,7 @@ export class DatePlus extends Date {
     /**
      * Calculates number of elapsed minutes between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed minutes
      */
     public getElapsedMinutes(date: Date): number {
@@ -171,7 +171,7 @@ export class DatePlus extends Date {
     /**
      * Calculates number of elapsed seconds between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed seconds
      */
     public getElapsedSeconds(date: Date): number {
@@ -181,12 +181,22 @@ export class DatePlus extends Date {
     /**
      * Calculates number of elapsed milliseconds between date1 and date2
      *
-     * @param date - Starting date object to calculate
+     * @param date - Ending date object to calculate
      * @returns - Number of elapsed milliseconds
      */
     public getElapsedMs(date: Date): number {
         return utils.getElapsedMs(this, date)
     }
+
+    /**
+     * Calculates elapsed time between current and previous
+     *
+     * @param date - End date
+     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+     * @returns Time difference in string form, e.g "3 seconds ago"
+     */
+    public getElapsedString = (date: Date, approx = "about"): string =>
+        utils.getElapsedString(this, date, approx)
 }
 
 for (const [key, value] of Object.entries({...conversions, ...utils, ...values})) {
