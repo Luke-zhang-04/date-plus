@@ -121,7 +121,7 @@ module.exports = {
                 ignoreNumericLiteralTypes: true,
                 ignoreReadonlyClassProperties: true,
                 ignoreArrayIndexes: true,
-                ignore: [...Array.from(range(-10, 11)), 12, 16, 32, 64, 128, 256, 512],
+                ignore: [...Array.from(range(-10, 11)), 11, 16, 32, 64, 128, 256, 512],
             },
         ],
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "warn",
