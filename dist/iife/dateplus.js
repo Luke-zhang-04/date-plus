@@ -430,87 +430,101 @@ var DatePlus = (function (exports) {
     });
 
     class DatePlus extends Date {
-      constructor() {
-        super(...arguments);
-        /**
-         * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
-         *
-         * @param date - String date to format
-         * @param seperator - Char the date is seperatred by
-         * @returns - Date with zeros
-         */
-
-        this.addZeros = (seperator = "/") => addZeros(this.formatDate(), seperator);
-        /**
-         * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-         *
-         * @param seperator - Char to seperate date with
-         * @returns Formatted date
-         */
-
-
-        this.formatDate = (seperator = "/") => formatDate(this, seperator);
-        /**
-         * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-         *
-         * @returns Stringed day of week
-         */
+      /**
+       * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
+       *
+       * @param date - String date to format
+       * @param seperator - Char the date is seperatred by
+       * @returns - Date with zeros
+       */
+      addZeros(seperator = "/") {
+        return addZeros(this.formatDate(), seperator);
+      }
+      /**
+       * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+       *
+       * @param seperator - Char to seperate date with
+       * @returns Formatted date
+       */
 
 
-        this.getWordDay = () => daysReference[this.getDay()];
-        /**
-         * Gets instantiated month in word form (e.g 0 => "January")
-         *
-         * @returns Stringed worded month
-         */
+      formatDate(seperator = "/") {
+        return formatDate(this, seperator);
+      }
+      /**
+       * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+       *
+       * @returns Stringed day of week
+       */
 
 
-        this.getWordMonth = () => monthsReference[this.getMonth()];
-        /**
-         * Calculates number of elapsed days between instantiated date and dae
-         *
-         * @param date - Ending date object to calculate
-         * @returns - Number of elapsed days
-         */
+      getWordDay() {
+        return daysReference[this.getDay()];
+      }
+      /**
+       * Gets instantiated month in word form (e.g 0 => "January")
+       *
+       * @returns Stringed worded month
+       */
 
 
-        this.getElapsedDays = date => getElapsedDays(this, date);
-        /**
-         * Calculates number of elapsed hours between date1 and date2
-         *
-         * @param date - Starting date object to calculate
-         * @returns - Number of elapsed hours
-         */
+      getWordMonth() {
+        return monthsReference[this.getMonth()];
+      }
+      /**
+       * Calculates number of elapsed days between instantiated date and dae
+       *
+       * @param date - Ending date object to calculate
+       * @returns - Number of elapsed days
+       */
 
 
-        this.getElapsedHours = date => getElapsedHours(this, date);
-        /**
-         * Calculates number of elapsed minutes between date1 and date2
-         *
-         * @param date - Starting date object to calculate
-         * @returns - Number of elapsed minutes
-         */
+      getElapsedDays(date) {
+        return getElapsedDays(this, date);
+      }
+      /**
+       * Calculates number of elapsed hours between date1 and date2
+       *
+       * @param date - Starting date object to calculate
+       * @returns - Number of elapsed hours
+       */
 
 
-        this.getElapsedMinutes = date => getElapsedMinutes(this, date);
-        /**
-         * Calculates number of elapsed seconds between date1 and date2
-         *
-         * @param date - Starting date object to calculate
-         * @returns - Number of elapsed seconds
-         */
+      getElapsedHours(date) {
+        return getElapsedHours(this, date);
+      }
+      /**
+       * Calculates number of elapsed minutes between date1 and date2
+       *
+       * @param date - Starting date object to calculate
+       * @returns - Number of elapsed minutes
+       */
 
 
-        this.getElapsedSeconds = date => getElapsedSeconds(this, date);
-        /**
-         * Calculates number of elapsed milliseconds between date1 and date2
-         *
-         * @param date - Starting date object to calculate
-         * @returns - Number of elapsed milliseconds
-         */
+      getElapsedMinutes(date) {
+        return getElapsedMinutes(this, date);
+      }
+      /**
+       * Calculates number of elapsed seconds between date1 and date2
+       *
+       * @param date - Starting date object to calculate
+       * @returns - Number of elapsed seconds
+       */
 
 
-        this.getElapsedMs = date => getElapsedMs(this, date);
+      getElapsedSeconds(date) {
+        return getElapsedSeconds(this, date);
+      }
+      /**
+       * Calculates number of elapsed milliseconds between date1 and date2
+       *
+       * @param date - Starting date object to calculate
+       * @returns - Number of elapsed milliseconds
+       */
+
+
+      getElapsedMs(date) {
+        return getElapsedMs(this, date);
       }
 
     }

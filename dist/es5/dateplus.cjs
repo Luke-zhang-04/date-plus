@@ -17,6 +17,22 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -755,11 +771,14 @@ var DatePlus = function (_Date) {
   var _super = _createSuper(DatePlus);
 
   function DatePlus() {
-    var _this;
-
     _classCallCheck(this, DatePlus);
 
-    _this = _super.apply(this, arguments);
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(DatePlus, [{
+    key: "addZeros",
+    value:
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
      *
@@ -767,11 +786,10 @@ var DatePlus = function (_Date) {
      * @param seperator - Char the date is seperatred by
      * @returns - Date with zeros
      */
-
-    _this.addZeros = function () {
+    function addZeros$1() {
       var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-      return addZeros(_this.formatDate(), seperator);
-    };
+      return addZeros(this.formatDate(), seperator);
+    }
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
      *
@@ -779,31 +797,34 @@ var DatePlus = function (_Date) {
      * @returns Formatted date
      */
 
-
-    _this.formatDate = function () {
+  }, {
+    key: "formatDate",
+    value: function formatDate$1() {
       var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-      return formatDate(_assertThisInitialized(_this), seperator);
-    };
+      return formatDate(this, seperator);
+    }
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
      *
      * @returns Stringed day of week
      */
 
-
-    _this.getWordDay = function () {
-      return daysReference[_this.getDay()];
-    };
+  }, {
+    key: "getWordDay",
+    value: function getWordDay() {
+      return daysReference[this.getDay()];
+    }
     /**
      * Gets instantiated month in word form (e.g 0 => "January")
      *
      * @returns Stringed worded month
      */
 
-
-    _this.getWordMonth = function () {
-      return monthsReference[_this.getMonth()];
-    };
+  }, {
+    key: "getWordMonth",
+    value: function getWordMonth() {
+      return monthsReference[this.getMonth()];
+    }
     /**
      * Calculates number of elapsed days between instantiated date and dae
      *
@@ -811,10 +832,11 @@ var DatePlus = function (_Date) {
      * @returns - Number of elapsed days
      */
 
-
-    _this.getElapsedDays = function (date) {
-      return getElapsedDays(_assertThisInitialized(_this), date);
-    };
+  }, {
+    key: "getElapsedDays",
+    value: function getElapsedDays$1(date) {
+      return getElapsedDays(this, date);
+    }
     /**
      * Calculates number of elapsed hours between date1 and date2
      *
@@ -822,10 +844,11 @@ var DatePlus = function (_Date) {
      * @returns - Number of elapsed hours
      */
 
-
-    _this.getElapsedHours = function (date) {
-      return getElapsedHours(_assertThisInitialized(_this), date);
-    };
+  }, {
+    key: "getElapsedHours",
+    value: function getElapsedHours$1(date) {
+      return getElapsedHours(this, date);
+    }
     /**
      * Calculates number of elapsed minutes between date1 and date2
      *
@@ -833,10 +856,11 @@ var DatePlus = function (_Date) {
      * @returns - Number of elapsed minutes
      */
 
-
-    _this.getElapsedMinutes = function (date) {
-      return getElapsedMinutes(_assertThisInitialized(_this), date);
-    };
+  }, {
+    key: "getElapsedMinutes",
+    value: function getElapsedMinutes$1(date) {
+      return getElapsedMinutes(this, date);
+    }
     /**
      * Calculates number of elapsed seconds between date1 and date2
      *
@@ -844,10 +868,11 @@ var DatePlus = function (_Date) {
      * @returns - Number of elapsed seconds
      */
 
-
-    _this.getElapsedSeconds = function (date) {
-      return getElapsedSeconds(_assertThisInitialized(_this), date);
-    };
+  }, {
+    key: "getElapsedSeconds",
+    value: function getElapsedSeconds$1(date) {
+      return getElapsedSeconds(this, date);
+    }
     /**
      * Calculates number of elapsed milliseconds between date1 and date2
      *
@@ -855,13 +880,12 @@ var DatePlus = function (_Date) {
      * @returns - Number of elapsed milliseconds
      */
 
-
-    _this.getElapsedMs = function (date) {
-      return getElapsedMs(_assertThisInitialized(_this), date);
-    };
-
-    return _this;
-  }
+  }, {
+    key: "getElapsedMs",
+    value: function getElapsedMs$1(date) {
+      return getElapsedMs(this, date);
+    }
+  }]);
 
   return DatePlus;
 }(_wrapNativeSuper(Date));

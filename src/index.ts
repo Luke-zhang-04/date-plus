@@ -106,7 +106,9 @@ export class DatePlus extends Date {
      * @param seperator - Char the date is seperatred by
      * @returns - Date with zeros
      */
-    public addZeros = (seperator = "/"): string => utils.addZeros(this.formatDate(), seperator)
+    public addZeros(seperator = "/"): string {
+        return utils.addZeros(this.formatDate(), seperator)
+    }
 
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
@@ -114,23 +116,27 @@ export class DatePlus extends Date {
      * @param seperator - Char to seperate date with
      * @returns Formatted date
      */
-    public formatDate = (seperator = "/"): string => utils.formatDate(this, seperator)
+    public formatDate(seperator = "/"): string {
+        return utils.formatDate(this, seperator)
+    }
 
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
      *
      * @returns Stringed day of week
      */
-    public getWordDay = (): string =>
-        values.daysReference[this.getDay() as keyof typeof values.daysReference]
+    public getWordDay(): string {
+        return values.daysReference[this.getDay() as keyof typeof values.daysReference]
+    }
 
     /**
      * Gets instantiated month in word form (e.g 0 => "January")
      *
      * @returns Stringed worded month
      */
-    public getWordMonth = (): string =>
-        values.monthsReference[this.getMonth() as keyof typeof values.monthsReference]
+    public getWordMonth(): string {
+        return values.monthsReference[this.getMonth() as keyof typeof values.monthsReference]
+    }
 
     /**
      * Calculates number of elapsed days between instantiated date and dae
@@ -138,7 +144,9 @@ export class DatePlus extends Date {
      * @param date - Ending date object to calculate
      * @returns - Number of elapsed days
      */
-    public getElapsedDays = (date: Date): number => utils.getElapsedDays(this, date)
+    public getElapsedDays(date: Date): number {
+        return utils.getElapsedDays(this, date)
+    }
 
     /**
      * Calculates number of elapsed hours between date1 and date2
@@ -146,7 +154,9 @@ export class DatePlus extends Date {
      * @param date - Starting date object to calculate
      * @returns - Number of elapsed hours
      */
-    getElapsedHours = (date: Date): number => utils.getElapsedHours(this, date)
+    public getElapsedHours(date: Date): number {
+        return utils.getElapsedHours(this, date)
+    }
 
     /**
      * Calculates number of elapsed minutes between date1 and date2
@@ -154,7 +164,9 @@ export class DatePlus extends Date {
      * @param date - Starting date object to calculate
      * @returns - Number of elapsed minutes
      */
-    getElapsedMinutes = (date: Date): number => utils.getElapsedMinutes(this, date)
+    public getElapsedMinutes(date: Date): number {
+        return utils.getElapsedMinutes(this, date)
+    }
 
     /**
      * Calculates number of elapsed seconds between date1 and date2
@@ -162,7 +174,9 @@ export class DatePlus extends Date {
      * @param date - Starting date object to calculate
      * @returns - Number of elapsed seconds
      */
-    getElapsedSeconds = (date: Date): number => utils.getElapsedSeconds(this, date)
+    public getElapsedSeconds(date: Date): number {
+        return utils.getElapsedSeconds(this, date)
+    }
 
     /**
      * Calculates number of elapsed milliseconds between date1 and date2
@@ -170,7 +184,9 @@ export class DatePlus extends Date {
      * @param date - Starting date object to calculate
      * @returns - Number of elapsed milliseconds
      */
-    getElapsedMs = (date: Date): number => utils.getElapsedMs(this, date)
+    public getElapsedMs(date: Date): number {
+        return utils.getElapsedMs(this, date)
+    }
 }
 
 for (const [key, value] of Object.entries({...conversions, ...utils, ...values})) {
