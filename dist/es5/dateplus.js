@@ -823,6 +823,28 @@ var DatePlus = (function (exports) {
     val = Math.round(elapsed / msPerYear);
     return "".concat(approx, " ").concat(val, " year").concat(val === 1 ? "" : "s", " ago");
   };
+  /**
+   * Convert a utc date to local
+   *
+   * @param date - Date to use. Note that the parameter will never be mutated.
+   * @returns A new date object with the time converted form UTC
+   */
+
+  var utcToLocal = function utcToLocal(date) {
+    var newDate = date.constructor(date.getTime());
+    newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return newDate;
+  };
+  /**
+   * Get the current UTC Time
+   *
+   * @returns UTC Time
+   */
+
+  var getUtcTime = function getUtcTime() {
+    var now = new Date();
+    return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+  };
 
   var utils = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -836,7 +858,9 @@ var DatePlus = (function (exports) {
     getElapsedMinutes: getElapsedMinutes,
     getElapsedSeconds: getElapsedSeconds,
     getElapsedMs: getElapsedMs,
-    getElapsedString: getElapsedString
+    getElapsedString: getElapsedString,
+    utcToLocal: utcToLocal,
+    getUtcTime: getUtcTime
   });
 
   var DatePlus = function (_Date) {
@@ -990,10 +1014,64 @@ var DatePlus = (function (exports) {
   }
 
   exports.DatePlus = DatePlus;
-  exports.conversions = conversions;
+  exports.addZeros = addZeros;
+  exports.daysReference = daysReference;
+  exports.daysToHours = daysToHours;
+  exports.daysToHrs = daysToHrs;
+  exports.daysToMins = daysToMins;
+  exports.daysToMinutes = daysToMinutes;
+  exports.daysToMs = daysToMs;
+  exports.daysToSeconds = daysToSeconds;
+  exports.daysToSecs = daysToSecs;
   exports.default = DatePlus;
-  exports.utils = utils;
-  exports.values = values$1;
+  exports.formatDate = formatDate;
+  exports.getDateValues = getDateValues;
+  exports.getElapsedDays = getElapsedDays;
+  exports.getElapsedHours = getElapsedHours;
+  exports.getElapsedMinutes = getElapsedMinutes;
+  exports.getElapsedMs = getElapsedMs;
+  exports.getElapsedSeconds = getElapsedSeconds;
+  exports.getElapsedString = getElapsedString;
+  exports.getUtcTime = getUtcTime;
+  exports.getWordDay = getWordDay;
+  exports.getWordMonth = getWordMonth;
+  exports.hoursToDays = hoursToDays;
+  exports.hoursToMinutes = hoursToMinutes;
+  exports.hoursToMs = hoursToMs;
+  exports.hoursToSeconds = hoursToSeconds;
+  exports.hrsToDays = hrsToDays;
+  exports.hrsToMins = hrsToMins;
+  exports.hrsToMs = hrsToMs;
+  exports.hrsToSecs = hrsToSecs;
+  exports.minsToDays = minsToDays;
+  exports.minsToHrs = minsToHrs;
+  exports.minsToMs = minsToMs;
+  exports.minsToSecs = minsToSecs;
+  exports.minutesToDays = minutesToDays;
+  exports.minutesToHours = minutesToHours;
+  exports.minutesToMs = minutesToMs;
+  exports.minutesToSeconds = minutesToSeconds;
+  exports.monthsReference = monthsReference;
+  exports.msToDays = msToDays;
+  exports.msToHours = msToHours;
+  exports.msToHrs = msToHrs;
+  exports.msToMins = msToMins;
+  exports.msToMinutes = msToMinutes;
+  exports.msToSeconds = msToSeconds;
+  exports.msToSecs = msToSecs;
+  exports.oneDay = oneDay;
+  exports.oneHour = oneHour;
+  exports.oneMinute = oneMinute;
+  exports.secondsToDays = secondsToDays;
+  exports.secondsToHours = secondsToHours;
+  exports.secondsToMinutes = secondsToMinutes;
+  exports.secondsToMs = secondsToMs;
+  exports.secsToDays = secsToDays;
+  exports.secsToHrs = secsToHrs;
+  exports.secsToMins = secsToMins;
+  exports.secsToMs = secsToMs;
+  exports.utcToLocal = utcToLocal;
+  exports.values = values;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

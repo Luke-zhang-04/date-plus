@@ -227,3 +227,39 @@ export const getElapsedString = (start: Date, end: Date, approx = "about"): stri
 
     return `${approx} ${val} year${val === 1 ? "" : "s"} ago`
 }
+
+// The next 2 functions are too hard to test for
+/* istanbul ignore next */
+/**
+ * Convert a utc date to local
+ *
+ * @param date - Date to use. Note that the parameter will never be mutated.
+ * @returns A new date object with the time converted form UTC
+ */
+export const utcToLocal = <T extends Date>(date: T): T => {
+    const newDate = date.constructor(date.getTime()) as T
+
+    newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset())
+
+    return newDate
+}
+
+/* istanbul ignore next */
+/**
+ * Get the current UTC Time
+ *
+ * @returns UTC Time
+ */
+export const getUtcTime = (): number => {
+    const now = new Date()
+
+    return Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        now.getUTCHours(),
+        now.getUTCMinutes(),
+        now.getUTCSeconds(),
+        now.getUTCMilliseconds(),
+    )
+}

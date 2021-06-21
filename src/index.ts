@@ -11,7 +11,9 @@ import * as conversions from "./conversions"
 import * as utils from "./utils"
 import * as values from "./values"
 
-export {conversions, utils, values}
+export * from "./conversions"
+export * from "./utils"
+export * from "./values"
 
 export const enum Values {
     HrsPerDay = 24,

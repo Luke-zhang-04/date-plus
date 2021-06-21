@@ -484,6 +484,28 @@ const getElapsedString = (start, end, approx = "about") => {
   val = Math.round(elapsed / msPerYear);
   return `${approx} ${val} year${val === 1 ? "" : "s"} ago`;
 };
+/**
+ * Convert a utc date to local
+ *
+ * @param date - Date to use. Note that the parameter will never be mutated.
+ * @returns A new date object with the time converted form UTC
+ */
+
+const utcToLocal = date => {
+  const newDate = date.constructor(date.getTime());
+  newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  return newDate;
+};
+/**
+ * Get the current UTC Time
+ *
+ * @returns UTC Time
+ */
+
+const getUtcTime = () => {
+  const now = new Date();
+  return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+};
 
 var utils = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -497,7 +519,9 @@ var utils = /*#__PURE__*/Object.freeze({
     getElapsedMinutes: getElapsedMinutes,
     getElapsedSeconds: getElapsedSeconds,
     getElapsedMs: getElapsedMs,
-    getElapsedString: getElapsedString
+    getElapsedString: getElapsedString,
+    utcToLocal: utcToLocal,
+    getUtcTime: getUtcTime
 });
 
 class DatePlus extends Date {
@@ -620,5 +644,5 @@ for (const [key, value] of Object.entries(Object.assign(Object.assign(Object.ass
 }
 
 export default DatePlus;
-export { DatePlus, conversions, utils, values$1 as values };
+export { DatePlus, addZeros, daysReference, daysToHours, daysToHrs, daysToMins, daysToMinutes, daysToMs, daysToSeconds, daysToSecs, formatDate, getDateValues, getElapsedDays, getElapsedHours, getElapsedMinutes, getElapsedMs, getElapsedSeconds, getElapsedString, getUtcTime, getWordDay, getWordMonth, hoursToDays, hoursToMinutes, hoursToMs, hoursToSeconds, hrsToDays, hrsToMins, hrsToMs, hrsToSecs, minsToDays, minsToHrs, minsToMs, minsToSecs, minutesToDays, minutesToHours, minutesToMs, minutesToSeconds, monthsReference, msToDays, msToHours, msToHrs, msToMins, msToMinutes, msToSeconds, msToSecs, oneDay, oneHour, oneMinute, secondsToDays, secondsToHours, secondsToMinutes, secondsToMs, secsToDays, secsToHrs, secsToMins, secsToMs, utcToLocal, values };
 //# sourceMappingURL=dateplus.js.map
