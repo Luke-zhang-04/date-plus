@@ -1,7 +1,247 @@
 /**
- * DatePlus v3.1.1 | A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
+ * DatePlus v4.0.0-beta1 | A simple program to assist with date manipulation
+ *
  * @license MIT
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
-"use strict";Object.defineProperty(exports,"t",{value:!0});const e=e=>({ms:e%1e3,seconds:(e-e%1e3)/1e3}),s=e,t=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60;return{ms:s,seconds:t,minutes:(e-1e3*t-s)/6e4}},o=t,r=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60,o=(e-1e3*t-s)/6e4%60;return{ms:s,seconds:t,minutes:o,hours:(e-1e3*o*60-1e3*t-s)/36e5}},n=r,a=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60,o=(e-1e3*t-s)/6e4%60,r=(e-1e3*o*60-1e3*t-s)/36e5%24;return{ms:s,seconds:t,minutes:o,hours:r,days:(e-1e3*r*60*60-1e3*o*60-1e3*t-s)/864e5}},p=e=>1e3*e,u=p,x=e=>t(p(e)),c=x,d=e=>r(p(e)),i=d,T=e=>a(p(e)),h=T,y=e=>60*e*1e3,m=T,M=e=>60*e,l=M,g=e=>r(y(e)),D=g,$=e=>a(y(e)),b=$,S=e=>60*e*60*1e3,_=S,f=e=>60*e*60,H=f,E=e=>60*e,O=E,j=e=>a(S(e)),v=j,N=e=>24*e*60*60*1e3,W=e=>24*e*60*60,P=W,J=e=>24*e*60,A=J,F=e=>24*e,R=F;var Z=Object.freeze({__proto__:null,msToSecs:e,msToSeconds:s,msToMins:t,msToMinutes:o,msToHrs:r,msToHours:n,msToDays:a,secsToMs:p,secondsToMs:u,secsToMins:x,secondsToMinutes:c,secsToHrs:d,secondsToHours:i,secsToDays:T,secondsToDays:h,minsToMs:y,minutesToMs:m,minsToSecs:M,minutesToSeconds:l,minsToHrs:g,minutesToHours:D,minsToDays:$,minutesToDays:b,hrsToMs:S,hoursToMs:_,hrsToSecs:f,hoursToSeconds:H,hrsToMins:E,hoursToMinutes:O,hrsToDays:j,hoursToDays:v,daysToMs:N,daysToSecs:W,daysToSeconds:P,daysToMins:J,daysToMinutes:A,daysToHrs:F,daysToHours:R});const k={hrsPerDay:24,minsPerHr:60,secsPerMin:60,msPerSec:1e3},w={0:"Sunday",1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"},L={0:"January",1:"Feburary",2:"March",3:"April",4:"May",5:"June",6:"July",7:"August",8:"September",9:"October",10:"November",11:"December"};var U=Object.freeze({__proto__:null,values:k,daysReference:w,monthsReference:L,oneMinute:6e4,oneHour:36e5,oneDay:864e5});const V={y:"year",m:"month",d:"day"},q=(e,s="/")=>{let t="";for(let o=0;o<2;o++)e.split(s)[o].length<2?t+=`0${e.split(s)[o]}${s}`:t+=`${e.split(s)[o]}${s}`;return e.split(s)[2].length<2?t+=`0${e.split(s)[2]}`:t+=e.split(s)[2],t},z=(e,s="/")=>{const t=e.getMonth().toString(),o=e.getDate().toString();return[e.getFullYear().toString(),t,o].join(s)},B=(e,s="y:m:d",t="auto")=>{let o="/";if("auto"===t){for(const s of e)if(isNaN(Number(s))){o=s;break}}else o=t;const r=e.split(o),n=s.split(":"),a={};for(let e=0;e<3;e++){a[V[n[e]]]=Number(r[e])}return a},C=e=>w[e],G=e=>L[e],I=(e,s)=>-1*Math.round((e.getTime()-s.getTime())/864e5),K=(e,s)=>-1*Math.round((e.getTime()-s.getTime())/36e5),Q=(e,s)=>-1*Math.round((e.getTime()-s.getTime())/6e4),X=(e,s)=>-1*Math.round((e.getTime()-s.getTime())/1e3),Y=(e,s)=>-1*Math.round(e.getTime()-s.getTime()),ee=(e,s,t="about")=>{const o=2592e6,r=31536e6,n=Y(e,s);let a;return n<6e4?(a=Math.round(n/1e3),`${a} second${1===a?"":"s"} ago`):n<36e5?(a=Math.round(n/6e4),`${a} minute${1===a?"":"s"} ago`):n<864e5?(a=Math.round(n/36e5),`${a} hour${1===a?"":"s"} ago`):n<o?(a=Math.round(n/864e5),`${t} ${a} day${1===a?"":"s"} ago`):n<r?(a=Math.round(n/o),`${t} ${a} month${1===a?"":"s"} ago`):(a=Math.round(n/r),`${t} ${a} year${1===a?"":"s"} ago`)},se=e=>{const s=e.constructor(e.getTime());return s.setMinutes(e.getMinutes()-e.getTimezoneOffset()),s},te=()=>{const e=new Date;return Date.UTC(e.getUTCFullYear(),e.getUTCMonth(),e.getUTCDate(),e.getUTCHours(),e.getUTCMinutes(),e.getUTCSeconds(),e.getUTCMilliseconds())};var oe=Object.freeze({__proto__:null,addZeros:q,formatDate:z,getDateValues:B,getWordDay:C,getWordMonth:G,getElapsedDays:I,getElapsedHours:K,getElapsedMinutes:Q,getElapsedSeconds:X,getElapsedMs:Y,getElapsedString:ee,utcToLocal:se,getUtcTime:te});class re extends Date{constructor(){super(...arguments),this.getElapsedString=(e,s="about")=>ee(this,e,s)}addZeros(e="/"){return q(this.formatDate(),e)}formatDate(e="/"){return z(this,e)}getWordDay(){return w[this.getDay()]}getWordMonth(){return L[this.getMonth()]}getElapsedDays(e){return I(this,e)}getElapsedHours(e){return K(this,e)}getElapsedMinutes(e){return Q(this,e)}getElapsedSeconds(e){return X(this,e)}getElapsedMs(e){return Y(this,e)}}for(const[e,s]of Object.entries(Object.assign(Object.assign(Object.assign({},Z),oe),U)))re[e]=s;exports.DatePlus=re,exports.addZeros=q,exports.daysReference=w,exports.daysToHours=R,exports.daysToHrs=F,exports.daysToMins=J,exports.daysToMinutes=A,exports.daysToMs=N,exports.daysToSeconds=P,exports.daysToSecs=W,exports.default=re,exports.formatDate=z,exports.getDateValues=B,exports.getElapsedDays=I,exports.getElapsedHours=K,exports.getElapsedMinutes=Q,exports.getElapsedMs=Y,exports.getElapsedSeconds=X,exports.getElapsedString=ee,exports.getUtcTime=te,exports.getWordDay=C,exports.getWordMonth=G,exports.hoursToDays=v,exports.hoursToMinutes=O,exports.hoursToMs=_,exports.hoursToSeconds=H,exports.hrsToDays=j,exports.hrsToMins=E,exports.hrsToMs=S,exports.hrsToSecs=f,exports.minsToDays=$,exports.minsToHrs=g,exports.minsToMs=y,exports.minsToSecs=M,exports.minutesToDays=b,exports.minutesToHours=D,exports.minutesToMs=m,exports.minutesToSeconds=l,exports.monthsReference=L,exports.msToDays=a,exports.msToHours=n,exports.msToHrs=r,exports.msToMins=t,exports.msToMinutes=o,exports.msToSeconds=s,exports.msToSecs=e,exports.oneDay=864e5,exports.oneHour=36e5,exports.oneMinute=6e4,exports.secondsToDays=h,exports.secondsToHours=i,exports.secondsToMinutes=c,exports.secondsToMs=u,exports.secsToDays=T,exports.secsToHrs=d,exports.secsToMins=x,exports.secsToMs=p,exports.utcToLocal=se,exports.values=k;
+"use strict"
+Object.defineProperty(exports, "t", {value: !0})
+const e = (e) => ({ms: e % 1e3, seconds: (e - (e % 1e3)) / 1e3}),
+    t = e,
+    s = (e) => {
+        const t = (e % 1e3) % 1e3,
+            s = ((e - (e % 1e3)) / 1e3) % 60
+        return {ms: t, seconds: s, minutes: (e - 1e3 * s - t) / 6e4}
+    },
+    r = s,
+    o = (e) => {
+        const t = (e % 1e3) % 1e3,
+            s = ((e - (e % 1e3)) / 1e3) % 60,
+            r = ((e - 1e3 * s - t) / 6e4) % 60
+        return {ms: t, seconds: s, minutes: r, hours: (e - 1e3 * r * 60 - 1e3 * s - t) / 36e5}
+    },
+    p = o,
+    x = (e) => {
+        const t = (e % 1e3) % 1e3,
+            s = ((e - (e % 1e3)) / 1e3) % 60,
+            r = ((e - 1e3 * s - t) / 6e4) % 60,
+            o = ((e - 1e3 * r * 60 - 1e3 * s - t) / 36e5) % 24
+        return {
+            ms: t,
+            seconds: s,
+            minutes: r,
+            hours: o,
+            days: (e - 1e3 * o * 60 * 60 - 1e3 * r * 60 - 1e3 * s - t) / 864e5,
+        }
+    },
+    a = (e) => 1e3 * e,
+    n = a,
+    u = (e) => s(a(e)),
+    h = u,
+    d = (e) => o(a(e)),
+    c = d,
+    i = (e) => x(a(e)),
+    y = i,
+    m = (e) => 60 * e * 1e3,
+    $ = i,
+    M = (e) => 60 * e,
+    l = M,
+    g = (e) => o(m(e)),
+    b = g,
+    D = (e) => x(m(e)),
+    f = D,
+    E = (e) => 60 * e * 60 * 1e3,
+    N = E,
+    S = (e) => 60 * e * 60,
+    P = S,
+    J = (e) => 60 * e,
+    W = J,
+    v = (e) => x(E(e)),
+    A = v,
+    F = (e) => 24 * e * 60 * 60,
+    H = F,
+    O = (e) => 24 * e * 60,
+    T = O,
+    _ = (e) => 24 * e,
+    j = _,
+    k = {
+        0: "Sunday",
+        1: "Monday",
+        2: "Tuesday",
+        3: "Wednesday",
+        4: "Thursday",
+        5: "Friday",
+        6: "Saturday",
+    },
+    w = {
+        0: "January",
+        1: "Feburary",
+        2: "March",
+        3: "April",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "August",
+        8: "September",
+        9: "October",
+        10: "November",
+        11: "December",
+    },
+    Z = {y: "year", m: "month", d: "day"},
+    q = (e, t = "/") => {
+        let s = ""
+        for (let r = 0; r < 2; r++)
+            e.split(t)[r].length < 2
+                ? (s += `0${e.split(t)[r]}${t}`)
+                : (s += `${e.split(t)[r]}${t}`)
+        return e.split(t)[2].length < 2 ? (s += `0${e.split(t)[2]}`) : (s += e.split(t)[2]), s
+    },
+    z = (e, t = "/") => {
+        const s = e.getMonth().toString(),
+            r = e.getDate().toString()
+        return [e.getFullYear().toString(), s, r].join(t)
+    },
+    B = (e, t) => -1 * Math.round((e.getTime() - t.getTime()) / 864e5),
+    C = (e, t) => -1 * Math.round((e.getTime() - t.getTime()) / 36e5),
+    G = (e, t) => -1 * Math.round((e.getTime() - t.getTime()) / 6e4),
+    I = (e, t) => -1 * Math.round((e.getTime() - t.getTime()) / 1e3),
+    K = (e, t) => -1 * Math.round(e.getTime() - t.getTime()),
+    L = (e, t, s = "about") => {
+        const r = 2592e6,
+            o = 31536e6,
+            p = K(e, t)
+        let x
+        return p < 6e4
+            ? ((x = Math.round(p / 1e3)), `${x} second${1 === x ? "" : "s"} ago`)
+            : p < 36e5
+            ? ((x = Math.round(p / 6e4)), `${x} minute${1 === x ? "" : "s"} ago`)
+            : p < 864e5
+            ? ((x = Math.round(p / 36e5)), `${x} hour${1 === x ? "" : "s"} ago`)
+            : p < r
+            ? ((x = Math.round(p / 864e5)), `${s} ${x} day${1 === x ? "" : "s"} ago`)
+            : p < o
+            ? ((x = Math.round(p / r)), `${s} ${x} month${1 === x ? "" : "s"} ago`)
+            : ((x = Math.round(p / o)), `${s} ${x} year${1 === x ? "" : "s"} ago`)
+    }
+class Q extends Date {
+    constructor() {
+        super(...arguments), (this.getElapsedString = (e, t = "about") => L(this, e, t))
+    }
+    addZeros(e = "/") {
+        return q(this.formatDate(), e)
+    }
+    formatDate(e = "/") {
+        return z(this, e)
+    }
+    getWordDay() {
+        return k[this.getDay()]
+    }
+    getWordMonth() {
+        return w[this.getMonth()]
+    }
+    getElapsedDays(e) {
+        return B(this, e)
+    }
+    getElapsedHours(e) {
+        return C(this, e)
+    }
+    getElapsedMinutes(e) {
+        return G(this, e)
+    }
+    getElapsedSeconds(e) {
+        return I(this, e)
+    }
+    getElapsedMs(e) {
+        return K(this, e)
+    }
+}
+;(exports.DatePlus = Q),
+    (exports.addZeros = q),
+    (exports.daysReference = k),
+    (exports.daysToHours = j),
+    (exports.daysToHrs = _),
+    (exports.daysToMins = O),
+    (exports.daysToMinutes = T),
+    (exports.daysToMs = (e) => 24 * e * 60 * 60 * 1e3),
+    (exports.daysToSeconds = H),
+    (exports.daysToSecs = F),
+    (exports.default = Q),
+    (exports.formatDate = z),
+    (exports.getDateValues = (e, t = "y:m:d", s = "auto") => {
+        let r = "/"
+        if ("auto" === s) {
+            for (const t of e)
+                if (isNaN(Number(t))) {
+                    r = t
+                    break
+                }
+        } else r = s
+        const o = e.split(r),
+            p = t.split(":"),
+            x = {}
+        for (let e = 0; e < 3; e++) {
+            x[Z[p[e]]] = Number(o[e])
+        }
+        return x
+    }),
+    (exports.getElapsedDays = B),
+    (exports.getElapsedHours = C),
+    (exports.getElapsedMinutes = G),
+    (exports.getElapsedMs = K),
+    (exports.getElapsedSeconds = I),
+    (exports.getElapsedString = L),
+    (exports.getUtcTime = () => {
+        const e = new Date()
+        return Date.UTC(
+            e.getUTCFullYear(),
+            e.getUTCMonth(),
+            e.getUTCDate(),
+            e.getUTCHours(),
+            e.getUTCMinutes(),
+            e.getUTCSeconds(),
+            e.getUTCMilliseconds(),
+        )
+    }),
+    (exports.getWordDay = (e) => k[e]),
+    (exports.getWordMonth = (e) => w[e]),
+    (exports.hoursToDays = A),
+    (exports.hoursToMinutes = W),
+    (exports.hoursToMs = N),
+    (exports.hoursToSeconds = P),
+    (exports.hrsToDays = v),
+    (exports.hrsToMins = J),
+    (exports.hrsToMs = E),
+    (exports.hrsToSecs = S),
+    (exports.minsToDays = D),
+    (exports.minsToHrs = g),
+    (exports.minsToMs = m),
+    (exports.minsToSecs = M),
+    (exports.minutesToDays = f),
+    (exports.minutesToHours = b),
+    (exports.minutesToMs = $),
+    (exports.minutesToSeconds = l),
+    (exports.monthsReference = w),
+    (exports.msToDays = x),
+    (exports.msToHours = p),
+    (exports.msToHrs = o),
+    (exports.msToMins = s),
+    (exports.msToMinutes = r),
+    (exports.msToSeconds = t),
+    (exports.msToSecs = e),
+    (exports.oneDay = 864e5),
+    (exports.oneHour = 36e5),
+    (exports.oneMinute = 6e4),
+    (exports.secondsToDays = y),
+    (exports.secondsToHours = c),
+    (exports.secondsToMinutes = h),
+    (exports.secondsToMs = n),
+    (exports.secsToDays = i),
+    (exports.secsToHrs = d),
+    (exports.secsToMins = u),
+    (exports.secsToMs = a),
+    (exports.utcToLocal = (e) => {
+        const t = e.constructor(e.getTime())
+        return t.setMinutes(e.getMinutes() - e.getTimezoneOffset()), t
+    }),
+    (exports.values = {hrsPerDay: 24, minsPerHr: 60, secsPerMin: 60, msPerSec: 1e3})
 //# sourceMappingURL=dateplus.min.cjs.map

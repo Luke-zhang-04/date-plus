@@ -1,6 +1,6 @@
 {
   "name": "@luke-zhang-04/dateplus",
-  "version": "3.1.1",
+  "version": "4.0.0-beta1",
   "description": "A simple program to assist with date manipulation",
   "main": "dist/esm/dateplus.js",
   "types": "index.d.ts",
