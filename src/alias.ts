@@ -2,7 +2,7 @@
  * DatePlus A simple program to assist with date manipulation
  *
  * @license MIT
- * @version 3.0.1
+ * @version 3.1.0
  * @author Luke Zhang luke-zhang-04.github.io
  * @file defines Alias static methods from conversion.ts with longer names
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang

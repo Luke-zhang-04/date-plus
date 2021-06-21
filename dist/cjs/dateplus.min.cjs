@@ -1,7 +1,146 @@
 /**
- * DatePlus v3.0.1 | A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
+ * DatePlus v3.1.0 | A simple program to assist with date manipulation
+ *
  * @license MIT
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
-"use strict";Object.defineProperty(exports,"t",{value:!0});class e extends Date{}e.msToSecs=e=>({ms:e%1e3,seconds:(e-e%1e3)/1e3}),e.msToMins=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60;return{ms:s,seconds:t,minutes:(e-1e3*t-s)/6e4}},e.msToHrs=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60,r=(e-1e3*t-s)/6e4%60;return{ms:s,seconds:t,minutes:r,hours:(e-1e3*r*60-1e3*t-s)/36e5}},e.msToDays=e=>{const s=e%1e3%1e3,t=(e-e%1e3)/1e3%60,r=(e-1e3*t-s)/6e4%60,u=(e-1e3*r*60-1e3*t-s)/36e5%24;return{ms:s,seconds:t,minutes:r,hours:u,days:(e-1e3*u*60*60-1e3*r*60-1e3*t-s)/864e5}},e.secsToMs=e=>1e3*e,e.secsToMins=s=>e.msToMins(e.secsToMs(s)),e.secsToHrs=s=>e.msToHrs(e.secsToMs(s)),e.secsToDays=s=>e.msToDays(e.secsToMs(s)),e.minsToMs=e=>60*e*1e3,e.minsToSecs=e=>60*e,e.minsToHrs=s=>e.msToHrs(e.minsToMs(s)),e.minsToDays=s=>e.msToDays(e.minsToMs(s)),e.hrsToMs=e=>60*e*60*1e3,e.hrsToSecs=e=>60*e*60,e.hrsToMins=e=>60*e,e.hrsToDays=s=>e.msToDays(e.hrsToMs(s)),e.daysToMs=e=>24*e*60*60*1e3,e.daysToSecs=e=>24*e*60*60,e.daysToMins=e=>24*e*60,e.daysToHrs=e=>24*e;class s extends e{constructor(){super(...arguments),this.getElapsedDays=e=>-1*Math.round((this.getTime()-e.getTime())/s.u)}}s.u=864e5,s.getElapsedDays=(e,t)=>-1*Math.round((e.getTime()-t.getTime())/s.u);class t extends s{}t.msToSeconds=t.msToSecs,t.msToMinutes=t.msToMins,t.msToHours=t.msToHrs,t.secondsToMs=t.secsToMs,t.secondsToMinutes=t.secsToMins,t.secondsToHours=t.secsToHrs,t.secondsToDays=t.secsToDays,t.minutesToMs=t.minsToMs,t.minutesToSeconds=t.minsToSecs,t.minutesToHours=t.minsToHrs,t.minutesToDays=t.minsToDays,t.hoursToMs=t.hrsToMs,t.hoursToSeconds=t.hrsToSecs,t.hoursToMinutes=t.hrsToMins,t.hoursToDays=t.hrsToDays,t.daysToSeconds=t.daysToSecs,t.daysToMinutes=t.daysToMins,t.daysToHours=t.daysToHrs;class r extends t{constructor(){super(...arguments),this.addZeros=(e="/")=>r.addZeros(this.formatDate(),e),this.formatDate=(e="/")=>r.formatDate(this,e),this.getWordDay=()=>r.o[this.getDay()],this.getWordMonth=()=>r.i[this.getMonth()]}}r.o={0:"Sunday",1:"Monday",2:"Tuesday",3:"Wednesday",4:"Thursday",5:"Friday",6:"Saturday"},r.h={y:"year",m:"month",d:"day"},r.i={0:"January",1:"Feburary",2:"March",3:"April",4:"May",5:"June",6:"July",7:"August",8:"September",9:"October",10:"November",11:"December"},r.addZeros=(e,s="/")=>{let t="";for(let r=0;r<2;r++)e.split(s)[r].length<2?t+="0".concat(e.split(s)[r]).concat(s):t+="".concat(e.split(s)[r]).concat(s);return e.split(s)[2].length<2?t+="0".concat(e.split(s)[2]):t+=e.split(s)[2],t},r.formatDate=(e,s="/")=>{const t=e.getMonth().toString(),r=e.getDate().toString();return[e.getFullYear().toString(),t,r].join(s)},r.getDateValues=(e,s="y:m:d",t="auto")=>{let u="/";if("auto"===t){for(const s of e)if(isNaN(Number(s))){u=s;break}}else u=t;const n=e.split(u),o=s.split(":"),a={};for(let e=0;e<3;e++){a[r.h[o[e]]]=Number(n[e])}return a},r.getWordDay=e=>r.o[e],r.getWordMonth=e=>r.i[e],exports.DatePlus=r,exports.default=r;
+"use strict"
+Object.defineProperty(exports, "t", {value: !0})
+class e extends Date {}
+;(e.msToSecs = (e) => ({ms: e % 1e3, seconds: (e - (e % 1e3)) / 1e3})),
+    (e.msToMins = (e) => {
+        const s = (e % 1e3) % 1e3,
+            t = ((e - (e % 1e3)) / 1e3) % 60
+        return {ms: s, seconds: t, minutes: (e - 1e3 * t - s) / 6e4}
+    }),
+    (e.msToHrs = (e) => {
+        const s = (e % 1e3) % 1e3,
+            t = ((e - (e % 1e3)) / 1e3) % 60,
+            r = ((e - 1e3 * t - s) / 6e4) % 60
+        return {ms: s, seconds: t, minutes: r, hours: (e - 1e3 * r * 60 - 1e3 * t - s) / 36e5}
+    }),
+    (e.msToDays = (e) => {
+        const s = (e % 1e3) % 1e3,
+            t = ((e - (e % 1e3)) / 1e3) % 60,
+            r = ((e - 1e3 * t - s) / 6e4) % 60,
+            u = ((e - 1e3 * r * 60 - 1e3 * t - s) / 36e5) % 24
+        return {
+            ms: s,
+            seconds: t,
+            minutes: r,
+            hours: u,
+            days: (e - 1e3 * u * 60 * 60 - 1e3 * r * 60 - 1e3 * t - s) / 864e5,
+        }
+    }),
+    (e.secsToMs = (e) => 1e3 * e),
+    (e.secsToMins = (s) => e.msToMins(e.secsToMs(s))),
+    (e.secsToHrs = (s) => e.msToHrs(e.secsToMs(s))),
+    (e.secsToDays = (s) => e.msToDays(e.secsToMs(s))),
+    (e.minsToMs = (e) => 60 * e * 1e3),
+    (e.minsToSecs = (e) => 60 * e),
+    (e.minsToHrs = (s) => e.msToHrs(e.minsToMs(s))),
+    (e.minsToDays = (s) => e.msToDays(e.minsToMs(s))),
+    (e.hrsToMs = (e) => 60 * e * 60 * 1e3),
+    (e.hrsToSecs = (e) => 60 * e * 60),
+    (e.hrsToMins = (e) => 60 * e),
+    (e.hrsToDays = (s) => e.msToDays(e.hrsToMs(s))),
+    (e.daysToMs = (e) => 24 * e * 60 * 60 * 1e3),
+    (e.daysToSecs = (e) => 24 * e * 60 * 60),
+    (e.daysToMins = (e) => 24 * e * 60),
+    (e.daysToHrs = (e) => 24 * e)
+class s extends e {
+    constructor() {
+        super(...arguments),
+            (this.getElapsedDays = (e) => -1 * Math.round((this.getTime() - e.getTime()) / s.u))
+    }
+}
+;(s.u = 864e5), (s.getElapsedDays = (e, t) => -1 * Math.round((e.getTime() - t.getTime()) / s.u))
+class t extends s {}
+;(t.msToSeconds = t.msToSecs),
+    (t.msToMinutes = t.msToMins),
+    (t.msToHours = t.msToHrs),
+    (t.secondsToMs = t.secsToMs),
+    (t.secondsToMinutes = t.secsToMins),
+    (t.secondsToHours = t.secsToHrs),
+    (t.secondsToDays = t.secsToDays),
+    (t.minutesToMs = t.minsToMs),
+    (t.minutesToSeconds = t.minsToSecs),
+    (t.minutesToHours = t.minsToHrs),
+    (t.minutesToDays = t.minsToDays),
+    (t.hoursToMs = t.hrsToMs),
+    (t.hoursToSeconds = t.hrsToSecs),
+    (t.hoursToMinutes = t.hrsToMins),
+    (t.hoursToDays = t.hrsToDays),
+    (t.daysToSeconds = t.daysToSecs),
+    (t.daysToMinutes = t.daysToMins),
+    (t.daysToHours = t.daysToHrs)
+class r extends t {
+    constructor() {
+        super(...arguments),
+            (this.addZeros = (e = "/") => r.addZeros(this.formatDate(), e)),
+            (this.formatDate = (e = "/") => r.formatDate(this, e)),
+            (this.getWordDay = () => r.o[this.getDay()]),
+            (this.getWordMonth = () => r.i[this.getMonth()])
+    }
+}
+;(r.o = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+}),
+    (r.h = {y: "year", m: "month", d: "day"}),
+    (r.i = {
+        0: "January",
+        1: "Feburary",
+        2: "March",
+        3: "April",
+        4: "May",
+        5: "June",
+        6: "July",
+        7: "August",
+        8: "September",
+        9: "October",
+        10: "November",
+        11: "December",
+    }),
+    (r.addZeros = (e, s = "/") => {
+        let t = ""
+        for (let r = 0; r < 2; r++)
+            e.split(s)[r].length < 2
+                ? (t += "0".concat(e.split(s)[r]).concat(s))
+                : (t += "".concat(e.split(s)[r]).concat(s))
+        return (
+            e.split(s)[2].length < 2 ? (t += "0".concat(e.split(s)[2])) : (t += e.split(s)[2]), t
+        )
+    }),
+    (r.formatDate = (e, s = "/") => {
+        const t = e.getMonth().toString(),
+            r = e.getDate().toString()
+        return [e.getFullYear().toString(), t, r].join(s)
+    }),
+    (r.getDateValues = (e, s = "y:m:d", t = "auto") => {
+        let u = "/"
+        if ("auto" === t) {
+            for (const s of e)
+                if (isNaN(Number(s))) {
+                    u = s
+                    break
+                }
+        } else u = t
+        const n = e.split(u),
+            o = s.split(":"),
+            a = {}
+        for (let e = 0; e < 3; e++) {
+            a[r.h[o[e]]] = Number(n[e])
+        }
+        return a
+    }),
+    (r.getWordDay = (e) => r.o[e]),
+    (r.getWordMonth = (e) => r.i[e]),
+    (exports.DatePlus = r),
+    (exports.default = r)
 //# sourceMappingURL=dateplus.min.cjs.map

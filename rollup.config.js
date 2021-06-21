@@ -5,7 +5,7 @@ import progress from "rollup-plugin-progress"
 import {terser} from "rollup-plugin-terser"
 
 const bannerProd = `/**
- * DatePlus v3.0.1 | A simple program to assist with date manipulation
+ * DatePlus v3.1.0 | A simple program to assist with date manipulation
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @license MIT
  */
@@ -17,15 +17,16 @@ const bannerDev = `/**
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 3.0.1
+ * @version 3.1.0
  */
 `
 
 /**
  * Creates plugin setup with parameters
+ *
  * @param {string} target - Browserslist target env
- * @param {boolean} prod - if bundle is production
- * @returns {import("rollup").Plugin[]} rollup plugin configs
+ * @param {boolean} prod - If bundle is production
+ * @returns {import("rollup").Plugin[]} Rollup plugin configs
  */
 const makePlugins = (target = "es6", prod = true) => [
     nodeResolve(),
@@ -33,28 +34,32 @@ const makePlugins = (target = "es6", prod = true) => [
         babelrc: false,
         babelHelpers: "bundled",
         presets: [
-            ["@babel/preset-env", {
-                browserslistEnv: target,
-            }],
+            [
+                "@babel/preset-env",
+                {
+                    browserslistEnv: target,
+                },
+            ],
         ],
         minified: prod,
         comments: !prod,
-        shouldPrintComment: (val) => (
+        shouldPrintComment: (val) =>
             !prod &&
-                (/@/u).test(val) &&
-                !((/eslint|istanbul/u).test(val)) &&
-                !(/@author Luke Zhang/u).test(val) // Remove license headers in favour of one banner
-        ),
+            /@/u.test(val) &&
+            !/eslint|istanbul/u.test(val) &&
+            !/@author Luke Zhang/u.test(val), // Remove license headers in favour of one banner
     }),
-    ...prod
-        ? [terser({
-            mangle: {
-                properties: {
-                    regex: /^_/u, // Mangle private properties
-                },
-            },
-        })]
-        : [],
+    ...(prod
+        ? [
+              terser({
+                  mangle: {
+                      properties: {
+                          regex: /^_/u, // Mangle private properties
+                      },
+                  },
+              }),
+          ]
+        : []),
     // To make bundling look cool
     filesize(),
     progress(),
@@ -69,10 +74,7 @@ const es5 = (() => {
     /**
      * @type {[format: import("rollup").ModuleFormat, extension?: string][]}
      */
-    const formats = [
-        ["iife", "js"],
-        ["cjs"],
-    ]
+    const formats = [["iife", "js"], ["cjs"]]
 
     for (const [format, extension] of formats) {
         configs.push({
@@ -112,11 +114,7 @@ const es6 = (() => {
     /**
      * @type {[format: import("rollup").ModuleFormat, extension?: string][]}
      */
-    const formats = [
-        ["esm", "js"],
-        ["iife", "js"],
-        ["cjs"],
-    ]
+    const formats = [["esm", "js"], ["iife", "js"], ["cjs"]]
 
     for (const [format, extension] of formats) {
         configs.push({
@@ -150,9 +148,6 @@ const es6 = (() => {
 /**
  * @type {import("rollup").RollupOptions[]}
  */
-const rollupConfig = [
-    ...es5,
-    ...es6,
-]
+const rollupConfig = [...es5, ...es6]
 
 export default rollupConfig
