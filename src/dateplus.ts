@@ -110,14 +110,9 @@ export class DatePlus extends Date {
      * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
      * @returns Time difference in string form, e.g "3 seconds ago"
      */
-    public getElapsedString = (date: Date, approx = "about"): string =>
-        utils.getElapsedString(this, date, approx)
+    public getElapsedString(date: Date, approx = "about"): string {
+        return utils.getElapsedString(this, date, approx)
+    }
 }
-
-// for (const [key, value] of Object.entries({...conversions, ...utils, ...values})) {
-//     // In the name of bundle size
-//     // @ts-expect-error
-//     DatePlus[key] = value
-// }
 
 export default DatePlus
