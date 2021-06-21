@@ -271,37 +271,30 @@ var DatePlus = (function (exports) {
      */
 
     const addZeros = (date, seperator = "/") => {
-      let newDate = "";
-
-      for (let index = 0; index < 2; index++) {
-        if (date.split(seperator)[index].length < 2) {
-          newDate += `0${date.split(seperator)[index]}${seperator}`;
-        } else {
-          newDate += `${date.split(seperator)[index]}${seperator}`;
-        }
-      }
-
-      if (date.split(seperator)[2].length < 2) {
-        newDate += `0${date.split(seperator)[2]}`;
-      } else {
-        newDate += date.split(seperator)[2];
-      }
-
-      return newDate;
+      const splitDate = date.split(seperator);
+      const newDateValues = splitDate.map(section => section.length < 2 ? `0${section}` : section);
+      return newDateValues.join(seperator);
     };
     /**
      * Format date into a string in the form YYYY{seperator}MM{seperator}DD
      *
-     * @param {Date} date - Date object to format
+     * @param date - Date object to format
+     * @param format - Format of string date
      * @param seperator - String to seperate date values with
      * @returns Formatted date
      */
 
-    const formatDate = (date, seperator = "/") => {
+    const formatDate = (date, format = "y:m:d", seperator = "/") => {
       const month = date.getMonth().toString();
       const day = date.getDate().toString();
       const year = date.getFullYear().toString();
-      return [year, month, day].join(seperator);
+      const values = {
+        m: month,
+        d: day,
+        y: year
+      };
+      const formatArray = format.split(":");
+      return formatArray.map(val => values[val]).join(seperator);
     };
     /**
      * Gets date values and outputs an object
@@ -326,13 +319,13 @@ var DatePlus = (function (exports) {
         _seperator = seperator;
       }
 
-      const dateData = date.split(_seperator);
+      const splitDate = date.split(_seperator);
       const dateFormat = format.split(":");
       const output = {};
 
       for (let index = 0; index < 3; index++) {
         const key = keysReference[dateFormat[index]];
-        output[key] = Number(dateData[index]);
+        output[key] = Number(splitDate[index]);
       }
 
       return output;
@@ -473,12 +466,13 @@ var DatePlus = (function (exports) {
        * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
        *
        * @param seperator - Char to seperate date with
+       * @param format - Format of string date
        * @returns Formatted date
        */
 
 
-      formatDate(seperator = "/") {
-        return formatDate(this, seperator);
+      formatDate(format = "y:m:d", seperator = "/") {
+        return formatDate(this, format, seperator);
       }
       /**
        * Gets instantiated day of week in word form (e.g 0 => "Sunday")

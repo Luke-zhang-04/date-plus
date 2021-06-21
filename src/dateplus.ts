@@ -29,10 +29,11 @@ export class DatePlus extends Date {
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
      *
      * @param seperator - Char to seperate date with
+     * @param format - Format of string date
      * @returns Formatted date
      */
-    public formatDate(seperator = "/"): string {
-        return utils.formatDate(this, seperator)
+    public formatDate(format: utils.DateFormat = "y:m:d", seperator = "/"): string {
+        return utils.formatDate(this, format, seperator)
     }
 
     /**

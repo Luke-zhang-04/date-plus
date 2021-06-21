@@ -537,38 +537,36 @@ var keysReference = {
 
 var addZeros = function addZeros(date) {
   var seperator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
-  var newDate = "";
-
-  for (var index = 0; index < 2; index++) {
-    if (date.split(seperator)[index].length < 2) {
-      newDate += "0".concat(date.split(seperator)[index]).concat(seperator);
-    } else {
-      newDate += "".concat(date.split(seperator)[index]).concat(seperator);
-    }
-  }
-
-  if (date.split(seperator)[2].length < 2) {
-    newDate += "0".concat(date.split(seperator)[2]);
-  } else {
-    newDate += date.split(seperator)[2];
-  }
-
-  return newDate;
+  var splitDate = date.split(seperator);
+  var newDateValues = splitDate.map(function (section) {
+    return section.length < 2 ? "0".concat(section) : section;
+  });
+  return newDateValues.join(seperator);
 };
 /**
  * Format date into a string in the form YYYY{seperator}MM{seperator}DD
  *
- * @param {Date} date - Date object to format
+ * @param date - Date object to format
+ * @param format - Format of string date
  * @param seperator - String to seperate date values with
  * @returns Formatted date
  */
 
 var formatDate = function formatDate(date) {
-  var seperator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "y:m:d";
+  var seperator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "/";
   var month = date.getMonth().toString();
   var day = date.getDate().toString();
   var year = date.getFullYear().toString();
-  return [year, month, day].join(seperator);
+  var values = {
+    m: month,
+    d: day,
+    y: year
+  };
+  var formatArray = format.split(":");
+  return formatArray.map(function (val) {
+    return values[val];
+  }).join(seperator);
 };
 /**
  * Gets date values and outputs an object
@@ -606,13 +604,13 @@ var getDateValues = function getDateValues(date) {
     _seperator = seperator;
   }
 
-  var dateData = date.split(_seperator);
+  var splitDate = date.split(_seperator);
   var dateFormat = format.split(":");
   var output = {};
 
   for (var index = 0; index < 3; index++) {
     var key = keysReference[dateFormat[index]];
-    output[key] = Number(dateData[index]);
+    output[key] = Number(splitDate[index]);
   }
 
   return output;
@@ -782,14 +780,16 @@ var DatePlus = function (_Date) {
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
      *
      * @param seperator - Char to seperate date with
+     * @param format - Format of string date
      * @returns Formatted date
      */
 
   }, {
     key: "formatDate",
     value: function formatDate$1() {
-      var seperator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "/";
-      return formatDate(this, seperator);
+      var format = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "y:m:d";
+      var seperator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "/";
+      return formatDate(this, format, seperator);
     }
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
