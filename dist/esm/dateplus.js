@@ -4,61 +4,50 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 3.0.1
+ * @version 3.1.0
  */
 
-/**
- * Convert namespace
- * @classdesc A namespace program to convert units
- * @namespace
- */
-
-class Convert extends Date {}
 /**
  * Converts milliseconds to seconds with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with seconds and milliseconds
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with seconds and milliseconds
  */
-
-Convert.msToSecs = ms => ({
-  ms: ms % Values.MsPerSec,
-  seconds: (ms - ms % Values.MsPerSec) / Values.MsPerSec
+const msToSecs = ms => ({
+  ms: ms % 1000,
+  seconds: (ms - ms % 1000) / 1000
 });
+const msToSeconds = msToSecs;
 /**
  * Converts milliseconds to minutes with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with minutes, seconds, and milliseconds
  */
 
-
-Convert.msToMins = ms => {
-  const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin);
+const msToMins = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
   return {
     ms: milliseconds,
     seconds,
     minutes
   };
 };
+const msToMinutes = msToMins;
 /**
  * Converts milliseconds to hours with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with hours, minutes, seconds, and milliseconds
  */
 
-
-Convert.msToHrs = ms => {
-  const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-  const hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr);
+const msToHrs = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60);
   return {
     ms: milliseconds,
     seconds,
@@ -66,21 +55,20 @@ Convert.msToHrs = ms => {
     hours
   };
 };
+const msToHours = msToHrs;
 /**
  * Converts milliseconds to days with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with days, hours, minutes, seconds, and milliseconds
+ *
+ * @param ms - Milliseconds to convert
+ * @returns Object with days, hours, minutes, seconds, and milliseconds
  */
 
-
-Convert.msToDays = ms => {
-  const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-  const hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr) % Values.HrsPerDay;
-  const days = (ms - hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay);
+const msToDays = ms => {
+  const milliseconds = ms % 1000 % 1000;
+  const seconds = (ms - ms % 1000) / 1000 % 60;
+  const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60) % 24;
+  const days = (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60 * 24);
   return {
     ms: milliseconds,
     seconds,
@@ -91,437 +79,197 @@ Convert.msToDays = ms => {
 };
 /**
  * Converts seconds to milliseconds
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {number} converted milliseconds
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted milliseconds
  */
 
-
-Convert.secsToMs = secs => secs * Values.MsPerSec;
+const secsToMs = secs => secs * 1000;
+const secondsToMs = secsToMs;
 /**
  * Converts seconds to minutes with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted minutes
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted minutes
  */
 
-
-Convert.secsToMins = secs => Convert.msToMins(Convert.secsToMs(secs));
+const secsToMins = secs => msToMins(secsToMs(secs));
+const secondsToMinutes = secsToMins;
 /**
  * Converts seconds to hours with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted hours
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted hours
  */
 
-
-Convert.secsToHrs = secs => Convert.msToHrs(Convert.secsToMs(secs));
+const secsToHrs = secs => msToHrs(secsToMs(secs));
+const secondsToHours = secsToHrs;
 /**
  * Converts seconds to days with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted days
+ *
+ * @param secs - Seconds to convert
+ * @returns Converted days
  */
 
-
-Convert.secsToDays = secs => Convert.msToDays(Convert.secsToMs(secs));
+const secsToDays = secs => msToDays(secsToMs(secs));
+const secondsToDays = secsToDays;
 /**
  * Converts hours to milliseconds
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {number} converted milliseconds
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted milliseconds
  */
 
-
-Convert.minsToMs = mins => mins * Values.SecsPerMin * Values.MsPerSec;
+const minsToMs = mins => mins * 60 * 1000;
+const minutesToMs = secsToDays;
 /**
  * Converts hours to seconds
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {number} converted seconds
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted seconds
  */
 
-
-Convert.minsToSecs = mins => mins * Values.SecsPerMin;
+const minsToSecs = mins => mins * 60;
+const minutesToSeconds = minsToSecs;
 /**
  * Converts minutes to hours with remainders
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {Object.<string, number>} converted hours
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted hours
  */
 
-
-Convert.minsToHrs = mins => Convert.msToHrs(Convert.minsToMs(mins));
+const minsToHrs = mins => msToHrs(minsToMs(mins));
+const minutesToHours = minsToHrs;
 /**
  * Converts minutes to days with remainders
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {Object.<string, number>} converted days
+ *
+ * @param mins - Minutes to convert
+ * @returns Converted days
  */
 
-
-Convert.minsToDays = mins => Convert.msToDays(Convert.minsToMs(mins));
+const minsToDays = mins => msToDays(minsToMs(mins));
+const minutesToDays = minsToDays;
 /**
  * Converts hours to milliseconds
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted milliseconds
+ *
+ * @param hours - Hours to convert
+ * @returns Converted milliseconds
  */
 
-
-Convert.hrsToMs = hours => hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+const hrsToMs = hours => hours * 60 * 60 * 1000;
+const hoursToMs = hrsToMs;
 /**
  * Converts hours to seconds
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted seconds
+ *
+ * @param hours - Hours to convert
+ * @returns Converted seconds
  */
 
-
-Convert.hrsToSecs = hours => hours * Values.MinsPerHr * Values.SecsPerMin;
+const hrsToSecs = hours => hours * 60 * 60;
+const hoursToSeconds = hrsToSecs;
 /**
  * Converts hours to minutes
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted minutes
+ *
+ * @param hours - Hours to convert
+ * @returns Converted minutes
  */
 
-
-Convert.hrsToMins = hours => hours * Values.MinsPerHr;
+const hrsToMins = hours => hours * 60;
+const hoursToMinutes = hrsToMins;
 /**
  * Converts hours to days with remainders
- * @public
- * @static
- * @param {number} hrs - hours to convert
- * @returns {Object.<string, number>} converted days
+ *
+ * @param hrs - Hours to convert
+ * @returns Converted days
  */
 
-
-Convert.hrsToDays = hrs => Convert.msToDays(Convert.hrsToMs(hrs));
+const hrsToDays = hrs => msToDays(hrsToMs(hrs));
+const hoursToDays = hrsToDays;
 /**
  * Converts days to milliseconds
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted milliseconds
+ *
+ * @param days - Days to convert
+ * @returns Converted milliseconds
  */
 
-
-Convert.daysToMs = days => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+const daysToMs = days => days * 24 * 60 * 60 * 1000;
 /**
  * Converts days to seconds
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted seconds
+ *
+ * @param days - Days to convert
+ * @returns Converted seconds
  */
 
-
-Convert.daysToSecs = days => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin;
+const daysToSecs = days => days * 24 * 60 * 60;
+const daysToSeconds = daysToSecs;
 /**
  * Converts days to minutes
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted minutes
+ *
+ * @param days - Days to convert
+ * @returns Converted minutes
  */
 
-
-Convert.daysToMins = days => days * Values.HrsPerDay * Values.MinsPerHr;
+const daysToMins = days => days * 24 * 60;
+const daysToMinutes = daysToMins;
 /**
  * Converts days to hours
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted hours
+ *
+ * @param days - Days to convert
+ * @returns Converted hours
  */
 
+const daysToHrs = days => days * 24;
+const daysToHours = daysToHrs;
 
-Convert.daysToHrs = days => days * Values.HrsPerDay;
+var conversions = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    msToSecs: msToSecs,
+    msToSeconds: msToSeconds,
+    msToMins: msToMins,
+    msToMinutes: msToMinutes,
+    msToHrs: msToHrs,
+    msToHours: msToHours,
+    msToDays: msToDays,
+    secsToMs: secsToMs,
+    secondsToMs: secondsToMs,
+    secsToMins: secsToMins,
+    secondsToMinutes: secondsToMinutes,
+    secsToHrs: secsToHrs,
+    secondsToHours: secondsToHours,
+    secsToDays: secsToDays,
+    secondsToDays: secondsToDays,
+    minsToMs: minsToMs,
+    minutesToMs: minutesToMs,
+    minsToSecs: minsToSecs,
+    minutesToSeconds: minutesToSeconds,
+    minsToHrs: minsToHrs,
+    minutesToHours: minutesToHours,
+    minsToDays: minsToDays,
+    minutesToDays: minutesToDays,
+    hrsToMs: hrsToMs,
+    hoursToMs: hoursToMs,
+    hrsToSecs: hrsToSecs,
+    hoursToSeconds: hoursToSeconds,
+    hrsToMins: hrsToMins,
+    hoursToMinutes: hoursToMinutes,
+    hrsToDays: hrsToDays,
+    hoursToDays: hoursToDays,
+    daysToMs: daysToMs,
+    daysToSecs: daysToSecs,
+    daysToSeconds: daysToSeconds,
+    daysToMins: daysToMins,
+    daysToMinutes: daysToMinutes,
+    daysToHrs: daysToHrs,
+    daysToHours: daysToHours
+});
 
-var Values;
-
-(function (Values) {
-  Values[Values["HrsPerDay"] = 24] = "HrsPerDay";
-  Values[Values["MinsPerHr"] = 60] = "MinsPerHr";
-  Values[Values["SecsPerMin"] = 60] = "SecsPerMin";
-  Values[Values["MsPerSec"] = 1000] = "MsPerSec";
-})(Values || (Values = {}));
-/**
- * Elapse class and namespace
- * @classdesc A class and namespace program to find elapsed times
- * @class
- * @namespace
- */
-
-
-class Elapse extends Convert {
-  constructor() {
-    super(...arguments);
-    /**
-     * Calculates number of elapsed days between instantiated date and dae
-     * @public
-     * @instance
-     * @param {Date | DatePlus} date - ending date object to calculate
-     * @returns {number} - number of elapsed days
-     */
-
-    this.getElapsedDays = date => Math.round((this.getTime() - date.getTime()) / Elapse._oneDay) * -1;
-  }
-
-}
-/**
- * Gets milliseconds per day
- * @private
- * @static
- * @type {number}
- */
-
-Elapse._oneDay = Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
-/**
- * Calculates number of elapsed days between date1 and date2
- * @public
- * @static
- * @param {Date | DatePlus} date1 - starting date object to calculate
- * @param {Date | DatePlus} date2 - ending date object to calculate
- * @returns {number} - number of elapsed days
- */
-
-Elapse.getElapsedDays = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / Elapse._oneDay) * -1;
-
-class Alias extends Elapse {}
-/**
- * Converts milliseconds to seconds with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with seconds and milliseconds
- */
-
-Alias.msToSeconds = Alias.msToSecs;
-/**
- * Converts milliseconds to minutes with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with minutes, seconds, and milliseconds
- */
-
-Alias.msToMinutes = Alias.msToMins;
-/**
- * Converts milliseconds to hours with remainders
- * @public
- * @static
- * @param {number} ms - milliseconds to convert
- * @returns {Object.<string, number>} object with hours, minutes, seconds, and milliseconds
- */
-
-Alias.msToHours = Alias.msToHrs;
-/**
- * Converts seconds to milliseconds
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {number} converted milliseconds
- */
-
-Alias.secondsToMs = Alias.secsToMs;
-/**
- * Converts seconds to minutes with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted minutes
- */
-
-Alias.secondsToMinutes = Alias.secsToMins;
-/**
- * Converts seconds to hours with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted hours
- */
-
-Alias.secondsToHours = Alias.secsToHrs;
-/**
- * Converts seconds to days with remainders
- * @public
- * @static
- * @param {number} secs - seconds to convert
- * @returns {Object.<string, number>} converted days
- */
-
-Alias.secondsToDays = Alias.secsToDays;
-/**
- * Converts hours to milliseconds
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {number} converted milliseconds
- */
-
-Alias.minutesToMs = Alias.minsToMs;
-/**
- * Converts hours to seconds
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {number} converted seconds
- */
-
-Alias.minutesToSeconds = Alias.minsToSecs;
-/**
- * Converts minutes to hours with remainders
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {Object.<string, number>} converted hours
- */
-
-Alias.minutesToHours = Alias.minsToHrs;
-/**
- * Converts minutes to days with remainders
- * @public
- * @static
- * @param {number} mins - minutes to convert
- * @returns {Object.<string, number>} converted days
- */
-
-Alias.minutesToDays = Alias.minsToDays;
-/**
- * Converts hours to milliseconds
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted milliseconds
- */
-
-Alias.hoursToMs = Alias.hrsToMs;
-/**
- * Converts hours to seconds
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted seconds
- */
-
-Alias.hoursToSeconds = Alias.hrsToSecs;
-/**
- * Converts hours to minutes
- * @public
- * @static
- * @param {number} hours - hours to convert
- * @returns {number} converted minutes
- */
-
-Alias.hoursToMinutes = Alias.hrsToMins;
-/**
- * Converts hours to days with remainders
- * @public
- * @static
- * @param {number} hrs - hours to convert
- * @returns {Object.<string, number>} converted days
- */
-
-Alias.hoursToDays = Alias.hrsToDays;
-/**
- * Converts days to seconds
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted seconds
- */
-
-Alias.daysToSeconds = Alias.daysToSecs;
-/**
- * Converts days to minutes
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted minutes
- */
-
-Alias.daysToMinutes = Alias.daysToMins;
-/**
- * Converts days to hours
- * @public
- * @static
- * @param {number} days - days to convert
- * @returns {number} converted hours
- */
-
-Alias.daysToHours = Alias.daysToHrs;
-
-/**
- * Dateplus class and namespace
- * @classdesc A class and namespace program to assist with date manipulation
- * @class
- * @namespace
- */
-
-class DatePlus extends Alias {
-  constructor() {
-    super(...arguments);
-    /**
-     * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
-     * @public
-     * @instance
-     * @param {string} seperator - char the date is seperatred by
-     * @returns {string} - date with zeros
-     */
-
-    this.addZeros = (seperator = "/") => DatePlus.addZeros(this.formatDate(), seperator);
-    /**
-     * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-     * @public
-     * @instance
-     * @param {string} seperator - char to seperate date with
-     * @returns {string} formatted date
-     */
-
-
-    this.formatDate = (seperator = "/") => DatePlus.formatDate(this, seperator);
-    /**
-     * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-     * @public
-     * @instance
-     * @returns {string} stringed day of week
-     */
-
-
-    this.getWordDay = () => DatePlus._daysReference[this.getDay()];
-    /**
-     * Gets instantiated month in word form (e.g 0 => "January")
-     * @public
-     * @instance
-     * @returns {string} stringed worded month
-     */
-
-
-    this.getWordMonth = () => DatePlus._monthsReference[this.getMonth()];
-  }
-
-}
-/**
- * Reference to days of the week, zero indexed
- * @private
- * @static
- * @type {Object.<number, string>}
- */
-
-DatePlus._daysReference = {
+const values = {
+  hrsPerDay: 24,
+  minsPerHr: 60,
+  secsPerMin: 60,
+  msPerSec: 1000
+};
+const daysReference = {
   0: "Sunday",
   1: "Monday",
   2: "Tuesday",
@@ -530,26 +278,7 @@ DatePlus._daysReference = {
   5: "Friday",
   6: "Saturday"
 };
-/**
- * Reference to months of a year, zero indexed
- * @private
- * @static
- * @type {Object.<number, string>}
- */
-
-DatePlus._keysReference = {
-  y: "year",
-  m: "month",
-  d: "day"
-};
-/**
- * Reference to months of a year, zero indexed
- * @private
- * @static
- * @type {Object.<number, string>}
- */
-
-DatePlus._monthsReference = {
+const monthsReference = {
   0: "January",
   1: "Feburary",
   2: "March",
@@ -563,28 +292,46 @@ DatePlus._monthsReference = {
   10: "November",
   11: "December"
 };
+const oneMinute = 60 * 1000;
+const oneHour = 60 * oneMinute;
+const oneDay = 24 * oneHour;
+
+var values$1 = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    values: values,
+    daysReference: daysReference,
+    monthsReference: monthsReference,
+    oneMinute: oneMinute,
+    oneHour: oneHour,
+    oneDay: oneDay
+});
+
+const keysReference = {
+  y: "year",
+  m: "month",
+  d: "day"
+};
 /**
  * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
- * @public
- * @static
- * @param {string} date - string date to format
- * @param {string} seperator - char the date is seperatred by
- * @returns {string} - date with zeros
+ *
+ * @param date - String date to format
+ * @param seperator - Char the date is seperatred by
+ * @returns - Date with zeros
  */
 
-DatePlus.addZeros = (date, seperator = "/") => {
+const addZeros = (date, seperator = "/") => {
   let newDate = "";
 
   for (let index = 0; index < 2; index++) {
     if (date.split(seperator)[index].length < 2) {
-      newDate += "0".concat(date.split(seperator)[index]).concat(seperator);
+      newDate += `0${date.split(seperator)[index]}${seperator}`;
     } else {
-      newDate += "".concat(date.split(seperator)[index]).concat(seperator);
+      newDate += `${date.split(seperator)[index]}${seperator}`;
     }
   }
 
   if (date.split(seperator)[2].length < 2) {
-    newDate += "0".concat(date.split(seperator)[2]);
+    newDate += `0${date.split(seperator)[2]}`;
   } else {
     newDate += date.split(seperator)[2];
   }
@@ -593,15 +340,13 @@ DatePlus.addZeros = (date, seperator = "/") => {
 };
 /**
  * Format date into a string in the form YYYY{seperator}MM{seperator}DD
- * @public
- * @static
- * @param {Date | DatePlus} date - date object to format
- * @param {string} seperator - string to seperate date values with
- * @returns {string} formatted date
+ *
+ * @param {Date} date - Date object to format
+ * @param seperator - String to seperate date values with
+ * @returns Formatted date
  */
 
-
-DatePlus.formatDate = (date, seperator = "/") => {
+const formatDate = (date, seperator = "/") => {
   const month = date.getMonth().toString();
   const day = date.getDate().toString();
   const year = date.getFullYear().toString();
@@ -609,16 +354,14 @@ DatePlus.formatDate = (date, seperator = "/") => {
 };
 /**
  * Gets date values and outputs an object
- * @public
- * @static
- * @param {string} date - date to extract values from, months zero indexed
- * @param {DateFormat}format - format of string date
- * @param {string} seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
- * @returns {Object<string, number>} object with all values
+ *
+ * @param date - Date to extract values from, months zero indexed
+ * @param format - Format of string date
+ * @param seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
+ * @returns Object with all values
  */
 
-
-DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
+const getDateValues = (date, format = "y:m:d", seperator = "auto") => {
   let _seperator = "/";
 
   if (seperator === "auto") {
@@ -637,7 +380,7 @@ DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
   const output = {};
 
   for (let index = 0; index < 3; index++) {
-    const key = DatePlus._keysReference[dateFormat[index]];
+    const key = keysReference[dateFormat[index]];
     output[key] = Number(dateData[index]);
   }
 
@@ -645,25 +388,261 @@ DatePlus.getDateValues = (date, format = "y:m:d", seperator = "auto") => {
 };
 /**
  * Converts numerical day of week into word form (e.g 0 => "Sunday")
- * @public
- * @static
- * @param {number} numerical - numerical day of week, 0 indexed (0-6)
- * @returns {string} stringed day of week
+ *
+ * @param numerical - Numerical day of week, 0 indexed (0-6)
+ * @returns Stringed day of week
  */
 
-
-DatePlus.getWordDay = numerical => DatePlus._daysReference[numerical];
+const getWordDay = numerical => daysReference[numerical];
 /**
  * Converts numerical month into word form (e.g 0 => "January")
- * @public
- * @static
- * @param {number} numerical - numerical day of week, 0 indexed (0-11)
- * @returns {string} stringed worded month
+ *
+ * @param numerical - Numerical day of week, 0 indexed (0-11)
+ * @returns Stringed worded month
  */
 
+const getWordMonth = numerical => monthsReference[numerical];
+/**
+ * Calculates number of elapsed days between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed days
+ */
 
-DatePlus.getWordMonth = numerical => DatePlus._monthsReference[numerical];
+const getElapsedDays = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneDay) * -1;
+/**
+ * Calculates number of elapsed hours between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed hours
+ */
+
+const getElapsedHours = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneHour) * -1;
+/**
+ * Calculates number of elapsed minutes between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed minutes
+ */
+
+const getElapsedMinutes = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneMinute) * -1;
+/**
+ * Calculates number of elapsed seconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed seconds
+ */
+
+const getElapsedSeconds = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / 1000) * -1;
+/**
+ * Calculates number of elapsed milliseconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed milliseconds
+ */
+
+const getElapsedMs = (date1, date2) => Math.round(date1.getTime() - date2.getTime()) * -1;
+/**
+ * Calculates elapsed time between current and previous
+ *
+ * @param start- Start date
+ * @param end - End date
+ * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+ * @returns Time difference in string form, e.g "3 seconds ago"
+ */
+
+const getElapsedString = (start, end, approx = "about") => {
+  const daysPerMonth = 30;
+  const daysPerYear = 365;
+  const msPerMonth = oneDay * daysPerMonth;
+  const msPerYear = oneDay * daysPerYear;
+  const elapsed = getElapsedMs(start, end);
+  let val;
+
+  if (elapsed < oneMinute) {
+    val = Math.round(elapsed / 1000);
+    return `${val} second${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < oneHour) {
+    val = Math.round(elapsed / oneMinute);
+    return `${val} minute${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < oneDay) {
+    val = Math.round(elapsed / oneHour);
+    return `${val} hour${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < msPerMonth) {
+    val = Math.round(elapsed / oneDay);
+    return `${approx} ${val} day${val === 1 ? "" : "s"} ago`;
+  } else if (elapsed < msPerYear) {
+    val = Math.round(elapsed / msPerMonth);
+    return `${approx} ${val} month${val === 1 ? "" : "s"} ago`;
+  }
+
+  val = Math.round(elapsed / msPerYear);
+  return `${approx} ${val} year${val === 1 ? "" : "s"} ago`;
+};
+/**
+ * Convert a utc date to local
+ *
+ * @param date - Date to use. Note that the parameter will never be mutated.
+ * @returns A new date object with the time converted form UTC
+ */
+
+const utcToLocal = date => {
+  const newDate = date.constructor(date.getTime());
+  newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+  return newDate;
+};
+/**
+ * Get the current UTC Time
+ *
+ * @returns UTC Time
+ */
+
+const getUtcTime = () => {
+  const now = new Date();
+  return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+};
+
+var utils = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    addZeros: addZeros,
+    formatDate: formatDate,
+    getDateValues: getDateValues,
+    getWordDay: getWordDay,
+    getWordMonth: getWordMonth,
+    getElapsedDays: getElapsedDays,
+    getElapsedHours: getElapsedHours,
+    getElapsedMinutes: getElapsedMinutes,
+    getElapsedSeconds: getElapsedSeconds,
+    getElapsedMs: getElapsedMs,
+    getElapsedString: getElapsedString,
+    utcToLocal: utcToLocal,
+    getUtcTime: getUtcTime
+});
+
+class DatePlus extends Date {
+  constructor() {
+    super(...arguments);
+    /**
+     * Calculates elapsed time between current and previous
+     *
+     * @param date - End date
+     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+     * @returns Time difference in string form, e.g "3 seconds ago"
+     */
+
+    this.getElapsedString = (date, approx = "about") => getElapsedString(this, date, approx);
+  }
+  /**
+   * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
+   *
+   * @param date - String date to format
+   * @param seperator - Char the date is seperatred by
+   * @returns - Date with zeros
+   */
+
+
+  addZeros(seperator = "/") {
+    return addZeros(this.formatDate(), seperator);
+  }
+  /**
+   * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
+   *
+   * @param seperator - Char to seperate date with
+   * @returns Formatted date
+   */
+
+
+  formatDate(seperator = "/") {
+    return formatDate(this, seperator);
+  }
+  /**
+   * Gets instantiated day of week in word form (e.g 0 => "Sunday")
+   *
+   * @returns Stringed day of week
+   */
+
+
+  getWordDay() {
+    return daysReference[this.getDay()];
+  }
+  /**
+   * Gets instantiated month in word form (e.g 0 => "January")
+   *
+   * @returns Stringed worded month
+   */
+
+
+  getWordMonth() {
+    return monthsReference[this.getMonth()];
+  }
+  /**
+   * Calculates number of elapsed days between instantiated date and dae
+   *
+   * @param date - Ending date object to calculate
+   * @returns - Number of elapsed days
+   */
+
+
+  getElapsedDays(date) {
+    return getElapsedDays(this, date);
+  }
+  /**
+   * Calculates number of elapsed hours between date1 and date2
+   *
+   * @param date - Ending date object to calculate
+   * @returns - Number of elapsed hours
+   */
+
+
+  getElapsedHours(date) {
+    return getElapsedHours(this, date);
+  }
+  /**
+   * Calculates number of elapsed minutes between date1 and date2
+   *
+   * @param date - Ending date object to calculate
+   * @returns - Number of elapsed minutes
+   */
+
+
+  getElapsedMinutes(date) {
+    return getElapsedMinutes(this, date);
+  }
+  /**
+   * Calculates number of elapsed seconds between date1 and date2
+   *
+   * @param date - Ending date object to calculate
+   * @returns - Number of elapsed seconds
+   */
+
+
+  getElapsedSeconds(date) {
+    return getElapsedSeconds(this, date);
+  }
+  /**
+   * Calculates number of elapsed milliseconds between date1 and date2
+   *
+   * @param date - Ending date object to calculate
+   * @returns - Number of elapsed milliseconds
+   */
+
+
+  getElapsedMs(date) {
+    return getElapsedMs(this, date);
+  }
+
+}
+
+for (const [key, value] of Object.entries(Object.assign(Object.assign(Object.assign({}, conversions), utils), values$1))) {
+  // @ts-expect-error
+  DatePlus[key] = value;
+}
 
 export default DatePlus;
-export { DatePlus };
+export { DatePlus, addZeros, daysReference, daysToHours, daysToHrs, daysToMins, daysToMinutes, daysToMs, daysToSeconds, daysToSecs, formatDate, getDateValues, getElapsedDays, getElapsedHours, getElapsedMinutes, getElapsedMs, getElapsedSeconds, getElapsedString, getUtcTime, getWordDay, getWordMonth, hoursToDays, hoursToMinutes, hoursToMs, hoursToSeconds, hrsToDays, hrsToMins, hrsToMs, hrsToSecs, minsToDays, minsToHrs, minsToMs, minsToSecs, minutesToDays, minutesToHours, minutesToMs, minutesToSeconds, monthsReference, msToDays, msToHours, msToHrs, msToMins, msToMinutes, msToSeconds, msToSecs, oneDay, oneHour, oneMinute, secondsToDays, secondsToHours, secondsToMinutes, secondsToMs, secsToDays, secsToHrs, secsToMins, secsToMs, utcToLocal, values };
 //# sourceMappingURL=dateplus.js.map

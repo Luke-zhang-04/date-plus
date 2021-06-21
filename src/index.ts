@@ -1,263 +1,210 @@
 /**
- * DatePlus
- * A simple program to assist with date manipulation
- * @copyright Copyright (C) 2020 - 2021 Luke Zhang
- * @author Luke Zhang luke-zhang-04.github.io
+ * DatePlus A simple program to assist with date manipulation
+ *
  * @license MIT
- * @version 3.0.1
- * @exports DatePlus
- * @file exports main dateplus object
+ * @version 3.1.0
+ * @author Luke Zhang luke-zhang-04.github.io
+ * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
-import * as interfaces from "./interfaces"
-import Alias from "./alias"
 
-type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
+import * as conversions from "./conversions"
+import * as utils from "./utils"
+import * as values from "./values"
 
-/* eslint-disable no-magic-numbers */
-/**
- * Interface for datereference
- */
-interface Days {
-    0: "Sunday",
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
+export * from "./conversions"
+export * from "./utils"
+export * from "./values"
+
+export const enum Values {
+    HrsPerDay = 24,
+    MinsPerHr = 60,
+    SecsPerMin = 60,
+    MsPerSec = 1000,
 }
 
 /**
- * Object for date keys
+ * Dateplus - A class and namespace program to assist with date manipulation
  */
-interface Keys {
-    [index: string]: string,
-    y: "year" | "years",
-    m: "month" | "months",
-    d: "day" | "days",
-}
+export class DatePlus extends Date {
+    /* eslint-disable @typescript-eslint/lines-between-class-members */
 
-/**
- * Interface for datereference
- */
-interface Months {
-    0: "January",
-    1: "Feburary",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "June",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
-}
-/* eslint-enable no-magic-numbers */
+    public declare static msToSecs: typeof conversions.msToSecs
+    public declare static msToSeconds: typeof conversions.msToSecs
 
-/**
- * Dateplus class and namespace
- * @classdesc A class and namespace program to assist with date manipulation
- * @class
- * @namespace
- */
-export class DatePlus extends Alias {
+    public declare static msToMins: typeof conversions.msToMins
+    public declare static msToMinutes: typeof conversions.msToMins
 
-    /**
-     * Reference to days of the week, zero indexed
-     * @private
-     * @static
-     * @type {Object.<number, string>}
-     */
-    private static _daysReference: Days = {
-        0: "Sunday",
-        1: "Monday",
-        2: "Tuesday",
-        3: "Wednesday",
-        4: "Thursday",
-        5: "Friday",
-        6: "Saturday",
-    }
+    public declare static msToHrs: typeof conversions.msToHrs
+    public declare static msToHours: typeof conversions.msToHrs
 
-    /* eslint-disable id-length */
-    /**
-     * Reference to months of a year, zero indexed
-     * @private
-     * @static
-     * @type {Object.<number, string>}
-     */
-    private static _keysReference: Keys = {
-        y: "year",
-        m: "month",
-        d: "day",
-    }
-    /* eslint-enable id-length */
+    public declare static msToDays: typeof conversions.msToDays
 
-    /**
-     * Reference to months of a year, zero indexed
-     * @private
-     * @static
-     * @type {Object.<number, string>}
-     */
-    private static _monthsReference: Months = {
-        0: "January",
-        1: "Feburary",
-        2: "March",
-        3: "April",
-        4: "May",
-        5: "June",
-        6: "July",
-        7: "August",
-        8: "September",
-        9: "October",
-        10: "November",
-        11: "December",
-    }
+    public declare static secsToMs: typeof conversions.secsToMs
+    public declare static secondsToMs: typeof conversions.secsToMs
+
+    public declare static secsToMins: typeof conversions.secsToMins
+    public declare static secondsToMinutes: typeof conversions.secsToMins
+
+    public declare static secsToHrs: typeof conversions.secsToHrs
+    public declare static secondsToHours: typeof conversions.secsToHrs
+
+    public declare static secsToDays: typeof conversions.secsToDays
+    public declare static secondsToDays: typeof conversions.secsToDays
+
+    public declare static minsToMs: typeof conversions.secsToDays
+    public declare static minutesToMs: typeof conversions.secsToDays
+
+    public declare static minsToSecs: typeof conversions.minsToSecs
+    public declare static minutesToSeconds: typeof conversions.minsToSecs
+
+    public declare static minsToHrs: typeof conversions.minsToHrs
+    public declare static minutesToHours: typeof conversions.minsToHrs
+
+    public declare static minsToDays: typeof conversions.minsToDays
+    public declare static minutesToDays: typeof conversions.minsToDays
+
+    public declare static hrsToMs: typeof conversions.hrsToMs
+    public declare static hoursToMs: typeof conversions.hrsToMs
+
+    public declare static hrsToSecs: typeof conversions.hrsToSecs
+    public declare static hoursToSeconds: typeof conversions.hrsToSecs
+
+    public declare static hrsToMins: typeof conversions.hrsToMins
+    public declare static hoursToMinutes: typeof conversions.hrsToMins
+
+    public declare static hrsToDays: typeof conversions.hrsToDays
+    public declare static hoursToDays: typeof conversions.hrsToDays
+
+    public declare static daysToMs: typeof conversions.daysToMs
+
+    public declare static daysToSecs: typeof conversions.daysToSecs
+    public declare static daysToSeconds: typeof conversions.daysToSecs
+
+    public declare static daysToMins: typeof conversions.daysToMins
+    public declare static daysToMinutes: typeof conversions.daysToMins
+
+    public declare static daysToHrs: typeof conversions.daysToHrs
+    public declare static daysToHours: typeof conversions.daysToHrs
+
+    public declare static addZeros: typeof utils.addZeros
+
+    public declare static formatDate: typeof utils.formatDate
+
+    public declare static getWordDay: typeof utils.getWordDay
+    public declare static getWordMonth: typeof utils.getWordMonth
+
+    public declare static getElapsedMs: typeof utils.getElapsedMs
+    public declare static getElapsedSeconds: typeof utils.getElapsedSeconds
+    public declare static getElapsedMinutes: typeof utils.getElapsedMinutes
+    public declare static getElapsedHours: typeof utils.getElapsedHours
+    public declare static getElapsedDays: typeof utils.getElapsedDays
+
+    /* eslint-enable @typescript-eslint/lines-between-class-members */
 
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
-     * @public
-     * @static
-     * @param {string} date - string date to format
-     * @param {string} seperator - char the date is seperatred by
-     * @returns {string} - date with zeros
+     *
+     * @param date - String date to format
+     * @param seperator - Char the date is seperatred by
+     * @returns - Date with zeros
      */
-    public static addZeros = (date: string, seperator = "/"): string => {
-        let newDate = ""
-
-        for (let index = 0; index < 2; index++) {
-            if (date.split(seperator)[index].length < 2) {
-                newDate += `0${date.split(seperator)[index]}${seperator}`
-            } else {
-                newDate += `${date.split(seperator)[index]}${seperator}`
-            }
-        }
-
-        if (date.split(seperator)[2].length < 2) {
-            newDate += `0${date.split(seperator)[2]}`
-        } else {
-            newDate += date.split(seperator)[2]
-        }
-
-        return newDate
+    public addZeros(seperator = "/"): string {
+        return utils.addZeros(this.formatDate(), seperator)
     }
-
-    /**
-     * Format date into a string in the form YYYY{seperator}MM{seperator}DD
-     * @public
-     * @static
-     * @param {Date | DatePlus} date - date object to format
-     * @param {string} seperator - string to seperate date values with
-     * @returns {string} formatted date
-     */
-    public static formatDate = (
-        date: Date | DatePlus,
-        seperator = "/"
-    ): string => {
-        const month = (date.getMonth()).toString()
-        const day = date.getDate().toString()
-        const year = date.getFullYear().toString()
-
-        return [year, month, day].join(seperator)
-    }
-
-    /**
-     * Gets date values and outputs an object
-     * @public
-     * @static
-     * @param {string} date - date to extract values from, months zero indexed
-     * @param {DateFormat}format - format of string date
-     * @param {string} seperator - Seperator the date works with; leave auto for auto detection, limited to 1 char
-     * @returns {Object<string, number>} object with all values
-     */
-    public static getDateValues = (
-        date: string,
-        format: DateFormat = "y:m:d",
-        seperator = "auto",
-    ): interfaces.YearObj => {
-        let _seperator = "/"
-
-        type KeysArr = ("y" | "m" | "d")[]
-
-        if (seperator === "auto") {
-            for (const letter of date) {
-                if (isNaN(Number(letter))) {
-                    _seperator = letter
-                    break
-                }
-            }
-        } else {
-            _seperator = seperator
-        }
-
-        const dateData = date.split(_seperator)
-        const dateFormat: KeysArr = format.split(":") as KeysArr
-        const output: {[key: string]: number} = {}
-
-        for (let index = 0; index < 3; index++) {
-            const key = DatePlus._keysReference[dateFormat[index]]
-
-            output[key] = Number(dateData[index])
-        }
-
-        return output as interfaces.YearObj
-    }
-
-    /* eslint-disable max-len */
-    /**
-     * Converts numerical day of week into word form (e.g 0 => "Sunday")
-     * @public
-     * @static
-     * @param {number} numerical - numerical day of week, 0 indexed (0-6)
-     * @returns {string} stringed day of week
-     */
-    public static getWordDay = (numerical: keyof Days): string => DatePlus._daysReference[numerical]
-
-    /**
-     * Converts numerical month into word form (e.g 0 => "January")
-     * @public
-     * @static
-     * @param {number} numerical - numerical day of week, 0 indexed (0-11)
-     * @returns {string} stringed worded month
-     */
-    public static getWordMonth = (numerical: keyof Months): string => DatePlus._monthsReference[numerical]
-
-    /**
-     * Add's 0s to the instantiated (e.g 2020/4/3 => 2020/04/03)
-     * @public
-     * @instance
-     * @param {string} seperator - char the date is seperatred by
-     * @returns {string} - date with zeros
-     */
-    public addZeros = (seperator = "/"): string => DatePlus.addZeros(this.formatDate(), seperator)
 
     /**
      * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
-     * @public
-     * @instance
-     * @param {string} seperator - char to seperate date with
-     * @returns {string} formatted date
+     *
+     * @param seperator - Char to seperate date with
+     * @returns Formatted date
      */
-    public formatDate = (seperator = "/"): string => DatePlus.formatDate(this, seperator)
+    public formatDate(seperator = "/"): string {
+        return utils.formatDate(this, seperator)
+    }
 
     /**
      * Gets instantiated day of week in word form (e.g 0 => "Sunday")
-     * @public
-     * @instance
-     * @returns {string} stringed day of week
+     *
+     * @returns Stringed day of week
      */
-    public getWordDay = (): string => DatePlus._daysReference[this.getDay() as keyof Days]
+    public getWordDay(): string {
+        return values.daysReference[this.getDay() as keyof typeof values.daysReference]
+    }
 
     /**
      * Gets instantiated month in word form (e.g 0 => "January")
-     * @public
-     * @instance
-     * @returns {string} stringed worded month
+     *
+     * @returns Stringed worded month
      */
-    public getWordMonth = (): string => DatePlus._monthsReference[this.getMonth() as keyof Months]
-    /* eslint-enable max-len */
+    public getWordMonth(): string {
+        return values.monthsReference[this.getMonth() as keyof typeof values.monthsReference]
+    }
 
+    /**
+     * Calculates number of elapsed days between instantiated date and dae
+     *
+     * @param date - Ending date object to calculate
+     * @returns - Number of elapsed days
+     */
+    public getElapsedDays(date: Date): number {
+        return utils.getElapsedDays(this, date)
+    }
+
+    /**
+     * Calculates number of elapsed hours between date1 and date2
+     *
+     * @param date - Ending date object to calculate
+     * @returns - Number of elapsed hours
+     */
+    public getElapsedHours(date: Date): number {
+        return utils.getElapsedHours(this, date)
+    }
+
+    /**
+     * Calculates number of elapsed minutes between date1 and date2
+     *
+     * @param date - Ending date object to calculate
+     * @returns - Number of elapsed minutes
+     */
+    public getElapsedMinutes(date: Date): number {
+        return utils.getElapsedMinutes(this, date)
+    }
+
+    /**
+     * Calculates number of elapsed seconds between date1 and date2
+     *
+     * @param date - Ending date object to calculate
+     * @returns - Number of elapsed seconds
+     */
+    public getElapsedSeconds(date: Date): number {
+        return utils.getElapsedSeconds(this, date)
+    }
+
+    /**
+     * Calculates number of elapsed milliseconds between date1 and date2
+     *
+     * @param date - Ending date object to calculate
+     * @returns - Number of elapsed milliseconds
+     */
+    public getElapsedMs(date: Date): number {
+        return utils.getElapsedMs(this, date)
+    }
+
+    /**
+     * Calculates elapsed time between current and previous
+     *
+     * @param date - End date
+     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+     * @returns Time difference in string form, e.g "3 seconds ago"
+     */
+    public getElapsedString = (date: Date, approx = "about"): string =>
+        utils.getElapsedString(this, date, approx)
+}
+
+for (const [key, value] of Object.entries({...conversions, ...utils, ...values})) {
+    // In the name of bundle size
+    // @ts-expect-error
+    DatePlus[key] = value
 }
 
 export default DatePlus
