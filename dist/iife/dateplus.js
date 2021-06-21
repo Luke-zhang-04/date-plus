@@ -15,7 +15,6 @@ var DatePlus = (function (exports) {
      * @classdesc A namespace program to convert units
      * @namespace
      */
-
     class Convert extends Date {}
     /**
      * Converts milliseconds to seconds with remainders
@@ -26,8 +25,8 @@ var DatePlus = (function (exports) {
      */
 
     Convert.msToSecs = ms => ({
-      ms: ms % Values.MsPerSec,
-      seconds: (ms - ms % Values.MsPerSec) / Values.MsPerSec
+      ms: ms % 1000,
+      seconds: (ms - ms % 1000) / 1000
     });
     /**
      * Converts milliseconds to minutes with remainders
@@ -39,9 +38,9 @@ var DatePlus = (function (exports) {
 
 
     Convert.msToMins = ms => {
-      const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-      const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-      const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin);
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
       return {
         ms: milliseconds,
         seconds,
@@ -58,10 +57,10 @@ var DatePlus = (function (exports) {
 
 
     Convert.msToHrs = ms => {
-      const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-      const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-      const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-      const hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr);
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+      const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60);
       return {
         ms: milliseconds,
         seconds,
@@ -79,11 +78,11 @@ var DatePlus = (function (exports) {
 
 
     Convert.msToDays = ms => {
-      const milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-      const seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-      const minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-      const hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr) % Values.HrsPerDay;
-      const days = (ms - hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay);
+      const milliseconds = ms % 1000 % 1000;
+      const seconds = (ms - ms % 1000) / 1000 % 60;
+      const minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+      const hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60) % 24;
+      const days = (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60 * 24);
       return {
         ms: milliseconds,
         seconds,
@@ -101,7 +100,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.secsToMs = secs => secs * Values.MsPerSec;
+    Convert.secsToMs = secs => secs * 1000;
     /**
      * Converts seconds to minutes with remainders
      * @public
@@ -141,7 +140,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.minsToMs = mins => mins * Values.SecsPerMin * Values.MsPerSec;
+    Convert.minsToMs = mins => mins * 60 * 1000;
     /**
      * Converts hours to seconds
      * @public
@@ -151,7 +150,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.minsToSecs = mins => mins * Values.SecsPerMin;
+    Convert.minsToSecs = mins => mins * 60;
     /**
      * Converts minutes to hours with remainders
      * @public
@@ -181,7 +180,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.hrsToMs = hours => hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+    Convert.hrsToMs = hours => hours * 60 * 60 * 1000;
     /**
      * Converts hours to seconds
      * @public
@@ -191,7 +190,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.hrsToSecs = hours => hours * Values.MinsPerHr * Values.SecsPerMin;
+    Convert.hrsToSecs = hours => hours * 60 * 60;
     /**
      * Converts hours to minutes
      * @public
@@ -201,7 +200,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.hrsToMins = hours => hours * Values.MinsPerHr;
+    Convert.hrsToMins = hours => hours * 60;
     /**
      * Converts hours to days with remainders
      * @public
@@ -221,7 +220,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.daysToMs = days => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+    Convert.daysToMs = days => days * 24 * 60 * 60 * 1000;
     /**
      * Converts days to seconds
      * @public
@@ -231,7 +230,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.daysToSecs = days => days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin;
+    Convert.daysToSecs = days => days * 24 * 60 * 60;
     /**
      * Converts days to minutes
      * @public
@@ -241,7 +240,7 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.daysToMins = days => days * Values.HrsPerDay * Values.MinsPerHr;
+    Convert.daysToMins = days => days * 24 * 60;
     /**
      * Converts days to hours
      * @public
@@ -251,23 +250,14 @@ var DatePlus = (function (exports) {
      */
 
 
-    Convert.daysToHrs = days => days * Values.HrsPerDay;
+    Convert.daysToHrs = days => days * 24;
 
-    var Values;
-
-    (function (Values) {
-      Values[Values["HrsPerDay"] = 24] = "HrsPerDay";
-      Values[Values["MinsPerHr"] = 60] = "MinsPerHr";
-      Values[Values["SecsPerMin"] = 60] = "SecsPerMin";
-      Values[Values["MsPerSec"] = 1000] = "MsPerSec";
-    })(Values || (Values = {}));
     /**
      * Elapse class and namespace
      * @classdesc A class and namespace program to find elapsed times
      * @class
      * @namespace
      */
-
 
     class Elapse extends Convert {
       constructor() {
@@ -291,7 +281,7 @@ var DatePlus = (function (exports) {
      * @type {number}
      */
 
-    Elapse._oneDay = Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+    Elapse._oneDay = 24 * 60 * 60 * 1000;
     /**
      * Calculates number of elapsed days between date1 and date2
      * @public

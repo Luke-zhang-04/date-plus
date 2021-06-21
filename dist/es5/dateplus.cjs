@@ -230,7 +230,6 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
  * @classdesc A namespace program to convert units
  * @namespace
  */
-
 var Convert = function (_Date) {
   _inherits(Convert, _Date);
 
@@ -247,8 +246,8 @@ var Convert = function (_Date) {
 
 Convert.msToSecs = function (ms) {
   return {
-    ms: ms % Values.MsPerSec,
-    seconds: (ms - ms % Values.MsPerSec) / Values.MsPerSec
+    ms: ms % 1000,
+    seconds: (ms - ms % 1000) / 1000
   };
 };
 /**
@@ -261,9 +260,9 @@ Convert.msToSecs = function (ms) {
 
 
 Convert.msToMins = function (ms) {
-  var milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  var seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  var minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin);
+  var milliseconds = ms % 1000 % 1000;
+  var seconds = (ms - ms % 1000) / 1000 % 60;
+  var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60);
   return {
     ms: milliseconds,
     seconds: seconds,
@@ -280,10 +279,10 @@ Convert.msToMins = function (ms) {
 
 
 Convert.msToHrs = function (ms) {
-  var milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  var seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  var minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-  var hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr);
+  var milliseconds = ms % 1000 % 1000;
+  var seconds = (ms - ms % 1000) / 1000 % 60;
+  var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  var hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60);
   return {
     ms: milliseconds,
     seconds: seconds,
@@ -301,11 +300,11 @@ Convert.msToHrs = function (ms) {
 
 
 Convert.msToDays = function (ms) {
-  var milliseconds = ms % Values.MsPerSec % Values.MsPerSec;
-  var seconds = (ms - ms % Values.MsPerSec) / Values.MsPerSec % Values.SecsPerMin;
-  var minutes = (ms - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin) % Values.MinsPerHr;
-  var hours = (ms - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr) % Values.HrsPerDay;
-  var days = (ms - hours * Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr - minutes * Values.MsPerSec * Values.SecsPerMin - seconds * Values.MsPerSec - milliseconds) / (Values.MsPerSec * Values.SecsPerMin * Values.MinsPerHr * Values.HrsPerDay);
+  var milliseconds = ms % 1000 % 1000;
+  var seconds = (ms - ms % 1000) / 1000 % 60;
+  var minutes = (ms - seconds * 1000 - milliseconds) / (1000 * 60) % 60;
+  var hours = (ms - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60) % 24;
+  var days = (ms - hours * 1000 * 60 * 60 - minutes * 1000 * 60 - seconds * 1000 - milliseconds) / (1000 * 60 * 60 * 24);
   return {
     ms: milliseconds,
     seconds: seconds,
@@ -324,7 +323,7 @@ Convert.msToDays = function (ms) {
 
 
 Convert.secsToMs = function (secs) {
-  return secs * Values.MsPerSec;
+  return secs * 1000;
 };
 /**
  * Converts seconds to minutes with remainders
@@ -372,7 +371,7 @@ Convert.secsToDays = function (secs) {
 
 
 Convert.minsToMs = function (mins) {
-  return mins * Values.SecsPerMin * Values.MsPerSec;
+  return mins * 60 * 1000;
 };
 /**
  * Converts hours to seconds
@@ -384,7 +383,7 @@ Convert.minsToMs = function (mins) {
 
 
 Convert.minsToSecs = function (mins) {
-  return mins * Values.SecsPerMin;
+  return mins * 60;
 };
 /**
  * Converts minutes to hours with remainders
@@ -420,7 +419,7 @@ Convert.minsToDays = function (mins) {
 
 
 Convert.hrsToMs = function (hours) {
-  return hours * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+  return hours * 60 * 60 * 1000;
 };
 /**
  * Converts hours to seconds
@@ -432,7 +431,7 @@ Convert.hrsToMs = function (hours) {
 
 
 Convert.hrsToSecs = function (hours) {
-  return hours * Values.MinsPerHr * Values.SecsPerMin;
+  return hours * 60 * 60;
 };
 /**
  * Converts hours to minutes
@@ -444,7 +443,7 @@ Convert.hrsToSecs = function (hours) {
 
 
 Convert.hrsToMins = function (hours) {
-  return hours * Values.MinsPerHr;
+  return hours * 60;
 };
 /**
  * Converts hours to days with remainders
@@ -468,7 +467,7 @@ Convert.hrsToDays = function (hrs) {
 
 
 Convert.daysToMs = function (days) {
-  return days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+  return days * 24 * 60 * 60 * 1000;
 };
 /**
  * Converts days to seconds
@@ -480,7 +479,7 @@ Convert.daysToMs = function (days) {
 
 
 Convert.daysToSecs = function (days) {
-  return days * Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin;
+  return days * 24 * 60 * 60;
 };
 /**
  * Converts days to minutes
@@ -492,7 +491,7 @@ Convert.daysToSecs = function (days) {
 
 
 Convert.daysToMins = function (days) {
-  return days * Values.HrsPerDay * Values.MinsPerHr;
+  return days * 24 * 60;
 };
 /**
  * Converts days to hours
@@ -504,24 +503,15 @@ Convert.daysToMins = function (days) {
 
 
 Convert.daysToHrs = function (days) {
-  return days * Values.HrsPerDay;
+  return days * 24;
 };
 
-var Values;
-
-(function (Values) {
-  Values[Values["HrsPerDay"] = 24] = "HrsPerDay";
-  Values[Values["MinsPerHr"] = 60] = "MinsPerHr";
-  Values[Values["SecsPerMin"] = 60] = "SecsPerMin";
-  Values[Values["MsPerSec"] = 1000] = "MsPerSec";
-})(Values || (Values = {}));
 /**
  * Elapse class and namespace
  * @classdesc A class and namespace program to find elapsed times
  * @class
  * @namespace
  */
-
 
 var Elapse = function (_Convert) {
   _inherits(Elapse, _Convert);
@@ -551,7 +541,7 @@ var Elapse = function (_Convert) {
 
   return Elapse;
 }(Convert);
-Elapse._oneDay = Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec;
+Elapse._oneDay = 24 * 60 * 60 * 1000;
 /**
  * Calculates number of elapsed days between date1 and date2
  * @public

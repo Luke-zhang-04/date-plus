@@ -12,7 +12,7 @@ import Convert from "./conversions"
 import DatePlus from "."
 
 /* eslint-disable no-shadow */
-export enum Values {
+export const enum Values {
     HrsPerDay = 24,
     MinsPerHr = 60,
     SecsPerMin = 60,
