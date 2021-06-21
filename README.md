@@ -12,10 +12,16 @@
     <a href="https://codeclimate.com/github/Luke-zhang-04/date-plus/test_coverage"><img src="https://img.shields.io/codeclimate/coverage/Luke-zhang-04/date-plus?label=Coverage&logo=code-climate" alt="coverage"/></a>
 </p>
 
-A simple library to assist with date manipulation (the most horrendous thing a human can be put through), comprising of a series of simple functions for convenience.
+A simple library to assist with date manipulation, comprising of a series of simple functions for convenience.
+
+## Difference from date-fns
+
+I didn't know about date-fns when I wrote this. Honestly, go use [date-fns](https://github.com/date-fns/date-fns) instead.
 
 ## Installation
+
 Download from NPM
+
 ```bash
 # Using NPM
 npm i @luke-zhang-04/dateplus --save
@@ -25,6 +31,7 @@ yarn add @luke-zhang-04/dateplus
 ```
 
 Get bundles with curl
+
 ```bash
 curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_NAME>/dateplus.bundle.min.js -O js/dateplus.bundle.min.js # Download minified file (recommended)
 
@@ -32,27 +39,29 @@ curl -L https://github.com/Luke-zhang-04/date-plus/releases/download/v<VERSION_N
 ```
 
 ## Usage
+
 Run in a node environment with a `require` or `import` statement
+
 ```js
-const DatePlus = require("@luke-zhang-04/dateplus").default
+const {default: DatePlus} = require("@luke-zhang-04/dateplus")
 import DatePlus from "@luke-zhang-04/dateplus"
 
 const myDate = new DatePlus()
 ```
 
-Run in a browser environment by either using webpack or an alternative on the previous solution, or by adding the `dateplus.min.js` to your javascript within the HTML
+Run in a browser environment by either using webpack or an alternative on the previous solution, or by adding the `dateplus.min.js` to your javascript within the HTML by downloading it or using a CDN
+
 ```html
 <script src="js/dateplus.min.js"></script>
+<!-- OR -->
+<script src="https://unpkg.com/@luke-zhang-04/dateplus@4.0.0-beta1/dist/esm/dateplus.min.js"></script>
 
 <script>
-    // Warning: Object destructuring is an ES6 feature
-    const {DatePlus} = DatePlus, // DatePlus is exposed to one global Namespace
-        myDate = new DatePlus()
+    const {default: DatePlus} = DatePlus
+    const myDate = new DatePlus()
 </script>
 ```
 
-No CDN is currently available
-
-
 ## Documentation
+
 For documentation, visit the [dateplus wiki](https://github.com/Luke-zhang-04/date-plus/wiki)
