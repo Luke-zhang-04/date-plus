@@ -7,7 +7,7 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
-import {daysReference, monthsReference, oneDay} from "./values"
+import {Values, daysReference, monthsReference, oneDay, oneHour, oneMinute} from "./values"
 import type {YearObj} from "./conversions"
 
 type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
@@ -143,3 +143,43 @@ export const getWordMonth = (numerical: keyof typeof monthsReference): string =>
  */
 export const getElapsedDays = (date1: Date, date2: Date): number =>
     Math.round((date1.getTime() - date2.getTime()) / oneDay) * -1
+
+/**
+ * Calculates number of elapsed hours between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed hours
+ */
+export const getElapsedHours = (date1: Date, date2: Date): number =>
+    Math.round((date1.getTime() - date2.getTime()) / oneHour) * -1
+
+/**
+ * Calculates number of elapsed minutes between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed minutes
+ */
+export const getElapsedMinutes = (date1: Date, date2: Date): number =>
+    Math.round((date1.getTime() - date2.getTime()) / oneMinute) * -1
+
+/**
+ * Calculates number of elapsed seconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed seconds
+ */
+export const getElapsedSeconds = (date1: Date, date2: Date): number =>
+    Math.round((date1.getTime() - date2.getTime()) / Values.MsPerSec) * -1
+
+/**
+ * Calculates number of elapsed milliseconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed milliseconds
+ */
+export const getElapsedMs = (date1: Date, date2: Date): number =>
+    Math.round(date1.getTime() - date2.getTime()) * -1

@@ -7,6 +7,8 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
 
+// TODO: use Mocha for tests
+
 /* eslint-disable one-var */
 
 const test = (DatePlus, quiet = false) => {
@@ -60,6 +62,44 @@ const test = (DatePlus, quiet = false) => {
         )
     }
     !quiet && console.log("getElapsedDays passed\n")
+
+    !quiet && console.log("testing getElapsedHours")
+    if (date.getElapsedHours(date2) !== 720) {
+        throw Error(
+            `Elapsed days ${date.getElapsedHours(date2)} from getElapsedHours does not match 720`,
+        )
+    }
+    !quiet && console.log("getElapsedHours passed\n")
+
+    !quiet && console.log("testing getElapsedMinutes")
+    if (date.getElapsedMinutes(date2) !== 43_200) {
+        throw Error(
+            `Elapsed days ${date.getElapsedMinutes(
+                date2,
+            )} from getElapsedMinutes does not match 43_200`,
+        )
+    }
+    !quiet && console.log("getElapsedMinutes passed\n")
+
+    !quiet && console.log("testing getElapsedSeconds")
+    if (date.getElapsedSeconds(date2) !== 2_592_000) {
+        throw Error(
+            `Elapsed days ${date.getElapsedSeconds(
+                date2,
+            )} from getElapsedSeconds does not match 2_592_000`,
+        )
+    }
+    !quiet && console.log("getElapsedSeconds passed\n")
+
+    !quiet && console.log("testing getElapsedMs")
+    if (date.getElapsedMs(date2) !== 2_592_000_000) {
+        throw Error(
+            `Elapsed days ${date.getElapsedMs(
+                date2,
+            )} from getElapsedMs does not match 2_592_000_000`,
+        )
+    }
+    !quiet && console.log("getElapsedMs passed\n")
 
     !quiet && console.log("testing msToSecs")
     let conv = DatePlus.msToSecs(2001)

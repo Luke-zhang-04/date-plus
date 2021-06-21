@@ -84,17 +84,20 @@ export class DatePlus extends Date {
     public declare static daysToHrs: typeof conversions.daysToHrs
     public declare static daysToHours: typeof conversions.daysToHrs
 
-    /* eslint-enable @typescript-eslint/lines-between-class-members */
-
     public declare static addZeros: typeof utils.addZeros
 
     public declare static formatDate: typeof utils.formatDate
 
     public declare static getWordDay: typeof utils.getWordDay
-
     public declare static getWordMonth: typeof utils.getWordMonth
 
+    public declare static getElapsedMs: typeof utils.getElapsedMs
+    public declare static getElapsedSeconds: typeof utils.getElapsedSeconds
+    public declare static getElapsedMinutes: typeof utils.getElapsedMinutes
+    public declare static getElapsedHours: typeof utils.getElapsedHours
     public declare static getElapsedDays: typeof utils.getElapsedDays
+
+    /* eslint-enable @typescript-eslint/lines-between-class-members */
 
     /**
      * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
@@ -135,8 +138,39 @@ export class DatePlus extends Date {
      * @param date - Ending date object to calculate
      * @returns - Number of elapsed days
      */
-    public getElapsedDays = (date: Date): number =>
-        Math.round((this.getTime() - date.getTime()) / values.oneDay) * -1
+    public getElapsedDays = (date: Date): number => utils.getElapsedDays(this, date)
+
+    /**
+     * Calculates number of elapsed hours between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed hours
+     */
+    getElapsedHours = (date: Date): number => utils.getElapsedHours(this, date)
+
+    /**
+     * Calculates number of elapsed minutes between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed minutes
+     */
+    getElapsedMinutes = (date: Date): number => utils.getElapsedMinutes(this, date)
+
+    /**
+     * Calculates number of elapsed seconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed seconds
+     */
+    getElapsedSeconds = (date: Date): number => utils.getElapsedSeconds(this, date)
+
+    /**
+     * Calculates number of elapsed milliseconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed milliseconds
+     */
+    getElapsedMs = (date: Date): number => utils.getElapsedMs(this, date)
 }
 
 for (const [key, value] of Object.entries({...conversions, ...utils, ...values})) {

@@ -52,4 +52,17 @@ export const monthsReference = {
     11: "December",
 }
 
-export const oneDay = Values.HrsPerDay * Values.MinsPerHr * Values.SecsPerMin * Values.MsPerSec
+/**
+ * One minutes in ms
+ */
+export const oneMinute = Values.SecsPerMin * Values.MsPerSec
+
+/**
+ * One hour in ms
+ */
+export const oneHour = Values.MinsPerHr * oneMinute
+
+/**
+ * One day in ms
+ */
+export const oneDay = Values.HrsPerDay * oneHour

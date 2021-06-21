@@ -256,13 +256,17 @@ const monthsReference = {
   10: "November",
   11: "December"
 };
-const oneDay = 24 * 60 * 60 * 1000;
+const oneMinute = 60 * 1000;
+const oneHour = 60 * oneMinute;
+const oneDay = 24 * oneHour;
 
 var values$1 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     values: values,
     daysReference: daysReference,
     monthsReference: monthsReference,
+    oneMinute: oneMinute,
+    oneHour: oneHour,
     oneDay: oneDay
 });
 
@@ -371,6 +375,42 @@ const getWordMonth = numerical => monthsReference[numerical];
  */
 
 const getElapsedDays = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneDay) * -1;
+/**
+ * Calculates number of elapsed hours between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed hours
+ */
+
+const getElapsedHours = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneHour) * -1;
+/**
+ * Calculates number of elapsed minutes between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed minutes
+ */
+
+const getElapsedMinutes = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / oneMinute) * -1;
+/**
+ * Calculates number of elapsed seconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed seconds
+ */
+
+const getElapsedSeconds = (date1, date2) => Math.round((date1.getTime() - date2.getTime()) / 1000) * -1;
+/**
+ * Calculates number of elapsed milliseconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed milliseconds
+ */
+
+const getElapsedMs = (date1, date2) => Math.round(date1.getTime() - date2.getTime()) * -1;
 
 var utils = /*#__PURE__*/Object.freeze({
     __proto__: null,
@@ -379,7 +419,11 @@ var utils = /*#__PURE__*/Object.freeze({
     getDateValues: getDateValues,
     getWordDay: getWordDay,
     getWordMonth: getWordMonth,
-    getElapsedDays: getElapsedDays
+    getElapsedDays: getElapsedDays,
+    getElapsedHours: getElapsedHours,
+    getElapsedMinutes: getElapsedMinutes,
+    getElapsedSeconds: getElapsedSeconds,
+    getElapsedMs: getElapsedMs
 });
 
 class DatePlus extends Date {
@@ -427,7 +471,43 @@ class DatePlus extends Date {
      */
 
 
-    this.getElapsedDays = date => Math.round((this.getTime() - date.getTime()) / oneDay) * -1;
+    this.getElapsedDays = date => getElapsedDays(this, date);
+    /**
+     * Calculates number of elapsed hours between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed hours
+     */
+
+
+    this.getElapsedHours = date => getElapsedHours(this, date);
+    /**
+     * Calculates number of elapsed minutes between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed minutes
+     */
+
+
+    this.getElapsedMinutes = date => getElapsedMinutes(this, date);
+    /**
+     * Calculates number of elapsed seconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed seconds
+     */
+
+
+    this.getElapsedSeconds = date => getElapsedSeconds(this, date);
+    /**
+     * Calculates number of elapsed milliseconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed milliseconds
+     */
+
+
+    this.getElapsedMs = date => getElapsedMs(this, date);
   }
 
 }

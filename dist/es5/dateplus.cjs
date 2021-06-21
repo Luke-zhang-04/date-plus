@@ -550,13 +550,17 @@ var monthsReference = {
   10: "November",
   11: "December"
 };
-var oneDay = 24 * 60 * 60 * 1000;
+var oneMinute = 60 * 1000;
+var oneHour = 60 * oneMinute;
+var oneDay = 24 * oneHour;
 
 var values$1 = /*#__PURE__*/Object.freeze({
   __proto__: null,
   values: values,
   daysReference: daysReference,
   monthsReference: monthsReference,
+  oneMinute: oneMinute,
+  oneHour: oneHour,
   oneDay: oneDay
 });
 
@@ -686,6 +690,50 @@ var getWordMonth = function getWordMonth(numerical) {
 var getElapsedDays = function getElapsedDays(date1, date2) {
   return Math.round((date1.getTime() - date2.getTime()) / oneDay) * -1;
 };
+/**
+ * Calculates number of elapsed hours between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed hours
+ */
+
+var getElapsedHours = function getElapsedHours(date1, date2) {
+  return Math.round((date1.getTime() - date2.getTime()) / oneHour) * -1;
+};
+/**
+ * Calculates number of elapsed minutes between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed minutes
+ */
+
+var getElapsedMinutes = function getElapsedMinutes(date1, date2) {
+  return Math.round((date1.getTime() - date2.getTime()) / oneMinute) * -1;
+};
+/**
+ * Calculates number of elapsed seconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed seconds
+ */
+
+var getElapsedSeconds = function getElapsedSeconds(date1, date2) {
+  return Math.round((date1.getTime() - date2.getTime()) / 1000) * -1;
+};
+/**
+ * Calculates number of elapsed milliseconds between date1 and date2
+ *
+ * @param date1 - Starting date object to calculate
+ * @param date2 - Ending date object to calculate
+ * @returns - Number of elapsed milliseconds
+ */
+
+var getElapsedMs = function getElapsedMs(date1, date2) {
+  return Math.round(date1.getTime() - date2.getTime()) * -1;
+};
 
 var utils = /*#__PURE__*/Object.freeze({
   __proto__: null,
@@ -694,7 +742,11 @@ var utils = /*#__PURE__*/Object.freeze({
   getDateValues: getDateValues,
   getWordDay: getWordDay,
   getWordMonth: getWordMonth,
-  getElapsedDays: getElapsedDays
+  getElapsedDays: getElapsedDays,
+  getElapsedHours: getElapsedHours,
+  getElapsedMinutes: getElapsedMinutes,
+  getElapsedSeconds: getElapsedSeconds,
+  getElapsedMs: getElapsedMs
 });
 
 var DatePlus = function (_Date) {
@@ -761,7 +813,51 @@ var DatePlus = function (_Date) {
 
 
     _this.getElapsedDays = function (date) {
-      return Math.round((_this.getTime() - date.getTime()) / oneDay) * -1;
+      return getElapsedDays(_assertThisInitialized(_this), date);
+    };
+    /**
+     * Calculates number of elapsed hours between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed hours
+     */
+
+
+    _this.getElapsedHours = function (date) {
+      return getElapsedHours(_assertThisInitialized(_this), date);
+    };
+    /**
+     * Calculates number of elapsed minutes between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed minutes
+     */
+
+
+    _this.getElapsedMinutes = function (date) {
+      return getElapsedMinutes(_assertThisInitialized(_this), date);
+    };
+    /**
+     * Calculates number of elapsed seconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed seconds
+     */
+
+
+    _this.getElapsedSeconds = function (date) {
+      return getElapsedSeconds(_assertThisInitialized(_this), date);
+    };
+    /**
+     * Calculates number of elapsed milliseconds between date1 and date2
+     *
+     * @param date - Starting date object to calculate
+     * @returns - Number of elapsed milliseconds
+     */
+
+
+    _this.getElapsedMs = function (date) {
+      return getElapsedMs(_assertThisInitialized(_this), date);
     };
 
     return _this;
