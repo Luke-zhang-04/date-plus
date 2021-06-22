@@ -4,7 +4,7 @@
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  * @author Luke Zhang luke-zhang-04.github.io
  * @license MIT
- * @version 3.1.0
+ * @version 4.0.0-beta1
  */
 
 'use strict';
@@ -225,48 +225,6 @@ const daysToMinutes = daysToMins;
 const daysToHrs = days => days * 24;
 const daysToHours = daysToHrs;
 
-var conversions = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    msToSecs: msToSecs,
-    msToSeconds: msToSeconds,
-    msToMins: msToMins,
-    msToMinutes: msToMinutes,
-    msToHrs: msToHrs,
-    msToHours: msToHours,
-    msToDays: msToDays,
-    secsToMs: secsToMs,
-    secondsToMs: secondsToMs,
-    secsToMins: secsToMins,
-    secondsToMinutes: secondsToMinutes,
-    secsToHrs: secsToHrs,
-    secondsToHours: secondsToHours,
-    secsToDays: secsToDays,
-    secondsToDays: secondsToDays,
-    minsToMs: minsToMs,
-    minutesToMs: minutesToMs,
-    minsToSecs: minsToSecs,
-    minutesToSeconds: minutesToSeconds,
-    minsToHrs: minsToHrs,
-    minutesToHours: minutesToHours,
-    minsToDays: minsToDays,
-    minutesToDays: minutesToDays,
-    hrsToMs: hrsToMs,
-    hoursToMs: hoursToMs,
-    hrsToSecs: hrsToSecs,
-    hoursToSeconds: hoursToSeconds,
-    hrsToMins: hrsToMins,
-    hoursToMinutes: hoursToMinutes,
-    hrsToDays: hrsToDays,
-    hoursToDays: hoursToDays,
-    daysToMs: daysToMs,
-    daysToSecs: daysToSecs,
-    daysToSeconds: daysToSeconds,
-    daysToMins: daysToMins,
-    daysToMinutes: daysToMinutes,
-    daysToHrs: daysToHrs,
-    daysToHours: daysToHours
-});
-
 const values = {
   hrsPerDay: 24,
   minsPerHr: 60,
@@ -300,16 +258,6 @@ const oneMinute = 60 * 1000;
 const oneHour = 60 * oneMinute;
 const oneDay = 24 * oneHour;
 
-var values$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    values: values,
-    daysReference: daysReference,
-    monthsReference: monthsReference,
-    oneMinute: oneMinute,
-    oneHour: oneHour,
-    oneDay: oneDay
-});
-
 const keysReference = {
   y: "year",
   m: "month",
@@ -324,37 +272,30 @@ const keysReference = {
  */
 
 const addZeros = (date, seperator = "/") => {
-  let newDate = "";
-
-  for (let index = 0; index < 2; index++) {
-    if (date.split(seperator)[index].length < 2) {
-      newDate += `0${date.split(seperator)[index]}${seperator}`;
-    } else {
-      newDate += `${date.split(seperator)[index]}${seperator}`;
-    }
-  }
-
-  if (date.split(seperator)[2].length < 2) {
-    newDate += `0${date.split(seperator)[2]}`;
-  } else {
-    newDate += date.split(seperator)[2];
-  }
-
-  return newDate;
+  const splitDate = date.split(seperator);
+  const newDateValues = splitDate.map(section => section.length < 2 ? `0${section}` : section);
+  return newDateValues.join(seperator);
 };
 /**
  * Format date into a string in the form YYYY{seperator}MM{seperator}DD
  *
- * @param {Date} date - Date object to format
+ * @param date - Date object to format
+ * @param format - Format of string date
  * @param seperator - String to seperate date values with
  * @returns Formatted date
  */
 
-const formatDate = (date, seperator = "/") => {
+const formatDate = (date, format = "y:m:d", seperator = "/") => {
   const month = date.getMonth().toString();
   const day = date.getDate().toString();
   const year = date.getFullYear().toString();
-  return [year, month, day].join(seperator);
+  const values = {
+    m: month,
+    d: day,
+    y: year
+  };
+  const formatArray = format.split(":");
+  return formatArray.map(val => values[val]).join(seperator);
 };
 /**
  * Gets date values and outputs an object
@@ -379,13 +320,13 @@ const getDateValues = (date, format = "y:m:d", seperator = "auto") => {
     _seperator = seperator;
   }
 
-  const dateData = date.split(_seperator);
+  const splitDate = date.split(_seperator);
   const dateFormat = format.split(":");
   const output = {};
 
   for (let index = 0; index < 3; index++) {
     const key = keysReference[dateFormat[index]];
-    output[key] = Number(dateData[index]);
+    output[key] = Number(splitDate[index]);
   }
 
   return output;
@@ -511,36 +452,7 @@ const getUtcTime = () => {
   return Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 };
 
-var utils = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    addZeros: addZeros,
-    formatDate: formatDate,
-    getDateValues: getDateValues,
-    getWordDay: getWordDay,
-    getWordMonth: getWordMonth,
-    getElapsedDays: getElapsedDays,
-    getElapsedHours: getElapsedHours,
-    getElapsedMinutes: getElapsedMinutes,
-    getElapsedSeconds: getElapsedSeconds,
-    getElapsedMs: getElapsedMs,
-    getElapsedString: getElapsedString,
-    utcToLocal: utcToLocal,
-    getUtcTime: getUtcTime
-});
-
 class DatePlus extends Date {
-  constructor() {
-    super(...arguments);
-    /**
-     * Calculates elapsed time between current and previous
-     *
-     * @param date - End date
-     * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
-     * @returns Time difference in string form, e.g "3 seconds ago"
-     */
-
-    this.getElapsedString = (date, approx = "about") => getElapsedString(this, date, approx);
-  }
   /**
    * Add's 0s to date (e.g 2020/4/3 => 2020/04/03)
    *
@@ -548,8 +460,6 @@ class DatePlus extends Date {
    * @param seperator - Char the date is seperatred by
    * @returns - Date with zeros
    */
-
-
   addZeros(seperator = "/") {
     return addZeros(this.formatDate(), seperator);
   }
@@ -557,12 +467,13 @@ class DatePlus extends Date {
    * Format instantiated into a string in the form YYYY{seperator}MM{seperator}DD
    *
    * @param seperator - Char to seperate date with
+   * @param format - Format of string date
    * @returns Formatted date
    */
 
 
-  formatDate(seperator = "/") {
-    return formatDate(this, seperator);
+  formatDate(format = "y:m:d", seperator = "/") {
+    return formatDate(this, format, seperator);
   }
   /**
    * Gets instantiated day of week in word form (e.g 0 => "Sunday")
@@ -639,12 +550,19 @@ class DatePlus extends Date {
   getElapsedMs(date) {
     return getElapsedMs(this, date);
   }
+  /**
+   * Calculates elapsed time between current and previous
+   *
+   * @param date - End date
+   * @param approx - Text to append to values from days and on, e.g *about* 1 day aga
+   * @returns Time difference in string form, e.g "3 seconds ago"
+   */
 
-}
 
-for (const [key, value] of Object.entries(Object.assign(Object.assign(Object.assign({}, conversions), utils), values$1))) {
-  // @ts-expect-error
-  DatePlus[key] = value;
+  getElapsedString(date, approx = "about") {
+    return getElapsedString(this, date, approx);
+  }
+
 }
 
 exports.DatePlus = DatePlus;

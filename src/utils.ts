@@ -2,7 +2,7 @@
  * DatePlus A simple program to assist with date manipulation
  *
  * @license MIT
- * @version 3.1.0
+ * @version 4.0.0-beta1
  * @author Luke Zhang luke-zhang-04.github.io
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
@@ -10,7 +10,8 @@
 import {Values, daysReference, monthsReference, oneDay, oneHour, oneMinute} from "./values"
 import type {YearObj} from "./conversions"
 
-type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
+export type DateFormat = "y:m:d" | "y:d:m" | "m:d:y" | "m:y:d" | "d:m:y" | "d:y:m"
+type KeysArr = ("y" | "m" | "d")[]
 
 /**
  * Object for date keys
@@ -41,38 +42,37 @@ const keysReference: Keys = {
  * @returns - Date with zeros
  */
 export const addZeros = (date: string, seperator = "/"): string => {
-    let newDate = ""
+    const splitDate = date.split(seperator)
 
-    for (let index = 0; index < 2; index++) {
-        if (date.split(seperator)[index].length < 2) {
-            newDate += `0${date.split(seperator)[index]}${seperator}`
-        } else {
-            newDate += `${date.split(seperator)[index]}${seperator}`
-        }
-    }
+    const newDateValues = splitDate.map((section) =>
+        section.length < 2 ? `0${section}` : section,
+    )
 
-    if (date.split(seperator)[2].length < 2) {
-        newDate += `0${date.split(seperator)[2]}`
-    } else {
-        newDate += date.split(seperator)[2]
-    }
-
-    return newDate
+    return newDateValues.join(seperator)
 }
 
 /**
  * Format date into a string in the form YYYY{seperator}MM{seperator}DD
  *
- * @param {Date} date - Date object to format
+ * @param date - Date object to format
+ * @param format - Format of string date
  * @param seperator - String to seperate date values with
  * @returns Formatted date
  */
-export const formatDate = (date: Date, seperator = "/"): string => {
+export const formatDate = (date: Date, format: DateFormat = "y:m:d", seperator = "/"): string => {
     const month = date.getMonth().toString()
     const day = date.getDate().toString()
+    /* eslint-disable id-length */
     const year = date.getFullYear().toString()
+    const values = {
+        m: month,
+        d: day,
+        y: year,
+    }
+    /* eslint-enable id-length */
+    const formatArray = format.split(":") as KeysArr
 
-    return [year, month, day].join(seperator)
+    return formatArray.map((val) => values[val]).join(seperator)
 }
 
 /**
@@ -90,8 +90,6 @@ export const getDateValues = (
 ): YearObj => {
     let _seperator = "/"
 
-    type KeysArr = ("y" | "m" | "d")[]
-
     if (seperator === "auto") {
         for (const letter of date) {
             if (isNaN(Number(letter))) {
@@ -103,14 +101,14 @@ export const getDateValues = (
         _seperator = seperator
     }
 
-    const dateData = date.split(_seperator)
-    const dateFormat: KeysArr = format.split(":") as KeysArr
+    const splitDate = date.split(_seperator)
+    const dateFormat = format.split(":") as KeysArr
     const output: {[key: string]: number} = {}
 
     for (let index = 0; index < 3; index++) {
         const key = keysReference[dateFormat[index]]
 
-        output[key] = Number(dateData[index])
+        output[key] = Number(splitDate[index])
     }
 
     return output as YearObj

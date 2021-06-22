@@ -1,0 +1,6 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "typedoc-output",
+  "plugin": "typedoc-plugin-markdown",
+  "entryDocument": "Home.md"
+}

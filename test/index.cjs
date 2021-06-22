@@ -2,7 +2,7 @@
  * DatePlus/tests Defines tests for DatePlus
  *
  * @license MIT
- * @version 3.1.0
+ * @version 4.0.0-beta1
  * @author Luke Zhang luke-zhang-04.github.io
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
@@ -15,7 +15,7 @@
  * @param {import("../lib").default} DatePlus
  */
 const test = (DatePlus, quiet = false) => {
-    const date = new DatePlus(2020, 6, 1)
+    const date = new DatePlus.DatePlus(2020, 6, 1)
     /* eslint-enable one-var */
 
     !quiet && console.log("testing formatDate")
@@ -340,4 +340,4 @@ const test = (DatePlus, quiet = false) => {
 
 const quiet = process.argv.includes("--quiet") || process.argv.includes("-q")
 
-test(require("./dateplus.cjs").default, quiet)
+test(require("./dateplus.cjs"), quiet)

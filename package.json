@@ -1,6 +1,6 @@
 {
   "name": "@luke-zhang-04/dateplus",
-  "version": "3.1.0",
+  "version": "4.0.0-beta1",
   "description": "A simple program to assist with date manipulation",
   "main": "dist/esm/dateplus.js",
   "types": "index.d.ts",
@@ -15,11 +15,12 @@
     "build": "bash build.sh",
     "start": "bash build.sh --watch",
     "prepublishOnly": "yarn build",
-    "lint": "eslint \"*/**/*.ts\"",
-    "lint:fix": "eslint \"*/**/*.ts\" --fix",
+    "lint": "eslint \"*/**/*.ts\" --cache",
+    "lint:fix": "eslint \"*/**/*.ts\" --fix --cache",
     "test": "node test/index.cjs",
     "test:quiet": "node test/index.cjs --quiet",
-    "coverage": "nyc node test/index.cjs --quiet"
+    "coverage": "nyc node test/index.cjs --quiet",
+    "generateDocs": "./generateDocs.sh"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,8 @@
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.1.0",
+    "typedoc": "^0.21.0",
+    "typedoc-plugin-markdown": "^3.10.0",
     "typescript": "^4.2.2."
   }
 }
