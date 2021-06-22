@@ -62,12 +62,14 @@ export const addZeros = (date: string, seperator = "/"): string => {
 export const formatDate = (date: Date, format: DateFormat = "y:m:d", seperator = "/"): string => {
     const month = date.getMonth().toString()
     const day = date.getDate().toString()
+    /* eslint-disable id-length */
     const year = date.getFullYear().toString()
     const values = {
         m: month,
         d: day,
         y: year,
     }
+    /* eslint-enable id-length */
     const formatArray = format.split(":") as KeysArr
 
     return formatArray.map((val) => values[val]).join(seperator)
