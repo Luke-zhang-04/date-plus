@@ -54,7 +54,7 @@ Run in a browser environment by either using webpack or an alternative on the pr
 ```html
 <script src="js/dateplus.min.js"></script>
 <!-- OR -->
-<script src="https://unpkg.com/@luke-zhang-04/dateplus@4.0.0-beta1/dist/esm/dateplus.min.js"></script>
+<script src="https://unpkg.com/@luke-zhang-04/dateplus@4.0.0-beta2/dist/esm/dateplus.min.js"></script>
 
 <script>
     const {default: DatePlus} = DatePlus

@@ -2,7 +2,7 @@
  * DatePlus/tests Defines tests for DatePlus
  *
  * @license MIT
- * @version 4.0.0-beta1
+ * @version 4.0.0-beta2
  * @author Luke Zhang luke-zhang-04.github.io
  * @copyright Copyright (C) 2020 - 2021 Luke Zhang
  */
