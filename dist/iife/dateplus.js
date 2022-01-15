@@ -272,7 +272,7 @@ var DatePlus = (function (exports) {
 
     const addZeros = (date, seperator = "/") => {
       const splitDate = date.split(seperator);
-      const newDateValues = splitDate.map(section => section.length < 2 ? `0${section}` : section);
+      const newDateValues = splitDate.map(section => section.length < 2 ? "0".concat(section) : section);
       return newDateValues.join(seperator);
     };
     /**
@@ -285,7 +285,7 @@ var DatePlus = (function (exports) {
      */
 
     const formatDate = (date, format = "y:m:d", seperator = "/") => {
-      const month = date.getMonth().toString();
+      const month = (date.getMonth() + 1).toString();
       const day = date.getDate().toString();
       const year = date.getFullYear().toString();
       const values = {
@@ -410,23 +410,23 @@ var DatePlus = (function (exports) {
 
       if (elapsed < oneMinute) {
         val = Math.round(elapsed / 1000);
-        return `${val} second${val === 1 ? "" : "s"} ago`;
+        return "".concat(val, " second").concat(val === 1 ? "" : "s", " ago");
       } else if (elapsed < oneHour) {
         val = Math.round(elapsed / oneMinute);
-        return `${val} minute${val === 1 ? "" : "s"} ago`;
+        return "".concat(val, " minute").concat(val === 1 ? "" : "s", " ago");
       } else if (elapsed < oneDay) {
         val = Math.round(elapsed / oneHour);
-        return `${val} hour${val === 1 ? "" : "s"} ago`;
+        return "".concat(val, " hour").concat(val === 1 ? "" : "s", " ago");
       } else if (elapsed < msPerMonth) {
         val = Math.round(elapsed / oneDay);
-        return `${approx} ${val} day${val === 1 ? "" : "s"} ago`;
+        return "".concat(approx, " ").concat(val, " day").concat(val === 1 ? "" : "s", " ago");
       } else if (elapsed < msPerYear) {
         val = Math.round(elapsed / msPerMonth);
-        return `${approx} ${val} month${val === 1 ? "" : "s"} ago`;
+        return "".concat(approx, " ").concat(val, " month").concat(val === 1 ? "" : "s", " ago");
       }
 
       val = Math.round(elapsed / msPerYear);
-      return `${approx} ${val} year${val === 1 ? "" : "s"} ago`;
+      return "".concat(approx, " ").concat(val, " year").concat(val === 1 ? "" : "s", " ago");
     };
     /**
      * Convert a utc date to local

@@ -21,8 +21,8 @@ const test = (DatePlus, quiet = false) => {
     !quiet && console.log("testing formatDate")
     let formattedDate = date.formatDate()
 
-    if (formattedDate !== "2020/6/1") {
-        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/6/1`)
+    if (formattedDate !== "2020/7/1") {
+        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/7/1`)
     }
     !quiet && console.log("formatDate passed\n")
 
@@ -39,8 +39,8 @@ const test = (DatePlus, quiet = false) => {
     !quiet && console.log("testing addZeros")
     formattedDate = DatePlus.addZeros(formattedDate)
 
-    if (formattedDate !== "2020/06/01") {
-        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/06/01`)
+    if (formattedDate !== "2020/07/01") {
+        throw Error(`Formatted date ${formattedDate} from formatDate does not match 2020/07/01`)
     }
     !quiet && console.log("addZeros passed\n")
 

@@ -60,7 +60,7 @@ export const addZeros = (date: string, seperator = "/"): string => {
  * @returns Formatted date
  */
 export const formatDate = (date: Date, format: DateFormat = "y:m:d", seperator = "/"): string => {
-    const month = date.getMonth().toString()
+    const month = (date.getMonth() + 1).toString()
     const day = date.getDate().toString()
     /* eslint-disable id-length */
     const year = date.getFullYear().toString()
